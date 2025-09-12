@@ -3,23 +3,14 @@ const PricingTabContent = () => {
     <div className="col-xl-9 col-lg-11">
       <div className="row x-gap-20 y-gap-20">
         <div className="col-12">
-          <div className="text-18 fw-500 mb-10">Pricing</div>
+          <div className="text-18 fw-500 mb-10">Tarif par nuit</div>
           <div className="form-input ">
             <input type="text" required />
             <label className="lh-1 text-16 text-light-1">Hotel Price</label>
           </div>
 
-          <div className="d-flex mt-20">
-            <div className="form-checkbox ">
-              <input type="checkbox" name="name" />
-              <div className="form-checkbox__mark">
-                <div className="form-checkbox__icon icon-check" />
-              </div>
-            </div>
-            <div className="text-15 lh-11 ml-10">Enable extra price</div>
-          </div>
-
-          <div className="fw-500 mt-30">Enable service fee</div>
+       
+          <div className="fw-500 mt-30">Frais sur services</div>
 
           <div className="d-flex mt-10">
             <div className="form-checkbox ">
@@ -28,7 +19,7 @@ const PricingTabContent = () => {
                 <div className="form-checkbox__icon icon-check" />
               </div>
             </div>
-            <div className="text-15 lh-11 ml-10">Enable extra price</div>
+            <div className="text-15 lh-11 ml-10">Appliquer des frais sur les services supplémentaires</div>
           </div>
         </div>
         {/* End .col-12 */}
@@ -36,7 +27,7 @@ const PricingTabContent = () => {
       {/* End .row */}
 
       <div className="text-18 fw-500 mb-10 pt-30">
-        Check in / Check out time
+        Heure d'arrivéee et de départ
       </div>
 
       <div className="row x-gap-20 y-gap-20">
@@ -84,7 +75,8 @@ const PricingTabContent = () => {
           type="submit"
           className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
         >
-          Save Changes <div className="icon-arrow-top-right ml-15" />
+          Enregistrer les modifications
+ <div className="icon-arrow-top-right ml-15" />
         </button>
       </div>
     </div>

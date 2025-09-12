@@ -14,7 +14,7 @@ const HotelPolicy = () => {
       {/* End hotel rating standard */}
 
       <div className="mt-20">
-        <div className="fw-500 mb-20">Policy</div>
+        <div className="fw-500 mb-20">Conditions</div>
         <div className="overflow-scroll scroll-bar-1">
           <table className="table-5 -border-bottom col-12">
             <thead className="bg-light-2">
