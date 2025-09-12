@@ -11,22 +11,22 @@ import AttributesTabContent from "./AttributesTabContent";
 const Index = () => {
   const tabs = [
     {
-      label: "Content",
+      label: "Description",
       labelNo: 1,
       content: <ContentTabContent />,
     },
     {
-      label: "Location",
+      label: "Localisation",
       labelNo: 2,
       content: <LocationTabContent />,
     },
     {
-      label: "Pricing",
+      label: "Tarification",
       labelNo: 3,
       content: <PricingTabContent />,
     },
     {
-      label: "Attributes",
+      label: "Équipements",
       labelNo: 4,
       content: <AttributesTabContent />,
     },

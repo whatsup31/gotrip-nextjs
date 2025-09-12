@@ -3,7 +3,7 @@ const AttributesTabContent = () => {
     <div className="col-xl-9 col-lg-11">
       <div className="row x-gap-100 y-gap-15">
         <div className="col-12">
-          <div className="text-18 fw-500">Property Type</div>
+          <div className="text-18 fw-500">Type de logement</div>
         </div>
         {/* End .col-12 */}
 
@@ -164,7 +164,7 @@ const AttributesTabContent = () => {
 
       <div className="row x-gap-100 y-gap-15 pt-30">
         <div className="col-12">
-          <div className="text-18 fw-500">Facilities</div>
+          <div className="text-18 fw-500">Équipements</div>
         </div>
         {/* End .col-12 */}
 
@@ -277,7 +277,7 @@ const AttributesTabContent = () => {
 
       <div className="row x-gap-100 y-gap-15 pt-30">
         <div className="col-12">
-          <div className="text-18 fw-500">Hotel Services</div>
+          <div className="text-18 fw-500">Services</div>
         </div>
         {/* End .col-12 */}
 
@@ -397,7 +397,7 @@ const AttributesTabContent = () => {
           type="submit"
           className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
         >
-          Save Changes <div className="icon-arrow-top-right ml-15" />
+          Enregistrer les modifications<div className="icon-arrow-top-right ml-15" />
         </button>
       </div>
     </div>
