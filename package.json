@@ -1,5 +1,5 @@
 {
-  "name": "gotrip-next",
+  "name": "omi",
   "version": "2.0.0",
   "private": true,
   "scripts": {
@@ -12,6 +12,8 @@
     "@faker-js/faker": "^9.8.0",
     "@popperjs/core": "2.11.8",
     "@reduxjs/toolkit": "^2.8.2",
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.57.4",
     "aos": "^2.3.4",
     "bootstrap": "^5.3.6",
     "chart.js": "^4.4.9",

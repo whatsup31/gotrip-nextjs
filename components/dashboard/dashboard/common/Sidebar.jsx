@@ -13,32 +13,54 @@ const pathname = usePathname()
     {
       id: 1,
       icon: "/img/dashboard/sidebar/compass.svg",
-      name: "Dashboard",
+      name: "Revenus",
       routePath: "/dashboard/db-dashboard",
     },
     {
       id: 2,
       icon: "/img/dashboard/sidebar/booking.svg",
-      name: " Booking History",
-      routePath: "/dashboard/db-booking",
+      name: "Réservations",
+      routePath: "/vendor-dashboard/booking",
     },
+
     {
       id: 3,
-      icon: "/img/dashboard/sidebar/bookmark.svg",
-      name: "Wishlist",
-      routePath: "/dashboard/db-wishlist",
+      icon: "/img/dashboard/sidebar/booking.svg",
+      name: "Logements",
+      routePath: "/vendor-dashboard/hotels",
     },
+
     {
       id: 4,
+      icon: "/img/dashboard/sidebar/booking.svg",
+      name: "Partenaires",
+      routePath: "/dashboard/db-booking",
+    },
+
+    {
+      id: 5,
+      icon: "/img/dashboard/sidebar/booking.svg",
+      name: "Facturation",
+      routePath: "/dashboard/db-booking",
+    },
+
+    {
+      id: 7,
       icon: "/img/dashboard/sidebar/gear.svg",
-      name: " Settings",
+      name: "Réglages",
       routePath: "/dashboard/db-settings",
     },
     {
-      id: 5,
+      id: 8,
       icon: "/img/dashboard/sidebar/log-out.svg",
-      name: " Logout",
+      name: "Déconnexion",
       routePath: "/login",
+    },
+    {
+      id: 9,
+      icon: "/img/dashboard/sidebar/log-out.svg",
+      name: "Ajouter un logement",
+      routePath: "/vendor-dashboard/add-hotel",
     },
   ];
   return (
