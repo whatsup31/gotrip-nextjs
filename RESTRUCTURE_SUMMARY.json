@@ -1,0 +1,13 @@
+{
+  "proj_root": "/mnt/data/work2",
+  "moved_legacy_dirs": [],
+  "moved_add_hotel_page": [
+    "/mnt/data/work2/app/(dashboard)/vendor-dashboard/add-hotel/page.jsx",
+    "/mnt/data/work2/app/(host)/listings/new/page.tsx"
+  ],
+  "moved_add_hotel_components_count": 16,
+  "features_listing_server": [
+    "dao.ts",
+    "service.ts"
+  ]
+}
