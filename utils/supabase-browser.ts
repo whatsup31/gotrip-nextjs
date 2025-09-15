@@ -1,7 +1,7 @@
 // utils/supabase-browser.ts
 'use client';
 import { createBrowserClient } from '@supabase/ssr'
-import { Database } from '@/utils/types_db' // optionnel si tu as des types générés
+import { Database } from '@/utils/types_db' 
 
 export const supabaseBrowser = () =>
   createBrowserClient<Database>(

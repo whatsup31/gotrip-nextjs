@@ -11,7 +11,7 @@ const AttributesTabContent = () => {
           <div className="row y-gap-15">
             <div className="col-12">
               <div className="d-flex items-center form-checkbox">
-                <input type="checkbox" name="name" />
+                <input type="checkbox" name="amenities" value="apartment" />
                 <div className="form-checkbox__mark">
                   <div className="form-checkbox__icon icon-check" />
                 </div>
@@ -22,7 +22,7 @@ const AttributesTabContent = () => {
 
             <div className="col-12">
               <div className="d-flex items-center form-checkbox">
-                <input type="checkbox" name="name" />
+                <input type="checkbox" name="amenities" value="boat" />
                 <div className="form-checkbox__mark">
                   <div className="form-checkbox__icon icon-check" />
                 </div>
@@ -33,7 +33,7 @@ const AttributesTabContent = () => {
 
             <div className="col-12">
               <div className="d-flex items-center form-checkbox">
-                <input type="checkbox" name="name" />
+                <input type="checkbox" name="amenities" value="holiday_home" />
                 <div className="form-checkbox__mark">
                   <div className="form-checkbox__icon icon-check" />
                 </div>

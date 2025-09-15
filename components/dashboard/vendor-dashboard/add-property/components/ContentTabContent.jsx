@@ -3,6 +3,7 @@ import HotelPolicy from "./content/HotelPolicy";
 import BannerUploader from "./content/BannerUploader";
 import FeaturedUploader from "./content/FeaturedUploader";
 import GalleryUploader from "./content/GalleryUploader";
+import SimplePhotoUploader from "./content/SimplePhotoUploader";
 
 const ContentTabContent = () => {
   return (
@@ -21,6 +22,7 @@ const ContentTabContent = () => {
         <div className="mt-30">
           <div className="fw-500">Photos du logement</div>
           <GalleryUploader />
+          <SimplePhotoUploader />
         </div>
         {/* End GalleryUploader */}
 

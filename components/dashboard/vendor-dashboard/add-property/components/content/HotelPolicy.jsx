@@ -4,7 +4,7 @@ const HotelPolicy = () => {
       <div className="row x-gap-20 y-gap-20">
         <div className="col-12">
           <div className="form-input ">
-            <input type="text" required />
+            <input type="text" />
             <label className="lh-1 text-16 text-light-1">
               Hotel rating standard
             </label>
@@ -30,7 +30,7 @@ const HotelPolicy = () => {
               <tr>
                 <td className="col-5">
                   <div className="form-input ">
-                    <input type="text" required />
+                    <input type="text" />
                     <label className="lh-1 text-16 text-light-1">
                       Eg: Which footwear is most suitable?
                     </label>
@@ -58,7 +58,7 @@ const HotelPolicy = () => {
               <tr>
                 <td className="col-5">
                   <div className="form-input ">
-                    <input type="text" required />
+                    <input type="text" />
                     <label className="lh-1 text-16 text-light-1">
                       Eg: Whhic hotel is most suitable?
                     </label>

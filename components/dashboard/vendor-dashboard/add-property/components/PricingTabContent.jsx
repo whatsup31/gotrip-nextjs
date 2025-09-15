@@ -5,7 +5,7 @@ const PricingTabContent = () => {
         <div className="col-12">
           <div className="text-18 fw-500 mb-10">Tarif par nuit</div>
           <div className="form-input ">
-            <input type="text" required />
+            <input type="text" name="price_per_night" />
             <label className="lh-1 text-16 text-light-1">Hotel Price</label>
           </div>
 
@@ -33,7 +33,7 @@ const PricingTabContent = () => {
       <div className="row x-gap-20 y-gap-20">
         <div className="col-md-6">
           <div className="form-input ">
-            <input type="text" required />
+            <input type="text" />
             <label className="lh-1 text-16 text-light-1">
               Time for check in
             </label>
@@ -42,7 +42,7 @@ const PricingTabContent = () => {
         {/* End col-6 */}
         <div className="col-md-6">
           <div className="form-input ">
-            <input type="text" required />
+            <input type="text" />
             <label className="lh-1 text-16 text-light-1">
               Time for check out
             </label>
@@ -51,7 +51,7 @@ const PricingTabContent = () => {
         {/* End col-6 */}
         <div className="col-md-6">
           <div className="form-input ">
-            <input type="text" required />
+            <input type="text" />
             <label className="lh-1 text-16 text-light-1">
               Minimum advance reservations
             </label>
@@ -60,7 +60,7 @@ const PricingTabContent = () => {
         {/* End col-6 */}
         <div className="col-md-6">
           <div className="form-input ">
-            <input type="text" required />
+            <input type="text" />
             <label className="lh-1 text-16 text-light-1">
               Minimum day stay requirements
             </label>
