@@ -20,7 +20,7 @@ const pathname = usePathname()
       id: 2,
       icon: "/img/dashboard/sidebar/booking.svg",
       name: "Réservations",
-      routePath: "/vendor-dashboard/booking",
+      routePath: "/partenaire-dashboard/booking",
     },
 
     {
