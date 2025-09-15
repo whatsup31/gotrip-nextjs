@@ -1,8 +1,11 @@
 import React from "react";
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import DashboardPage from "../../../../components/dashboard/partenaire-dashboard/add-property";
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 import DashboardPage from "../../../../components/dashboardc/conciergerie-dashboard/add-hotel";
@@ -12,6 +15,9 @@ export const metadata = {
   description: "GoTrip - Travel & Tour React NextJS Template",
 };
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

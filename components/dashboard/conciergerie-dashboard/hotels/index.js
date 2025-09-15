@@ -1,6 +1,6 @@
 
 import Sidebar from "../common/Sidebar";
-import Header from "../../../../components/header/dashboard-header";
+import Header from "../../../header/dashboard-header";
 import Footer from "../common/Footer";
 import BookingTable from "./components/BookingTable";
 import Link from "next/link";

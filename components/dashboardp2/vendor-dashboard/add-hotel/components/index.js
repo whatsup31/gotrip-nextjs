@@ -1,4 +1,8 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 =======
 
 >>>>>>> Stashed changes
@@ -14,11 +18,14 @@ import AttributesTabContent from "./AttributesTabContent";
 const Index = () => {
   const tabs = [
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     { label: "Description",  labelNo: 1, content: <ContentTabContent /> },
     { label: "Localisation", labelNo: 2, content: <LocationTabContent /> },
     { label: "Tarification", labelNo: 3, content: <PricingTabContent /> },
     { label: "Équipements", labelNo: 4, content: <AttributesTabContent /> },
 =======
+=======
+>>>>>>> Stashed changes
     {
       label: "Description",
       labelNo: 1,
@@ -39,6 +46,9 @@ const Index = () => {
       labelNo: 4,
       content: <AttributesTabContent />,
     },
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   ];
 
