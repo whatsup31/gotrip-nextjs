@@ -1,5 +1,9 @@
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 =======
 
 >>>>>>> Stashed changes
@@ -19,11 +23,14 @@ const Index = () => {
   const tabs = [
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     { label: "Description",  labelNo: 1, content: <ContentTabContent /> },
     { label: "Localisation", labelNo: 2, content: <LocationTabContent /> },
     { label: "Tarification", labelNo: 3, content: <PricingTabContent /> },
     { label: "Équipements", labelNo: 4, content: <AttributesTabContent /> },
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     {
@@ -47,6 +54,9 @@ const Index = () => {
       content: <AttributesTabContent />,
     },
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
