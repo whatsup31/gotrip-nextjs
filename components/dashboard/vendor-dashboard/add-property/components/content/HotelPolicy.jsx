@@ -40,7 +40,7 @@ const HotelPolicy = () => {
 
                 <td className="col-7">
                   <div className="form-input ">
-                    <textarea required rows={5} defaultValue={""} />
+                    <textarea rows={5} defaultValue={""} />
                     <label className="lh-1 text-16 text-light-1">Content</label>
                   </div>
                 </td>
@@ -68,7 +68,7 @@ const HotelPolicy = () => {
 
                 <td className="col-7">
                   <div className="form-input ">
-                    <textarea required rows={5} defaultValue={""} />
+                    <textarea rows={5} defaultValue={""} />
                     <label className="lh-1 text-16 text-light-1">Content</label>
                   </div>
                 </td>

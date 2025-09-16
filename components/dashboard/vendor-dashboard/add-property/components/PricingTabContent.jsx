@@ -72,7 +72,7 @@ const PricingTabContent = () => {
 
       <div className="col-md-12 d-inline-block mt-30">
         <button
-          type="submit"
+          type="button"
           className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
         >
           Enregistrer les modifications
