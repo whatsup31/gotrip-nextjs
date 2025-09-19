@@ -7,6 +7,8 @@ import ChartMain from "./components/ChartMain";
 import Link from "next/link";
 import RercentBooking from "./components/RercentBooking";
 import Footer from "../common/Footer";
+import FilterBox from "./components/filter-box";
+
 
 
 const index = () => {
@@ -30,15 +32,20 @@ const index = () => {
         <div className="dashboard__main">
           <div className="dashboard__content bg-light-2">
             <div className="row y-gap-20 justify-between items-end pb-60 lg:pb-40 md:pb-32">
-              <div className="col-12">
+              <div className="col-auto">
                 <h1 className="text-30 lh-14 fw-600">Activités</h1>
                 <div className="text-15 text-light-1">
-                  Une vision intelligente de vos revenus
+                Une vision intelligente de vos revenus
                 </div>
               </div>
-              {/* End .col-12 */}
+              {/* End .col-auto */}
+
+              <div className="col-auto">
+                <FilterBox />
+              </div>
             </div>
             {/* End .row */}
+            
 
             <DashboardCard />
 

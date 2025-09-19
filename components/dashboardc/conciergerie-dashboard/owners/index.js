@@ -37,8 +37,8 @@ const index = () => {
 
               <div className="col-auto">
               <a
- href="/conciergerie-dashboard/add-hotel"
- className="button h-50 px-24 text-white"  style={{ backgroundColor: "#007cd2" }}
+  href="/conciergerie-dashboard/add-hotel"
+                  className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
                 >
                   Ajouter un logement <div className="icon-plus ml-15"></div>
                 </a>

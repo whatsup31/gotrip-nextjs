@@ -61,8 +61,8 @@ const Header1 = () => {
                 {/* humberger menu */}
 
                 <Link href="/" className="header-logo mr-20">
-                  <img src="/img/general/logo-dark.svg" alt="logo icon" />
-                  <img src="/img/general/logo-dark.svg" alt="logo icon" />
+                  <img src="/img/general/logo-omi.png" alt="logo icon" />
+                  <img src="/img/general/logo-omi.png" alt="logo icon" />
                 </Link>
                 {/* End logo */}
 
@@ -85,13 +85,15 @@ const Header1 = () => {
                     href="/login"
                     className="button h-50 px-30 fw-400 text-14 -blue-1 bg-white text-dark-1 sm:d-none"
                   >
-                    Become An Expert
+                    Mon assistant voyage
+                    <div className="icon-star ml-15" />
                   </Link>
                   <Link
                     href="/signup"
                     className="button h-50 px-30 fw-400 text-14 -outline-white text-white ml-20 sm:ml-0"
                   >
-                    Sign In / Register
+                    Se connecter
+                    <div className="icon-user ml-15" />
                   </Link>
                 </div>
                 {/* End btn-group */}

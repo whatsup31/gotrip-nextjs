@@ -60,23 +60,6 @@ const Sidebar = () => {
         </div>
         {/* End accordion__item */}
 
-        <div className="sidebar__item ">
-          <a
-            href="/voyageur-dashboard/booking"
-            className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
-          >
-            <Image
-              width={20}
-              height={20}
-              src="/img/dashboard/sidebar/booking.svg"
-              alt="image"
-              className="mr-15"
-            />
-            Facturation
-          </a>
-        </div>
-        {/* End accordion__item */}
-
        
         {sidebarData.map((item, index) => (
           <div className="sidebar__item" key={index}>
@@ -122,8 +105,7 @@ const Sidebar = () => {
         ))}
 
      
-<div className="sidebar__item ">
-
+<div className="d-flex flex-column gap-3 mt-30">
 <a
 href="/voyageur-dashboard/add-hotel"
 className="button h-50 px-24 -dark-1 bg-white border-blue-1 text-blue"

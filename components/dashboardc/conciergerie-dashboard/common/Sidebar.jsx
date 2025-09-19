@@ -62,7 +62,7 @@ const Sidebar = () => {
 
         <div className="sidebar__item ">
           <a
-            href="/conciergerie-dashboard/booking"
+            href="/conciergerie-dashboard/owners"
             className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
           >
             <Image
@@ -114,13 +114,32 @@ const Sidebar = () => {
 
         <div className="sidebar__item ">
 
-        <a
+  <div className="d-flex flex-column gap-3 mt-30">
+  <a
     href="/conciergerie-dashboard/add-hotel"
-    className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
+    className="button h-50 px-24 text-white"  style={{ backgroundColor: "#007cd2" }}
   >
     Ajouter un logement
     <div className="icon-plus ml-15" />
   </a>
+
+  <a
+    href="/conciergerie-dashboard/add-hotel"
+    className="button h-50 px-24 text-white"  style={{ backgroundColor: "#007cd2" }}
+  >
+    Ajouter un propriétaire
+    <div className="icon-plus ml-15" />
+  </a>
+
+  <a
+    href="/conciergerie-dashboard/add-hotel"
+    className="button h-50 px-24 text-white"  style={{ backgroundColor: "#007cd2" }}
+  >
+    Ajouter un partenaire
+    <div className="icon-plus ml-15" />
+  </a>
+
+</div>
 
         </div>
         {/* End accordion__item */}
