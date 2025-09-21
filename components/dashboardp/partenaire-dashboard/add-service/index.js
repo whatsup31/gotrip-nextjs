@@ -1,4 +1,4 @@
-
+// components/dashboardp/partenaire-dashboard/add-service/index.js
 import Sidebar from "../common/Sidebar";
 import Header from "../../../header/dashboard-header";
 import SettingsTabs from "./components/index";
@@ -27,9 +27,9 @@ const index = () => {
           <div className="dashboard__content bg-light-2">
             <div className="row y-gap-20 justify-between items-end pb-60 lg:pb-40 md:pb-32">
               <div className="col-12">
-                <h1 className="text-30 lh-14 fw-600">Proposer un logement</h1>
+                <h1 className="text-30 lh-14 fw-600">Ajouter un produit</h1>
                 <div className="text-15 text-light-1">
-                  Ajoutez un nouveau logement un quelques clics
+                  Proposez vos produits et services à des millions de voyageurs en quelques clics
                 </div>
               </div>
               {/* End .col-12 */}

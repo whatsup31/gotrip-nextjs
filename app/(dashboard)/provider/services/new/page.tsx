@@ -1,3 +1,4 @@
+// app/(dashboard)/provider/services/new/page.jsx
 import { supabaseServer } from '@/utils/supabase-server'
 import { redirect } from 'next/navigation'
 

@@ -4,9 +4,7 @@
 import React, { useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import ContentTabContent from "./ContentTabContent";
-import LocationTabContent from "./LocationTabContent";
 import PricingTabContent from "./PricingTabContent";
-import AttributesTabContent from "./AttributesTabContent";
 
 const Index = () => {
   const tabs = [

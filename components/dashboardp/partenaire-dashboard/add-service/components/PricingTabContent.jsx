@@ -1,68 +1,89 @@
+// components/dashboardp/partenaire-dashboard/add-service/components/PricingTabContent.js
 const PricingTabContent = () => {
   return (
     <div className="col-xl-9 col-lg-11">
       <div className="row x-gap-20 y-gap-20">
         <div className="col-12">
-          <div className="text-18 fw-500 mb-10">Tarif par nuit</div>
+          <div className="text-18 fw-500 mb-10">Prix TTC de votre service</div>
           <div className="form-input ">
-            <input type="text" required />
-            <label className="lh-1 text-16 text-light-1">Hotel Price</label>
+            <input type="text" name="price" />
+            <label className="lh-1 text-16 text-light-1">17,90€</label>
           </div>
 
-       
-          <div className="fw-500 mt-30">Frais sur services</div>
-
-          <div className="d-flex mt-10">
-            <div className="form-checkbox ">
-              <input type="checkbox" name="name" />
-              <div className="form-checkbox__mark">
-                <div className="form-checkbox__icon icon-check" />
-              </div>
-            </div>
-            <div className="text-15 lh-11 ml-10">Appliquer des frais sur les services supplémentaires</div>
-          </div>
         </div>
         {/* End .col-12 */}
       </div>
       {/* End .row */}
 
       <div className="text-18 fw-500 mb-10 pt-30">
-        Heure d'arrivéee et de départ
+Frais de livraison      </div>
+
+      <div className="row x-gap-20 y-gap-20">
+        <div className="col-md-6">
+          <div className="form-input ">
+            <input type="text" name="delivery_fee" />
+            <label className="lh-1 text-16 text-light-1">
+5€            </label>
+          </div>
+        </div>
+        {/* End col-6 */}
+      </div>
+      {/* End row */}
+
+      <div className="text-18 fw-500 mb-10 pt-30">
+        Délais de livraison
       </div>
 
       <div className="row x-gap-20 y-gap-20">
         <div className="col-md-6">
           <div className="form-input ">
-            <input type="text" required />
+            <input type="text" name="delivery_time_label" />
             <label className="lh-1 text-16 text-light-1">
-              Time for check in
+              30 min
+            </label>
+          </div>
+        </div>
+        {/* End col-6 */}
+      </div>
+      {/* End row */}
+
+      <div className="text-18 fw-500 mb-10 pt-30">
+        Horaires d'ouverture
+      </div>
+
+      <div className="row x-gap-20 y-gap-20">
+        <div className="col-md-6">
+          <div className="form-input ">
+            <input type="text" name="openings[0][day]" />
+            <label className="lh-1 text-16 text-light-1">
+             Mercredi
             </label>
           </div>
         </div>
         {/* End col-6 */}
         <div className="col-md-6">
           <div className="form-input ">
-            <input type="text" required />
+            <input type="text" name="openings[0][range]" />
             <label className="lh-1 text-16 text-light-1">
-              Time for check out
+              10h - 22h
             </label>
           </div>
         </div>
         {/* End col-6 */}
         <div className="col-md-6">
           <div className="form-input ">
-            <input type="text" required />
+            <input type="text" name="openings[1][day]" />
             <label className="lh-1 text-16 text-light-1">
-              Minimum advance reservations
+              Vendredi
             </label>
           </div>
         </div>
         {/* End col-6 */}
         <div className="col-md-6">
           <div className="form-input ">
-            <input type="text" required />
+            <input type="text" name="openings[1][range]" />
             <label className="lh-1 text-16 text-light-1">
-              Minimum day stay requirements
+            10h - 00h
             </label>
           </div>
         </div>
@@ -72,7 +93,7 @@ const PricingTabContent = () => {
 
       <div className="col-md-12 d-inline-block mt-30">
         <button
-          type="submit"
+          type="button"
           className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
         >
           Enregistrer les modifications

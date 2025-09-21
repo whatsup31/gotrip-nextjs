@@ -1,12 +1,10 @@
-
+// components/dashboardp/partenaire-dashboard/add-service/components/index.js
 'use client'
 
 import React, { useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import ContentTabContent from "./ContentTabContent";
-import LocationTabContent from "./LocationTabContent";
 import PricingTabContent from "./PricingTabContent";
-import AttributesTabContent from "./AttributesTabContent";
 
 const Index = () => {
   const tabs = [
@@ -15,21 +13,13 @@ const Index = () => {
       labelNo: 1,
       content: <ContentTabContent />,
     },
-    {
-      label: "Localisation",
-      labelNo: 2,
-      content: <LocationTabContent />,
-    },
+  
     {
       label: "Tarification",
-      labelNo: 3,
+      labelNo: 2,
       content: <PricingTabContent />,
     },
-    {
-      label: "Équipements",
-      labelNo: 4,
-      content: <AttributesTabContent />,
-    },
+    
   ];
 
   const [tabIndex, setTabIndex] = useState(0);
