@@ -81,5 +81,5 @@ export async function createServiceAction(formData) {
   }])
 
   if (error) throw new Error(error.message)
-  redirect('/partner/services')
+  redirect('/vendor-dashboard/services')
 }
