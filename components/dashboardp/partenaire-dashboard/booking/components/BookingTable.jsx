@@ -13,14 +13,13 @@ const BookingTable = () => {
   };
 
   const tabItems = [
-    "All Booking",
-    "Completed",
-    "Processing",
-    "Confirmed",
-    "Cancelled",
-    "Paid",
-    "Unpaid",
-    "Partial Payment",
+    "Toutes les commandes",
+    "Terminées",
+    "En cours",
+    "À venir",
+    "Annulées",
+    "Payées",
+    "En cours de paiement",
   ];
 
   return (
@@ -48,14 +47,14 @@ const BookingTable = () => {
               <table className="table-3 -border-bottom col-12">
                 <thead className="bg-light-2">
                   <tr>
-                    <th>Type</th>
-                    <th>Title</th>
-                    <th>Order Date</th>
-                    <th>Execution Time</th>
-                    <th>Total</th>
-                    <th>Paid</th>
-                    <th>Remain</th>
+                    <th>Numéro</th>
+                    <th>Titre</th>
+                    <th>Commande</th>
+                    <th>Livraison</th>
                     <th>Status</th>
+                    <th>Total</th>
+                    <th>Commission</th>
+                    <th>Paiment</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -69,7 +68,11 @@ const BookingTable = () => {
                       <br />
                       Check out : 05/29/2022
                     </td>
-                    <td className="fw-500">$130</td>
+                    <td>
+                      <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-yellow-4 text-yellow-3">
+                        Pending
+                      </span>
+                    </td>
                     <td>$0</td>
                     <td>$35</td>
                     <td>
@@ -77,6 +80,7 @@ const BookingTable = () => {
                         Pending
                       </span>
                     </td>
+                
                     <td>
                       <ActionsButton />
                     </td>
@@ -90,7 +94,11 @@ const BookingTable = () => {
                       <br />
                       Check out : 05/29/2022
                     </td>
-                    <td className="fw-500">$130</td>
+                    <td>
+                      <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-yellow-4 text-yellow-3">
+                        Pending
+                      </span>
+                    </td>
                     <td>$0</td>
                     <td>$35</td>
                     <td>
@@ -111,7 +119,11 @@ const BookingTable = () => {
                       <br />
                       Check out : 05/29/2022
                     </td>
-                    <td className="fw-500">$130</td>
+                    <td>
+                      <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-yellow-4 text-yellow-3">
+                        Pending
+                      </span>
+                    </td>                    
                     <td>$0</td>
                     <td>$35</td>
                     <td>
@@ -132,7 +144,11 @@ const BookingTable = () => {
                       <br />
                       Check out : 05/29/2022
                     </td>
-                    <td className="fw-500">$130</td>
+                    <td>
+                      <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-yellow-4 text-yellow-3">
+                        Pending
+                      </span>
+                    </td>                    
                     <td>$0</td>
                     <td>$35</td>
                     <td>
@@ -153,7 +169,11 @@ const BookingTable = () => {
                       <br />
                       Check out : 05/29/2022
                     </td>
-                    <td className="fw-500">$130</td>
+                    <td>
+                      <span className="rounded-100 py-4 px-10 text-center text-14 fw-500 bg-yellow-4 text-yellow-3">
+                        Pending
+                      </span>
+                    </td>
                     <td>$0</td>
                     <td>$35</td>
                     <td>

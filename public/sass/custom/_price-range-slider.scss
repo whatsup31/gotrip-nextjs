@@ -4,7 +4,7 @@
     -moz-appearance: none;
     appearance: none;
     background: #fff;
-    border: 2px solid var(--color-blue-1);
+    border: 2px solid #007cd2;
     border-radius: 100%;
     cursor: pointer;
     display: block;
@@ -89,7 +89,7 @@
 }
 
 .input-range--disabled .input-range__track {
-    background: var(--color-blue-1);
+    background: #007cd2;
 }
 
 .input-range__track--background {
@@ -101,7 +101,7 @@
 }
 
 .input-range__track--active {
-    background: var(--color-blue-1);
+    background: #007cd2;
 }
 
 .input-range {

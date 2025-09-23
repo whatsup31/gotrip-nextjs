@@ -1,5 +1,5 @@
 :root {
-  --swiper-theme-color: var(--color-blue-1);
+  --swiper-theme-color: #007cd2;
   --swiper-navigation-size: 30px;
 }
 html {
@@ -10,7 +10,7 @@ html {
 
 body {
   padding: 0;
-  font-family: var(--font-primary);
+  font-family: system-ui;
   width: 100%;
   background-color: white;
   color: var(--color-dark-1);

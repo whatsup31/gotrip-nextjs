@@ -29,7 +29,7 @@ const index = () => {
               <div className="col-auto">
                 <h1 className="text-30 lh-14 fw-600">Réservations</h1>
                 <div className="text-15 text-light-1">
-                  Lorem ipsum dolor sit amet, consectetur.
+                La liste de toutes vos réservations
                 </div>
               </div>
               {/* End .col-auto */}

@@ -82,9 +82,9 @@ const Header1 = () => {
                 {/* Start btn-group */}
                 <div className="header__buttons d-flex items-center is-menu-opened-hide">
                   <Link
-                    href="/login"
-                    className="button h-50 px-30 fw-400 text-14 -blue-1 bg-white text-dark-1 sm:d-none"
-                  >
+                    href="/voyageur-dashboard/agent"
+                    className="button h-50 px-24 text-white"  style={{ backgroundColor: "#007cd2" }}
+                    >
                     Mon assistant voyage
                     <div className="icon-star ml-15" />
                   </Link>

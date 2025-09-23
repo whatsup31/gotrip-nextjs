@@ -11,13 +11,13 @@ const Sidebar = () => {
       <div className="sidebar -dashboard" id="vendorSidebarMenu">
         <div className="sidebar__item ">
           <Link
-            href="/voyageur-dashboard/dashboard"
+            href="/voyageur-dashboard/agent"
             className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
           >
             <Image
               width={20}
               height={20}
-              src="/img/dashboard/sidebar/compass.svg"
+              src="/img/dashboard/sidebar/agent.png"
               alt="image"
               className="mr-15"
             />
@@ -34,7 +34,7 @@ const Sidebar = () => {
             <Image
               width={20}
               height={20}
-              src="/img/dashboard/sidebar/booking.svg"
+              src="/img/dashboard/sidebar/reservation.png"
               alt="image"
               className="mr-15"
             />
@@ -45,13 +45,13 @@ const Sidebar = () => {
 
         <div className="sidebar__item ">
           <a
-            href="/voyageur-dashboard/hotels"
+            href="/voyageur-dashboard/orders"
             className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
           >
             <Image
               width={20}
               height={20}
-              src="/img/dashboard/sidebar/booking.svg"
+              src="/img/dashboard/sidebar/partenaires.png"
               alt="image"
               className="mr-15"
             />
@@ -108,10 +108,9 @@ const Sidebar = () => {
 <div className="d-flex flex-column gap-3 mt-30">
 <a
 href="/voyageur-dashboard/add-hotel"
-className="button h-50 px-24 -dark-1 bg-white border-blue-1 text-blue"
+className="button h-50 px-24 text-white"  style={{ backgroundColor: "#007cd2" }}
 >
 Réserver un logement
-<div className="icon-home ml-15" />
 </a>
 
 </div>

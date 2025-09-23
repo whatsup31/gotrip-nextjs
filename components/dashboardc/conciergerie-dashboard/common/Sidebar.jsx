@@ -17,7 +17,7 @@ const Sidebar = () => {
             <Image
               width={20}
               height={20}
-              src="/img/dashboard/sidebar/compass.svg"
+              src="/img/dashboard/sidebar/activites.png"
               alt="image"
               className="mr-15"
             />
@@ -34,7 +34,7 @@ const Sidebar = () => {
             <Image
               width={20}
               height={20}
-              src="/img/dashboard/sidebar/booking.svg"
+              src="/img/dashboard/sidebar/reservation.png"
               alt="image"
               className="mr-15"
             />
@@ -51,7 +51,7 @@ const Sidebar = () => {
             <Image
               width={20}
               height={20}
-              src="/img/dashboard/sidebar/booking.svg"
+              src="/img/dashboard/sidebar/logements.png"
               alt="image"
               className="mr-15"
             />
@@ -68,7 +68,7 @@ const Sidebar = () => {
             <Image
               width={20}
               height={20}
-              src="/img/dashboard/sidebar/booking.svg"
+              src="/img/dashboard/sidebar/owners.png"
               alt="image"
               className="mr-15"
             />
@@ -80,13 +80,13 @@ const Sidebar = () => {
 
         <div className="sidebar__item ">
           <a
-            href="/conciergerie-dashboard/booking"
+            href="/conciergerie-dashboard/partners"
             className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
           >
             <Image
               width={20}
               height={20}
-              src="/img/dashboard/sidebar/booking.svg"
+              src="/img/dashboard/sidebar/partenaires.png"
               alt="image"
               className="mr-15"
             />
@@ -97,13 +97,13 @@ const Sidebar = () => {
 
         <div className="sidebar__item ">
           <a
-            href="/conciergerie-dashboard/booking"
+            href="/conciergerie-dashboard/billing"
             className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
           >
             <Image
               width={20}
               height={20}
-              src="/img/dashboard/sidebar/booking.svg"
+              src="/img/dashboard/sidebar/facturation.png"
               alt="image"
               className="mr-15"
             />
@@ -120,22 +120,6 @@ const Sidebar = () => {
     className="button h-50 px-24 text-white"  style={{ backgroundColor: "#007cd2" }}
   >
     Ajouter un logement
-    <div className="icon-plus ml-15" />
-  </a>
-
-  <a
-    href="/conciergerie-dashboard/add-hotel"
-    className="button h-50 px-24 text-white"  style={{ backgroundColor: "#007cd2" }}
-  >
-    Ajouter un propriétaire
-    <div className="icon-plus ml-15" />
-  </a>
-
-  <a
-    href="/conciergerie-dashboard/add-hotel"
-    className="button h-50 px-24 text-white"  style={{ backgroundColor: "#007cd2" }}
-  >
-    Ajouter un partenaire
     <div className="icon-plus ml-15" />
   </a>
 

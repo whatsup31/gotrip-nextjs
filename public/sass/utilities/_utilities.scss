@@ -176,7 +176,7 @@ $_displays: none, inline-block, block, flex;
 
 .border {
   &-type-1 {
-    border: 1px dashed var(--color-blue-1);
+    border: 1px dashed #007cd2;
   }
 
   &-top-light {
@@ -198,7 +198,7 @@ $_displays: none, inline-block, block, flex;
     border: 1px solid var(--color-dark-4);
   }
   &-blue-1 {
-    border: 1px solid var(--color-blue-1);
+    border: 1px solid #007cd2;
   }
   &-white-15 {
     border: 1px solid rgba(white, 0.15);
@@ -911,7 +911,7 @@ $_displays: none, inline-block, block, flex;
     display: grid;
     grid-template-columns: 180px 1fr 60px 170px 140px 270px;
     gap: 30px;
-    background-color: var(--color-dark-3);
+    background-color: #007cd2;
     color: white;
     font-weight: 500;
     padding: 15px 0;
@@ -1571,7 +1571,7 @@ table.table-5 {
     transition: all 0.15s $easeOutQuart;
 
     &:hover {
-      background-color: var(--color-dark-3);
+      background-color: #007cd2;
       color: white;
     }
 
@@ -1595,7 +1595,7 @@ table.table-5 {
     &.-is-active {
       position: relative;
       z-index: 2;
-      background-color: var(--color-dark-3);
+      background-color: #007cd2;
       color: white;
     }
   }
@@ -1705,7 +1705,7 @@ table.table-5 {
       }
 
       &:hover {
-        color: var(--color-blue-1);
+        color: #007cd2;
       }
     }
 
@@ -1747,7 +1747,7 @@ table.table-5 {
           justify-content: flex-start;
           height: 50px;
           font-size: 20px;
-          color: var(--color-blue-1);
+          color: #007cd2;
           background-color: color-opac(blue-1, 0.05) !important;
 
           .icon {
@@ -2041,7 +2041,7 @@ table.table-5 {
 }
 
 .noUi-connect {
-  background-color: var(--color-blue-1) !important;
+  background-color: #007cd2 !important;
   box-shadow: 0 !important;
 }
 
@@ -2051,7 +2051,7 @@ table.table-5 {
   height: 20px !important;
   top: 50% !important;
   transform: translateY(-50%);
-  border: 2px solid var(--color-blue-1);
+  border: 2px solid #007cd2;
   box-shadow: 0 !important;
 
   &::before {

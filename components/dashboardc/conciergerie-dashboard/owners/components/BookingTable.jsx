@@ -13,20 +13,12 @@ const BookingTable = () => {
   };
 
   const tabItems = [
-    "All Booking",
-    "Completed",
-    "Processing",
-    "Confirmed",
-    "Cancelled",
-    "Paid",
-    "Unpaid",
-    "Partial Payment",
   ];
 
   return (
     <>
       <div className="tabs -underline-2 js-tabs">
-        <div className="tabs__controls row x-gap-40 y-gap-10 lg:x-gap-20 js-tabs-controls">
+        <div className="tabs__controls row x-gap-40 y-gap-30 lg:x-gap-20 js-tabs-controls">
           {tabItems.map((item, index) => (
             <div className="col-auto" key={index}>
               <button
@@ -58,12 +50,12 @@ const BookingTable = () => {
                         </div>
                       </div>
                     </th>
-                    <th>Name</th>
-                    <th>Location</th>
-                    <th>Author</th>
+                    <th>Nom</th>
+                    <th>Logement</th>
+                    <th>Ville</th>
                     <th>Status</th>
-                    <th>Reviews</th>
-                    <th>Date</th>
+                    <th>Note</th>
+                    <th>Inscription</th>
                     <th>Action</th>
                   </tr>
                 </thead>

@@ -24,15 +24,24 @@ const index = () => {
         {/* End dashboard__sidebar */}
 
         <div className="dashboard__main">
-          <div className="dashboard__content bg-light-2">
+        <div className="dashboard__content bg-light-2">
             <div className="row y-gap-20 justify-between items-end pb-60 lg:pb-40 md:pb-32">
-              <div className="col-12">
+              <div className="col-auto">
                 <h1 className="text-30 lh-14 fw-600">Ajouter un logement</h1>
                 <div className="text-15 text-light-1">
-                  Ajoutez un nouveau logement un quelques clics
+                  Ajouter un nouveau logement en quelques clics
                 </div>
               </div>
-              {/* End .col-12 */}
+              {/* End .col-auto */}
+
+              <div className="col-auto">
+              <a
+ href="/conciergerie-dashboard/add-hotel"
+ className="button h-50 px-24 text-white"  style={{ backgroundColor: "#00d2b5" }}
+                >
+                  Publier le logement<div className="icon-check ml-15"></div>
+                </a>
+              </div>
             </div>
             {/* End .row */}
 

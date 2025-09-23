@@ -59,7 +59,7 @@ const MobileMenu = () => {
     <>
       <div className="pro-header d-flex align-items-center justify-between border-bottom-light">
         <Link href="/">
-          <img src="/img/general/logo-dark.svg" alt="brand" />
+          <img src="/img/general/logo-omi.png" alt="brand" />
         </Link>
         {/* End logo */}
 
@@ -215,7 +215,7 @@ const MobileMenu = () => {
             className=" button -dark-1 px-30 fw-400 text-14 bg-blue-1 h-50 text-white"
             href="/login"
           >
-            Become An Expert
+            Mon assistant voyage
           </Link>
         </div>
       </div>

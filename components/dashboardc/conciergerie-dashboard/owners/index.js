@@ -28,19 +28,19 @@ const index = () => {
         <div className="dashboard__content bg-light-2">
             <div className="row y-gap-20 justify-between items-end pb-60 lg:pb-40 md:pb-32">
               <div className="col-auto">
-                <h1 className="text-30 lh-14 fw-600">Logements</h1>
+                <h1 className="text-30 lh-14 fw-600">Propriétaires</h1>
                 <div className="text-15 text-light-1">
-                  La liste de tous vos logements
+                  La liste des propriétaires des logements
                 </div>
               </div>
               {/* End .col-auto */}
 
               <div className="col-auto">
               <a
-  href="/conciergerie-dashboard/add-hotel"
-                  className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
+ href="/conciergerie-dashboard/add-hotel"
+ className="button h-50 px-24 text-white"  style={{ backgroundColor: "#007cd2" }}
                 >
-                  Ajouter un logement <div className="icon-plus ml-15"></div>
+                  Ajouter un propriétaire <div className="icon-plus ml-15"></div>
                 </a>
               </div>
             </div>
