@@ -1,4 +1,4 @@
-
+// components/dashboardv/voyageur-dashboard/hotels/index.js
 import Sidebar from "../common/Sidebar";
 import Header from "../../../header/dashboard-header";
 import Footer from "../common/Footer";

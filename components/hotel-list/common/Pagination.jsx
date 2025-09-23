@@ -1,79 +1,68 @@
-
+// components/hotel-list/common/Pagination.jsx
 'use client'
+import { useRouter, useSearchParams } from "next/navigation";
 
-import { useState } from "react";
+export default function Pagination({ total = 0, page = 1, pageSize = 10 }) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-const Pagination = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
-  const handlePageClick = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  const goTo = (p) => {
+    const sp = new URLSearchParams(searchParams.toString());
+    sp.set("page", String(p));
+    sp.set("pageSize", String(pageSize));
+    router.push(`?${sp.toString()}`);
   };
 
-  const renderPage = (pageNumber, isActive = false) => {
-    const className = `size-40 flex-center rounded-full cursor-pointer ${
-      isActive ? "bg-dark-1 text-white" : ""
-    }`;
+  const renderPage = (p) => {
+    const isActive = p === page;
+    const className = `size-40 flex-center rounded-full cursor-pointer ${isActive ? "bg-dark-1 text-white" : ""}`;
     return (
-      <div key={pageNumber} className="col-auto">
-        <div className={className} onClick={() => handlePageClick(pageNumber)}>
-          {pageNumber}
+      <div key={p} className="col-auto">
+        <div className={className} onClick={() => goTo(p)}>
+          {p}
         </div>
       </div>
     );
   };
 
-  const renderPages = () => {
-    const totalPages = 5; // Change this to the actual total number of pages
-    const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pageNumbers.push(i);
-    }
-    const pages = pageNumbers.map((pageNumber) =>
-      renderPage(pageNumber, pageNumber === currentPage)
-    );
-    return pages;
-  };
+  const pages = [];
+  const maxBtns = 7;
+  let start = Math.max(1, page - 3);
+  let end = Math.min(totalPages, start + maxBtns - 1);
+  start = Math.max(1, end - maxBtns + 1);
+  for (let p = start; p <= end; p++) pages.push(renderPage(p));
+
+  const from = total === 0 ? 0 : (page - 1) * pageSize + 1;
+  const to = Math.min(total, page * pageSize);
 
   return (
     <div className="border-top-light mt-30 pt-30">
       <div className="row x-gap-10 y-gap-20 justify-between md:justify-center">
         <div className="col-auto md:order-1">
-          <button className="button -blue-1 size-40 rounded-full border-light">
+          <button className="button -blue-1 size-40 rounded-full border-light" onClick={() => goTo(Math.max(1, page - 1))} disabled={page === 1}>
             <i className="icon-chevron-left text-12" />
           </button>
         </div>
 
         <div className="col-md-auto md:order-3">
-          <div className="row x-gap-20 y-gap-20 items-center md:d-none">
-            {renderPages()}
-            <div className="col-auto">
-              <div className="size-40 flex-center rounded-full">...</div>
-            </div>
-            <div className="col-auto">
-              <div className="size-40 flex-center rounded-full">20</div>
-            </div>
+          <div className="row x-gap-10 y-gap-20 justify-center items-center">
+            {pages}
           </div>
-
-          <div className="row x-gap-10 y-gap-20 justify-center items-center d-none md:d-flex">
-            {renderPages()}
-          </div>
-
-          <div className="text-center mt-30 md:mt-10">
+          <div className="text-center mt-20 md:mt-10">
             <div className="text-14 text-light-1">
-              1 – 20 of 300+ properties found
+              {from} – {to} sur {total} logements
             </div>
           </div>
         </div>
 
         <div className="col-auto md:order-2">
-          <button className="button -blue-1 size-40 rounded-full border-light">
+          <button className="button -blue-1 size-40 rounded-full border-light" onClick={() => goTo(Math.min(totalPages, page + 1))} disabled={page === totalPages}>
             <i className="icon-chevron-right text-12" />
           </button>
         </div>
       </div>
     </div>
   );
-};
-
-export default Pagination;
+}
