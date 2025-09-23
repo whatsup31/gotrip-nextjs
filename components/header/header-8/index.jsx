@@ -88,13 +88,13 @@ const Header1 = () => {
                     href="/login"
                     className="button px-30 fw-400 text-14 -blue-1 bg-dark-1 h-50 text-white"
                   >
-                    Become An Expert
+                    Mon assistant voyage
                   </Link>
                   <Link
                     href="/signup"
                     className="button px-30 fw-400 text-14 border-dark-1 -blue-1 h-50 text-dark-1 ml-20"
                   >
-                    Sign In / Register
+                    Se connecter
                   </Link>
                 </div>
                 {/* End btn-group */}

@@ -13,6 +13,7 @@ const BookingTable = () => {
   };
 
   const tabItems = [
+<<<<<<< HEAD
     "All Booking",
     "Completed",
     "Processing",
@@ -21,6 +22,15 @@ const BookingTable = () => {
     "Paid",
     "Unpaid",
     "Partial Payment",
+=======
+    "Toutes les réservations",
+    "Terminée",
+    "En cours",
+    "À venir",
+    "Annulées",
+    "Payées",
+    "En cours de paiement",
+>>>>>>> frontend-2309
   ];
 
   return (
@@ -49,8 +59,13 @@ const BookingTable = () => {
                 <thead className="bg-light-2">
                   <tr>
                     <th>Type</th>
+<<<<<<< HEAD
                     <th>Title</th>
                     <th>Order Date</th>
+=======
+                    <th>Titre</th>
+                    <th>Order </th>
+>>>>>>> frontend-2309
                     <th>Execution Time</th>
                     <th>Total</th>
                     <th>Paid</th>

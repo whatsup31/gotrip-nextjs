@@ -121,7 +121,7 @@
         background-color: rgba(53, 84, 209, 0.05) !important;
 
         > * > :first-child {
-            color: var(--color-blue-1);
+            color: #007cd2;
         }
     }
 }
@@ -140,7 +140,7 @@
     text-align: center;
     cursor: pointer;
     background-color: #f6f6f6;
-    color: var(--color-blue-1);
+    color: #007cd2;
     transition: all 0.3s ease;
 
     .icon {
@@ -149,7 +149,7 @@
         font-size: 14px;
     }
     &:hover {
-        background: var(--color-blue-1);
+        background: #007cd2;
         color: #fff;
     }
 }
@@ -195,17 +195,17 @@
     }
 }
 .rmdp-day.rmdp-selected span:not(.highlight) {
-    background-color: var(--color-dark-3) !important;
+    background-color: rgb(0, 124, 210) !important;
 }
 .rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover {
     background-color: #51658d !important;
 }
 .rmdp-day.rmdp-today span,
 .rmdp-arrow-container:hover {
-    background-color: var(--color-blue-1) !important;
+    background-color: #007cd2 !important;
 }
 .rmdp-week-day {
-    color: var(--color-blue-1) !important;
+    color: #007cd2 !important;
 }
 .rmdp-header {
     font-size: 16px !important;
@@ -233,7 +233,7 @@
 // terms tab
 .tabs__controls {
     .react-tabs__tab--selected {
-        color: var(--color-blue-1);
+        color: #007cd2;
         &:focus {
             outline: none;
         }
@@ -318,7 +318,7 @@
         .fix-icon {
             cursor: pointer;
             &:hover {
-                color: var(--color-blue-1);
+                color: #007cd2;
             }
         }
     }
@@ -332,7 +332,7 @@
     button {
         font-weight: 500;
         &:hover {
-            color: var(--color-blue-1);
+            color: #007cd2;
         }
     }
 }
@@ -434,7 +434,7 @@
 
 // date range active
 .rmdp-range {
-    background-color: var(--color-blue-1) !important;
+    background-color: #007cd2 !important;
 }
 .fixed {
     position: fixed;
@@ -446,17 +446,17 @@
     opacity: 0.65;
 }
 .menu-active-link{
-    color: var(--color-blue-1);
+    color: #007cd2;
     .inactive-menu{
         color: #051036 !important;
     }
 }
 .nested-menu-active{
-    color: var(--color-blue-1) !important;
+    color: #007cd2 !important;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-bottom: 2px solid var(--color-blue-1);
+    border-bottom: 2px solid #007cd2;
     box-sizing: content-box;
    
     

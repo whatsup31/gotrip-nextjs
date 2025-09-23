@@ -78,7 +78,7 @@ const HotelSingleV2Dynamic = ({ params }) => {
         <div className="container">
           <div className="row pb-20">
             <div className="col-auto">
-              <h3 className="text-22 fw-500">Available Rooms</h3>
+              <h3 className="text-22 fw-500">Services proposés</h3>
             </div>
           </div>
           {/* End .row */}
@@ -240,58 +240,10 @@ const HotelSingleV2Dynamic = ({ params }) => {
       {/* End helpful facts surroundings */}
 
       <section id="faq" className="pt-40 layout-pb-md">
-        <div className="container">
-          <div className="pt-40 border-top-light">
-            <div className="row y-gap-20">
-              <div className="col-lg-4">
-                <h2 className="text-22 fw-500">
-                  FAQs about
-                  <br /> The Crown Hotel
-                </h2>
-              </div>
-              {/* End .row */}
-
-              <div className="col-lg-8">
-                <div className="accordion -simple row y-gap-20 js-accordion">
-                  <Faq />
-                </div>
-              </div>
-              {/* End .col */}
-            </div>
-            {/* End .row */}
-          </div>
-          {/* End .pt-40 */}
-        </div>
+        
         {/* End .container */}
       </section>
       {/* End Faq about sections */}
-
-      <section className="layout-pt-md layout-pb-lg">
-        <div className="container">
-          <div className="row justify-center text-center">
-            <div className="col-auto">
-              <div className="sectionTitle -md">
-                <h2 className="sectionTitle__title">
-                  Popular properties similar to The Crown Hotel
-                </h2>
-                <p className=" sectionTitle__text mt-5 sm:mt-0">
-                  Interdum et malesuada fames ac ante ipsum
-                </p>
-              </div>
-              {/* End sectionTitle */}
-            </div>
-            {/* End .col */}
-          </div>
-          {/* End .row */}
-
-          <div className="pt-40 sm:pt-20 item_gap-x30">
-            <Hotels2 />
-          </div>
-          {/* End slide hotel */}
-        </div>
-        {/* End .container */}
-      </section>
-      {/* End similar hotel */}
 
       <CallToActions />
       {/* End Call To Actions Section */}

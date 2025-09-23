@@ -137,7 +137,7 @@ body.-is-sidebar-open {
 
       &.-is-active {
         background-color: color-opac(blue-1, 0.05);
-        color: var(--color-blue-1) !important;
+        color: #007cd2 !important;
       }
     }
   }
@@ -266,7 +266,7 @@ body.-is-sidebar-open {
 //booking table
 .tabs.-underline-2 .tabs__controls .tabs__button.is-tab-el-active,
 .tabs.-underline-2 .tabs__controls .tabs__button:hover {
-  color: var(--color-blue-1) !important;
+  color: #007cd2 !important;
 }
 .tabs.-underline-2 .tabs__controls .tabs__button {
   position: relative;
@@ -279,7 +279,7 @@ body.-is-sidebar-open {
   bottom: 0;
   width: 100%;
   height: 2px;
-  background-color: var(--color-blue-1);
+  background-color: #007cd2;
   transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
   opacity: 0;
 }

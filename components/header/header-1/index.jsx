@@ -34,8 +34,8 @@ const Header1 = () => {
             <div className="col-auto">
               <div className="d-flex items-center">
                 <Link href="/" className="header-logo mr-20">
-                  <img src="/img/general/logo-light.svg" alt="logo icon" />
-                  <img src="/img/general/logo-dark.svg" alt="logo icon" />
+                  <img src="/img/general/logo-omi-white.png" alt="logo icon" />
+                  <img src="/img/general/logo-omi.png" alt="logo icon" />
                 </Link>
                 {/* End logo */}
 
@@ -73,13 +73,13 @@ const Header1 = () => {
                     href="/login"
                     className="button px-30 fw-400 text-14 -white bg-white h-50 text-dark-1"
                   >
-                    Become An Expert
+                    Mon assistant voyage
                   </Link>
                   <Link
                     href="/signup"
                     className="button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ml-20"
                   >
-                    Sign In / Register
+                    Se connecter
                   </Link>
                 </div>
                 {/* End btn-group */}

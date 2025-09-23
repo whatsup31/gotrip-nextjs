@@ -16,19 +16,16 @@ const Index = () => {
               data-aos="fade-up"
               data-aos-delay="400"
             >
-              Best Travel{" "}
-              <span className="text-blue-1 relative">
-                Experience{" "}
+             Votre voyage<br />commence{" "}
+             <span style={{ color: "#007cd2" }} className="relative">                ici{" "}
                 <span className="-line">
                   <img src="/img/general/line.png" alt="image" />
                 </span>
               </span>
             </h1>
             <p className="mt-20" data-aos="fade-up" data-aos-delay="500">
-              Experience the various exciting tour and travel packages and Make
-              hotel reservations, find
-              <br className="lg:d-none" /> vacation packages, search cheap
-              hotels and events
+            Hébergement, services et expériences réunis dans une seule plateforme.
+    
             </p>
 
             <MainFilterSearchBox />

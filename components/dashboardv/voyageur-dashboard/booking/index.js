@@ -27,9 +27,15 @@ const index = () => {
           <div className="dashboard__content bg-light-2">
             <div className="row y-gap-20 justify-between items-end pb-60 lg:pb-40 md:pb-32">
               <div className="col-auto">
+<<<<<<< HEAD
                 <h1 className="text-30 lh-14 fw-600">Booking History</h1>
                 <div className="text-15 text-light-1">
                   Lorem ipsum dolor sit amet, consectetur.
+=======
+                <h1 className="text-30 lh-14 fw-600">Réservations</h1>
+                <div className="text-15 text-light-1">
+                La liste de toutes vos réservations
+>>>>>>> frontend-2309
                 </div>
               </div>
               {/* End .col-auto */}

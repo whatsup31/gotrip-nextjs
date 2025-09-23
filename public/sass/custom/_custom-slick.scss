@@ -58,8 +58,8 @@
             font-size: var(--text-10) !important;
         }
         &:hover {
-            background-color: var(--color-blue-1) !important;
-            border-color: var(--color-blue-1);
+            background-color: #007cd2 !important;
+            border-color: #007cd2;
             color: #fff !important;
         }
     }
@@ -109,7 +109,7 @@
     }
     &.slick-active {
         width: 20px;
-        background: var(--color-blue-1);
+        background: #007cd2;
     }
 }
 

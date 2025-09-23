@@ -58,7 +58,7 @@
   margin-left: 0 !important;
 }
 .rc-slider .rc-slider-handle {
-  border: solid 2px var(--color-blue-1);
+  border: solid 2px #007cd2;
   opacity: 1 !important;
   background-color: #fff !important;
   width: 16px;
@@ -66,13 +66,13 @@
   margin-top: -7px;
 }
 .rc-slider .rc-slider-handle:hover {
-  border-color: var(--color-blue-1);
+  border-color: #007cd2;
 }
 .rc-slider .rc-slider-handle-dragging {
-  border-color: var(--color-blue-1) !important;
+  border-color: #007cd2 !important;
   box-shadow: none !important;
 }
 .rc-slider .rc-slider-track,
 .rc-slider .rc-slider-tracks {
-  background-color: var(--color-blue-1);
+  background-color: #007cd2;
 }

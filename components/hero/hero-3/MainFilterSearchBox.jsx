@@ -56,7 +56,7 @@ const MainFilterSearchBox = () => {
                 onClick={() => Router.push("/hotel-list-v3")}
               >
                 <i className="icon-search text-20 mr-10" />
-                Search
+                Rechercher
               </button>
             </div>
             {/* End search button_item */}

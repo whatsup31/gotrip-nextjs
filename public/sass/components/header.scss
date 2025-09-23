@@ -117,20 +117,21 @@
           border-color: var(--color-dark-1) !important;
 
           &:hover {
-            background-color: var(--color-blue-1) !important;
+            background-color: #007cd2 !important;
             color: white !important;
-            border-color: var(--color-blue-1) !important;
+            border-color: #007cd2 !important;
           }
         }
 
         > *:nth-child(2) {
           color: var(--color-dark-1) !important;
+          background-color: #007cd2 !important;
           border-color: var(--color-dark-1) !important;
 
           &:hover {
-            background-color: var(--color-blue-1) !important;
+            background-color: #007cd2 !important;
             color: white !important;
-            border-color: var(--color-blue-1) !important;
+            border-color: #007cd2 !important;
           }
         }
       }
@@ -147,9 +148,9 @@
           border-color: var(--color-dark-1) !important;
 
           &:hover {
-            background-color: var(--color-blue-1) !important;
+            background-color: #007cd2 !important;
             color: white !important;
-            border-color: var(--color-blue-1) !important;
+            border-color: #007cd2 !important;
           }
         }
 
@@ -158,9 +159,9 @@
           border-color: var(--color-dark-1) !important;
 
           &:hover {
-            background-color: var(--color-blue-1) !important;
+            background-color: #007cd2 !important;
             color: white !important;
-            border-color: var(--color-blue-1) !important;
+            border-color: #007cd2 !important;
           }
         }
       }
@@ -284,7 +285,7 @@
             border-radius: 4px;
 
             &:hover {
-              color: var(--color-blue-1);
+              color: #007cd2;
               background-color: color-opac(blue-1, 0.05);
             }
           }
@@ -454,7 +455,7 @@
         }
 
         &:hover {
-          color: var(--color-blue-1);
+          color: #007cd2;
         }
       }
 
@@ -501,7 +502,7 @@
             justify-content: flex-start;
             height: 50px;
             font-size: 20px;
-            color: var(--color-blue-1);
+            color: #007cd2;
             background-color: color-opac(blue-1, 0.05) !important;
 
             .icon {
@@ -533,10 +534,10 @@
 
 // active menu
 .menu__nav li.current {
-  color: var(--color-blue-1);
+  color: #007cd2;
 }
 .mega__grid div.current {
-  color: var(--color-blue-1);
+  color: #007cd2;
 }
 
 .header .header-menu .menu-item-has-children .subnav a,

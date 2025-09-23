@@ -9,10 +9,10 @@ import Link from "next/link";
 const index = () => {
   return (
     <>
-     
+      {/*  */}
       {/* End Page Title */}
 
-      <div className=""></div>
+      <div className="header-margin"></div>
 
       <Header />
       {/* End dashboard-header */}
@@ -25,7 +25,7 @@ const index = () => {
         {/* End dashboard__sidebar */}
 
         <div className="dashboard__main">
-          <div className="dashboard__content bg-light-2">
+        <div className="dashboard__content bg-light-2">
             <div className="row y-gap-20 justify-between items-end pb-60 lg:pb-40 md:pb-32">
               <div className="col-auto">
                 <h1 className="text-30 lh-14 fw-600">Logements</h1>
@@ -37,8 +37,8 @@ const index = () => {
 
               <div className="col-auto">
               <a
-  href="/conciergerie-dashboard/add-hotel"
-                  className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
+ href="/conciergerie-dashboard/add-hotel"
+ className="button h-50 px-24 text-white"  style={{ backgroundColor: "#007cd2" }}
                 >
                   Ajouter un logement <div className="icon-plus ml-15"></div>
                 </a>
