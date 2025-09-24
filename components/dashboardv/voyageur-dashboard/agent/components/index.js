@@ -3,11 +3,14 @@
 import React, { useState } from 'react';
 
 const ChatBubble = () => {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState(
+    'Découvrir New York pour une semaine à deux entre septembre et octobre 2025...'
+  );
 
   const handleSend = () => {
     if (!message.trim()) return;
     console.log('Message envoyé :', message);
+    // TODO: appelle ton action réelle ici (API, navigation, etc.)
     setMessage('');
   };
 
@@ -16,25 +19,29 @@ const ChatBubble = () => {
       <textarea
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        placeholder="Découvrir New York pour une semaine à deux entre septembre et octobre 2025..."
         aria-label="Message"
+        readOnly={false}
       />
 
-<div className="col-auto">
-              <a
- href="/conciergerie-dashboard/add-hotel"
- className="button h-50 px-24 text-white"  style={{ backgroundColor: "#007cd2" }}
-                >
-                  Envoyer <div className="icon-check ml-15"></div>
-                </a>
-              </div>
+      <div className="col-auto actions">
+        {/* Si tu veux garder la navigation, utilise un <button> puis route programmatique */}
+        <button
+          type="button"
+          className="button h-50 px-24 text-white sendBtn"
+          style={{ backgroundColor: '#007cd2' }}
+          onClick={handleSend}
+        >
+          Envoyer <div className="icon-check ml-15"></div>
+        </button>
+      </div>
 
       <style jsx>{`
         .chatBubble {
           width: 100%;
           padding: 20px;
           box-sizing: border-box;
-          background: transparent; /* conserve le fond du parent */
+          /* garde le fond du parent, mais le textarea aura un fond opaque */
+          background: transparent;
         }
 
         textarea {
@@ -48,6 +55,13 @@ const ChatBubble = () => {
           line-height: 1.5;
           outline: none;
           margin-bottom: 16px;
+
+          /* Règles demandées */
+          background: #ffffff;        /* non transparent */
+          color: #111827;
+          user-select: text;          /* texte sélectionnable */
+          -webkit-user-select: text;
+          -ms-user-select: text;
         }
 
         textarea:focus {
@@ -61,7 +75,9 @@ const ChatBubble = () => {
         }
 
         .sendBtn {
-          display: inline-block;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
           padding: 12px 24px;
           border-radius: 5px;
           background: #0b74d0;
