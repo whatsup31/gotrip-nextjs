@@ -1,4 +1,4 @@
 import { redirect } from "next/navigation";
 export default function Page() {
-  redirect("/conciergerie-dashboard/add-service");
+  redirect("/partenaire-dashboard/add-hotel");
 }
