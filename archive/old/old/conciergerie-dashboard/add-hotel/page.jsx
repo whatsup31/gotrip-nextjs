@@ -1,5 +1,5 @@
 import React from "react";
-import DashboardPage from "../../../../components/dashboardp/partenaire-dashboard/add-hotel";
+import DashboardPage from "../../../../components/dashboardc/conciergerie-dashboard/add-hotel";
 
 export default function page() {
   return (
