@@ -1,4 +1,4 @@
-import DashboardPage from '@/components/dashboard/vendor-dashboard/add-hotel'
+import DashboardPage from '@/components/dashboardc/conciergerie-dashboard/add-hotel';
 import { supabaseServer } from '@/utils/supabase-server'
 import { redirect } from 'next/navigation'
 
