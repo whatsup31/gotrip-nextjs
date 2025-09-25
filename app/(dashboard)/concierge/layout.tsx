@@ -3,10 +3,12 @@ import { supabaseServer } from '@/utils/supabase-server'
 import { redirect } from 'next/navigation'
 import type { ReactNode } from 'react'
 
-// ⚠️ adapte ce chemin si besoin (où est ton fichier de types supabase ?)
-import type { Database } from '@/types/supabase'
-
-type ProfileRow = Database['public']['Tables']['profiles']['Row']
+// On définit un type minimal local aligné avec ta table `profiles`
+type ProfileRow = {
+  user_id: string
+  role: string | null
+  display_name: string | null
+}
 
 export default async function ConciergeLayout({ children }: { children: ReactNode }) {
   const supabase = supabaseServer()
@@ -16,7 +18,7 @@ export default async function ConciergeLayout({ children }: { children: ReactNod
 
   if (!user) redirect('/auth/login')
 
-  // ✅ Requête tapée sur 'user_id' (la clé qui relie auth.user.id à profiles)
+  // ✅ utilise bien la colonne `user_id` + typage explicite pour TS
   const { data: prof } = await supabase
     .from('profiles')
     .select('role, display_name')
