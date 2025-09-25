@@ -1,26 +1,30 @@
+// app/(dashboard)/concierge/layout.tsx
 import { supabaseServer } from '@/utils/supabase-server'
 import { redirect } from 'next/navigation'
+import type { ReactNode } from 'react'
 
-export default async function ConciergeLayout({ children }: { children: React.ReactNode }) {
+export default async function ConciergeLayout({ children }: { children: ReactNode }) {
   const supabase = supabaseServer()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/auth/login')
 
+  // --- Choisis UNE des deux variantes ci-dessous ---
+
+  // Variante A (recommandée, schéma classique Supabase)
   const { data: prof } = await supabase
     .from('profiles')
     .select('role, display_name')
-    .eq('user_id', user.id)
+    .eq('id', user.id) // <-- clé primaire 'id'
     .single()
+
+  // // Variante B (si ta table a vraiment 'user_id')
+  // const { data: prof } = await supabase
+  //   .from('profiles')
+  //   .select('role, display_name')
+  //   .eq('user_id' as 'user_id', user.id as string)
+  //   .single()
 
   if (prof?.role !== 'conciergerie') redirect('/')
 
-  const nav = [
-    { label: 'Dashboard', href: '/concierge' },
-    { label: 'Requests', href: '/concierge/requests' },
-    { label: 'Bookings', href: '/concierge/bookings' },
-    { label: 'Customers', href: '/concierge/customers' },
-    { label: 'Settings', href: '/concierge/settings' },
-  ]
-  
   return <>{children}</>
 }
