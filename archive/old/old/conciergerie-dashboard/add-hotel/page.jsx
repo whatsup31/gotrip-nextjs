@@ -1,10 +1,4 @@
-import React from "react";
-import DashboardPage from "../../../../components/dashboardc/conciergerie-dashboard/add-hotel";
-
-export default function page() {
-  return (
-    <>
-      <DashboardPage />
-    </>
-  );
+import { redirect } from "next/navigation";
+export default function Page() {
+  redirect("/conciergerie-dashboard/add-hotel");
 }
