@@ -6,14 +6,21 @@ export const metadata = {
   title: 'New booking | Traveler',
 }
 
+type SearchParams = { listing?: string }
+
 export default async function NewBooking({
   searchParams,
-}: { searchParams: { listing?: string } }) {
-  const supabase = supabaseServer()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) redirect('/auth/login')
+}: {
+  searchParams: Promise<SearchParams>
+}) {
+  const sp = await searchParams
+  const listingId = Number(sp?.listing || 0)
 
-  const listingId = Number(searchParams?.listing || 0)
+  const supabase = supabaseServer()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+  if (!user) redirect('/auth/login')
   if (!listingId) redirect('/')
 
   const { data: listing } = await supabase
@@ -29,11 +36,21 @@ export default async function NewBooking({
         <input type="hidden" name="listing_id" value={listingId} />
         <label className="block">
           <span>Start date</span>
-          <input name="start_date" type="date" className="w-full border rounded p-2" required />
+          <input
+            name="start_date"
+            type="date"
+            className="w-full border rounded p-2"
+            required
+          />
         </label>
         <label className="block">
           <span>End date</span>
-          <input name="end_date" type="date" className="w-full border rounded p-2" required />
+          <input
+            name="end_date"
+            type="date"
+            className="w-full border rounded p-2"
+            required
+          />
         </label>
         <button className="w-full border rounded p-2">Confirm booking</button>
       </form>
