@@ -90,7 +90,7 @@ export default async function HotelSingleV2Page({ params }) {
 					Réserver <i className="icon-arrow-top-right ml-10" />
 				</Link>
                 <div className="text-13 text-light-1 mt-15">
-                  Paiement simulé à l’étape suivante.
+                  Paiement à l’étape suivante.
                 </div>
               </div>
             </aside>
