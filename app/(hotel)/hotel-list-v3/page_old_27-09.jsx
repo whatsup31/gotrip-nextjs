@@ -1,4 +1,3 @@
-// app/(hotel)/hotel-list-v3/page.jsx
 import Header11 from "@/components/header/header-11";
 import DropdownSelelctBar from "@/components/hotel-list/common/DropdownSelelctBar";
 import MapPropertyFinder from "@/components/hotel-list/common/MapPropertyFinder";
@@ -12,18 +11,7 @@ export const metadata = {
   description: "GoTrip - Travel & Tour React NextJS Template",
 };
 
-export default async function Page({ searchParams }) {
-  const page = Number(searchParams?.page ?? 1);
-  const pageSize = Number(searchParams?.pageSize ?? 10);
-  const q = searchParams?.q ?? "";
-  const city = searchParams?.city ?? "";
-  const qs = new URLSearchParams({ page: String(page), pageSize: String(pageSize), q, city });
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/api/listings?` + qs.toString(), {
-    cache: "no-store",
-  });
-  const json = await res.json();
-  const { items = [], total = 0 } = json?.data ?? {};
-  
+const index = () => {
   return (
     <>
       {/* End Page Title */}
@@ -49,11 +37,11 @@ export default async function Page({ searchParams }) {
           {/* End .row */}
 
           <div className="row y-gap-20 pt-20">
-            <HotelProperties listings={items} />
+            <HotelProperties />
           </div>
           {/* End .row */}
 
-          <Pagination total={total} page={page} pageSize={pageSize} />
+          <Pagination />
           {/* End Pagination */}
         </div>
         {/* End .halfMap__content */}
@@ -68,5 +56,6 @@ export default async function Page({ searchParams }) {
       {/* End halfMap content */}
     </>
   );
-}
+};
 
+export default index;

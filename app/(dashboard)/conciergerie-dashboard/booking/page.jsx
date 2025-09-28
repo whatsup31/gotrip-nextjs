@@ -1,3 +1,4 @@
+// app/(dashboard)/conciergerie-dashboard/booking/page.jsx
 import React from "react";
 import DashboardPage from "../../../../components/dashboardc/conciergerie-dashboard/booking";
 

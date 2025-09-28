@@ -1,3 +1,4 @@
+// app/api/listings/route.ts
 import { NextResponse } from 'next/server'
 import { supabaseServer } from '@/utils/supabase-server'
 
@@ -39,4 +40,32 @@ export async function POST(req: Request) {
     return NextResponse.redirect(new URL('/host/listings', req.url), { status: 303 })
   }
   return NextResponse.json({ ok:true, data }, { status: 201 })
+}
+
+
+export async function GET(req: Request) {
+  const supabase = supabaseServer()
+  const { searchParams } = new URL(req.url)
+
+  const page = Math.max(1, Number(searchParams.get('page') || 1))
+  const pageSize = Math.min(50, Math.max(1, Number(searchParams.get('pageSize') || 10)))
+  const q = (searchParams.get('q') || '').trim()
+  const city = (searchParams.get('city') || '').trim()
+
+  const from = (page - 1) * pageSize
+  const to = from + pageSize - 1
+
+  let query = supabase
+    .from('listings')
+    .select('*', { count: 'exact' })
+    .order('created_at', { ascending: false })
+    .range(from, to)
+
+  if (q) query = query.ilike('title', `%${q}%`)
+  if (city) query = query.ilike('location', `%${city}%`)
+
+  const { data: items, count: total, error } = await query
+  if (error) return NextResponse.json({ ok:false, errors:[{ message: error.message }]}, { status: 400 })
+
+  return NextResponse.json({ ok:true, data:{ items, total, page, pageSize }}, { status: 200 })
 }

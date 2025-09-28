@@ -12,22 +12,22 @@ const Index = () => {
   const tabs = [
     {
       label: "Description",
-      labelNo: 1,
+      no: 1,
       content: <ContentTabContent />,
     },
     {
       label: "Localisation",
-      labelNo: 2,
+      no: 2,
       content: <LocationTabContent />,
     },
     {
       label: "Tarification",
-      labelNo: 3,
+      no: 3,
       content: <PricingTabContent />,
     },
     {
       label: "Équipements",
-      labelNo: 4,
+      no: 4,
       content: <AttributesTabContent />,
     },
   ];
@@ -44,7 +44,7 @@ const Index = () => {
         {tabs.map((tab, index) => (
           <Tab key={index} className="col-auto">
             <button className="tabs__button text-18 lg:text-16 text-light-1 fw-500 pb-5 lg:pb-0 js-tabs-button">
-              {tab.labelNo}. {tab.label}
+              {tab.no}. {tab.label}
             </button>
           </Tab>
         ))}

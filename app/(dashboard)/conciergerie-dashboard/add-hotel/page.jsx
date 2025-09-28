@@ -1,15 +1,20 @@
-import React from "react";
+// app/(dashboard)/vendor-dashboard/add-hotel/page.jsx
+'use client';
+import './_shim-jsx-runtime.js'; // ← DOIT être la 1re importation
+//import React from "react";
+import { useActionState } from 'react';
+import { createListingAction } from './actions';
 import DashboardPage from "../../../../components/dashboardc/conciergerie-dashboard/add-hotel";
+import InPlaceSubmit from '@/components/common/InPlaceSubmit';
 
-export const metadata = {
-  title: "Vendor Add Hotel || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
-};
+const initialState = { error: null };
 
-export default function page() {
+export default function Page() {
+  const [state, formAction] = useActionState(createListingAction, initialState);
   return (
-    <>
+    <form action={formAction}>
       <DashboardPage />
-    </>
+      <InPlaceSubmit error={state.error} />
+    </form>
   );
 }
