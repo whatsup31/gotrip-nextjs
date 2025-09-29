@@ -70,15 +70,7 @@ const PricingTabContent = () => {
       </div>
       {/* End row */}
 
-      <div className="col-md-12 d-inline-block mt-30">
-        <button
-          type="button"
-          className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
-        >
-          Enregistrer les modifications
- <div className="icon-arrow-top-right ml-15" />
-        </button>
-      </div>
+      
     </div>
   );
 };

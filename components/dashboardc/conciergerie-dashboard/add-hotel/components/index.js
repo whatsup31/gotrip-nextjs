@@ -1,14 +1,13 @@
-
 'use client'
 
-import React, { useState } from "react";
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import ContentTabContent from "./ContentTabContent";
-import LocationTabContent from "./LocationTabContent";
-import PricingTabContent from "./PricingTabContent";
-import AttributesTabContent from "./AttributesTabContent";
+import React from 'react'
+import ContentTabContent from './ContentTabContent'
+import LocationTabContent from './LocationTabContent'
+import PricingTabContent from './PricingTabContent'
+import AttributesTabContent from './AttributesTabContent'
 
 const Index = () => {
+<<<<<<< Updated upstream
   const tabs = [
     {
       label: "Description",
@@ -49,21 +48,42 @@ const Index = () => {
           </Tab>
         ))}
       </TabList>
+=======
+  return (
+    <div className="space-y-30">
+      {/* 1. Informations */}
+      <section className="bg-white rounded-4 shadow-3 px-30 py-30 lg:px-20 lg:py-20">
+        <ContentTabContent />
+      </section>
+>>>>>>> Stashed changes
 
-      <div className="tabs__content pt-30 js-tabs-content">
-        {tabs.map((tab, index) => (
-          <TabPanel
-            key={index}
-            className={`-tab-item-${index + 1} ${
-              tabIndex === index ? "is-tab-el-active" : ""
-            }`}
-          >
-            {tab.content}
-          </TabPanel>
-        ))}
+      {/* 2. Localisation */}
+      <section className="bg-white rounded-4 shadow-3 px-30 py-30 lg:px-20 lg:py-20">
+        <h2 className="text-20 fw-600 mb-20">2. Localisation</h2>
+        <LocationTabContent />
+      </section>
+
+      {/* 3. Tarif par nuit */}
+      <section className="bg-white rounded-4 shadow-3 px-30 py-30 lg:px-20 lg:py-20">
+        <h2 className="text-20 fw-600 mb-20">3. Tarif par nuit</h2>
+        <PricingTabContent />
+      </section>
+
+      {/* 4. Type de logement */}
+      <section className="bg-white rounded-4 shadow-3 px-30 py-30 lg:px-20 lg:py-20">
+        <h2 className="text-20 fw-600 mb-20">4. Type de logement</h2>
+        <AttributesTabContent />
+      </section>
+
+      {/* Bouton unique en bas */}
+      <div className="pt-10">
+        <button className="button h-50 px-24 -dark-1 text-white" style={{ backgroundColor: '#0d6efd' }}>
+          Publier le logement
+          <div className="icon-arrow-top-right ml-15" />
+        </button>
       </div>
-    </Tabs>
-  );
-};
+    </div>
+  )
+}
 
-export default Index;
+export default Index
