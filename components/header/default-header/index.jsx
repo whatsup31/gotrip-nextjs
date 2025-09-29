@@ -99,7 +99,7 @@ const Header1 = () => {
                 {/* Boutons desktop */}
                 <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
                   <Link
-                    href="/login"
+                    href="/voyageur-dashboard/agent"
                     className="button px-30 fw-400 text-14 -blue-1 bg-blue-1 h-50 text-white"
                   >
                     Mon assistant voyage
