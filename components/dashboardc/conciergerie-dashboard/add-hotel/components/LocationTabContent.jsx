@@ -7,7 +7,7 @@ import Transportation from "./location/Transportation";
 const LocationTabContent = () => {
   return (
     <div className="col-xl-10">
-      <div className="text-18 fw-500 mb-10">Localisation du logement</div>
+      <div className="text-18 fw-500 mb-10">Adresse du logement</div>
       <Location />
     </div>
   );

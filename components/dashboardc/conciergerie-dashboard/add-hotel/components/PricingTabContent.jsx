@@ -3,7 +3,7 @@ const PricingTabContent = () => {
     <div className="col-xl-9 col-lg-11">
       <div className="row x-gap-20 y-gap-20">
         <div className="col-12">
-          <div className="text-18 fw-500 mb-10">Tarif par nuit</div>
+          <div className="text-18 fw-500 mb-10">Prix de la nuitée</div>
           <div className="form-input ">
             <input type="text" required />
             <label className="lh-1 text-16 text-light-1">Hotel Price</label>
