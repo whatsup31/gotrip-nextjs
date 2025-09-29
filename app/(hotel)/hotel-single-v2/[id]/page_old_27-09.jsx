@@ -1,3 +1,4 @@
+// app/(hotel)/hotel-single-v2/[id]/page.jsx
 import "photoswipe/dist/photoswipe.css";
 import { hotelsData } from "@/data/hotels";
 import DefaultHeader from "@/components/header/default-header";
