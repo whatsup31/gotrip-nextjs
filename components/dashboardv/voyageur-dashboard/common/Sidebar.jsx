@@ -3,30 +3,23 @@ import Link from "next/link";
 
 const Sidebar = () => {
   const sidebarData = [
-
+    // Laisse vide ou ajoute ici des items d’accordéon si nécessaire
   ];
 
   return (
     <>
       <div className="sidebar -dashboard" id="vendorSidebarMenu">
+        {/* Mon agent */}
         <div className="sidebar__item ">
           <Link
-<<<<<<< HEAD
-            href="/voyageur-dashboard/dashboard"
-=======
             href="/voyageur-dashboard/agent"
->>>>>>> frontend-2309
             className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
           >
             <Image
               width={20}
               height={20}
-<<<<<<< HEAD
-              src="/img/dashboard/sidebar/compass.svg"
-=======
               src="/img/dashboard/sidebar/agent.png"
->>>>>>> frontend-2309
-              alt="image"
+              alt="Mon agent"
               className="mr-15"
             />
             Mon agent
@@ -34,73 +27,43 @@ const Sidebar = () => {
         </div>
         {/* End accordion__item */}
 
+        {/* Réservations */}
         <div className="sidebar__item ">
-          <a
+          <Link
             href="/voyageur-dashboard/booking"
             className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
           >
             <Image
               width={20}
               height={20}
-<<<<<<< HEAD
-              src="/img/dashboard/sidebar/booking.svg"
-=======
               src="/img/dashboard/sidebar/reservation.png"
->>>>>>> frontend-2309
-              alt="image"
+              alt="Réservations"
               className="mr-15"
             />
             Réservations
-          </a>
+          </Link>
         </div>
         {/* End accordion__item */}
 
+        {/* Commandes */}
         <div className="sidebar__item ">
-          <a
-<<<<<<< HEAD
-            href="/voyageur-dashboard/hotels"
-=======
+          <Link
             href="/voyageur-dashboard/orders"
->>>>>>> frontend-2309
             className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
           >
             <Image
               width={20}
               height={20}
-<<<<<<< HEAD
-              src="/img/dashboard/sidebar/booking.svg"
-=======
               src="/img/dashboard/sidebar/partenaires.png"
->>>>>>> frontend-2309
-              alt="image"
+              alt="Commandes"
               className="mr-15"
             />
             Commandes
-          </a>
+          </Link>
         </div>
         {/* End accordion__item */}
 
-<<<<<<< HEAD
-        <div className="sidebar__item ">
-          <a
-            href="/voyageur-dashboard/booking"
-            className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
-          >
-            <Image
-              width={20}
-              height={20}
-              src="/img/dashboard/sidebar/booking.svg"
-              alt="image"
-              className="mr-15"
-            />
-            Facturation
-          </a>
-        </div>
-        {/* End accordion__item */}
-
-=======
->>>>>>> frontend-2309
-       
+        {/* Items dynamiques si tu en ajoutes dans sidebarData */}
         {sidebarData.map((item, index) => (
           <div className="sidebar__item" key={index}>
             <div className="accordion -db-sidebar js-accordion">
@@ -116,7 +79,7 @@ const Sidebar = () => {
                         width={20}
                         height={20}
                         src={item.icon}
-                        alt="image"
+                        alt={item.title}
                         className="mr-10"
                       />
                       {item.title}
@@ -130,11 +93,11 @@ const Sidebar = () => {
                   data-bs-parent="#vendorSidebarMenu"
                 >
                   <ul className="list-disc pt-15 pb-5 pl-40">
-                    {item.links.map((link, linkIndex) => (
+                    {item.links?.map((link, linkIndex) => (
                       <li key={linkIndex}>
-                        <a href={link.href} className="text-15">
+                        <Link href={link.href} className="text-15">
                           {link.title}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -144,28 +107,18 @@ const Sidebar = () => {
           </div>
         ))}
 
-     
-<<<<<<< HEAD
-<div className="sidebar__item ">
-
-<a
-href="/voyageur-dashboard/add-hotel"
-className="button h-50 px-24 -dark-1 bg-white border-blue-1 text-blue"
->
-Réserver un logement
-<div className="icon-home ml-15" />
-=======
-<div className="d-flex flex-column gap-3 mt-30">
-<a
-href="/voyageur-dashboard/add-hotel"
-className="button h-50 px-24 text-white"  style={{ backgroundColor: "#007cd2" }}
->
-Réserver un logement
->>>>>>> frontend-2309
-</a>
-
-</div>
-{/* End accordion__item */}
+        {/* Bouton footer de la sidebar */}
+        <div className="sidebar__item mt-30">
+          <Link
+            href="/"
+            className="button h-50 px-24 text-white d-flex items-center justify-center"
+            style={{ backgroundColor: "#0d6efd" }}
+          >
+            Réserver un logement
+            <div className="icon-home ml-15" />
+          </Link>
+        </div>
+        {/* End accordion__item */}
       </div>
     </>
   );

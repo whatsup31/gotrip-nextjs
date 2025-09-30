@@ -2,7 +2,7 @@ import React from "react";
 import DashboardPage from "../../../../components/dashboardc/conciergerie-dashboard/add-property";
 
 export const metadata = {
-  title: "Vendor Add Hotel || GoTrip - Travel & Tour React NextJS Template",
+  title: "Ajouter un logement | ômi",
   description: "GoTrip - Travel & Tour React NextJS Template",
 };
 
