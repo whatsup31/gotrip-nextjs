@@ -1,4 +1,4 @@
-// /components/hotels/Hotels3.jsx
+// components/services/TopServicesV2.jsx
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -6,10 +6,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import isTextMatched from "../../utils/isTextMatched";
+import isTextMatched from "@/utils/isTextMatched";
 import { createClient } from "@supabase/supabase-js";
 
-// --- Supabase client public (clé NEXT_PUBLIC_*) ---
+// Supabase public client
 const supabase =
   typeof window !== "undefined" &&
   process.env.NEXT_PUBLIC_SUPABASE_URL &&
@@ -20,64 +20,59 @@ const supabase =
       )
     : null;
 
-// --- helpers ---
-const toArray = (v) => (Array.isArray(v) ? v : []);
-const normalizePhotos = (photos) =>
-  toArray(photos).map((s) => String(s)).filter(Boolean);
+// helpers
+const toArr = (v) => (Array.isArray(v) ? v : []);
+const normalizeImages = (imgs) => toArr(imgs).map(String).filter(Boolean);
 
-const Hotels3 = () => {
+export default function TopServicesV2() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let alive = true;
-
-    async function load() {
+    (async () => {
       try {
-        // Lecture directe dans la table listings
         if (!supabase) {
-          console.warn("Supabase env vars manquantes, aucun fetch effectué.");
           setItems([]);
           return;
         }
 
+        // adapte les colonnes à ton schéma (cf. screenshot)
         const { data, error } = await supabase
-          .from("listings")
-          .select("id,title,location,price_per_night,photos,amenities")
+          .from("services")
+          .select(
+            "id,title,description,price,category,area,rating_avg,images"
+          )
           .order("created_at", { ascending: false })
           .limit(12);
 
         if (error) throw error;
 
-        const mapped = toArray(data).map((it, idx) => ({
-          id: it.id,
-          title: it.title || "Listing",
-          location: it.location || "",
-          price: it.price_per_night ?? 0,
-          tag: "",
-
+        const mapped = toArr(data).map((s, idx) => ({
+          id: s.id,
+          title: s.title || "Service",
+          location: s.area || "",                 // même emplacement que Hotels3 -> "location"
+          price: s.price ?? 0,
+          tag: s.category || "",
+          ratings: s.rating_avg ?? 4.8,
+          numberOfReviews: 12,                    // valeur de démo pour garder le rendu
           slideImg: (() => {
-            const arr = normalizePhotos(it.photos);
-            return arr.length ? arr.slice(0, 5) : ["/img/hotels/1.jpg"];
+            const imgs = normalizeImages(s.images);
+            return imgs.length ? imgs.slice(0, 5) : ["/img/services/placeholder.jpg"];
           })(),
-
-          ratings: 4.8,
-          numberOfReviews: 12,
           delayAnimation: (idx % 5) * 50,
         }));
 
         if (!alive) return;
         setItems(mapped);
       } catch (e) {
-        console.error("Failed to load listings:", e);
+        console.error("load services error:", e);
         if (!alive) return;
         setItems([]);
       } finally {
         if (alive) setLoading(false);
       }
-    }
-
-    load();
+    })();
     return () => {
       alive = false;
     };
@@ -99,8 +94,8 @@ const Hotels3 = () => {
         spaceBetween={30}
         modules={[Navigation]}
         navigation={{
-          nextEl: ".js-filter2-next",
-          prevEl: ".js-filter2-prev",
+          nextEl: ".js-topservices-next",
+          prevEl: ".js-topservices-prev",
         }}
         breakpoints={{
           540: { slidesPerView: 2, spaceBetween: 20 },
@@ -112,7 +107,7 @@ const Hotels3 = () => {
         {slides.map((item) => (
           <SwiperSlide key={item.id}>
             <Link
-              href={`/hotel-single-v2/${item.id}`}
+              href={`/service/${item.id}`} // adapte si ta route diffère
               className="hotelsCard -type-1 hover-inside-slider"
               data-aos="fade"
               data-aos-delay={item.delayAnimation}
@@ -134,7 +129,7 @@ const Hotels3 = () => {
                               height={300}
                               className="rounded-4 col-12 js-lazy"
                               src={src}
-                              alt={`image ${i + 1}`}
+                              alt={`${item.title} - ${i + 1}`}
                             />
                           </SwiperSlide>
                         ))}
@@ -148,23 +143,23 @@ const Hotels3 = () => {
                     <i className="icon-heart text-12" />
                   </button>
                 </div>
-
+{/* 
                 <div className="cardImage__leftBadge">
                   <div
                     className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase ${
-                      isTextMatched(item.tag, "breakfast included")
+                      isTextMatched(item.tag, "massage")
                         ? "bg-dark-1 text-white"
                         : ""
                     } ${
-                      isTextMatched(item.tag, "best seller")
+                      isTextMatched(item.tag, "visite")
                         ? "bg-blue-1 text-white"
                         : ""
                     } ${
-                      isTextMatched(item.tag, "-25% today")
+                      isTextMatched(item.tag, "dégustation")
                         ? "bg-brown-1 text-white"
                         : ""
                     } ${
-                      isTextMatched(item.tag, "top rated")
+                      isTextMatched(item.tag, "top")
                         ? "bg-yellow-1 text-dark-1"
                         : ""
                     }`}
@@ -172,6 +167,7 @@ const Hotels3 = () => {
                     {item.tag}
                   </div>
                 </div>
+*/}
               </div>
 
               <div className="hotelsCard__content mt-10">
@@ -192,7 +188,10 @@ const Hotels3 = () => {
 
                 <div className="mt-5">
                   <div className="fw-500">
-                    Starting from <span className="text-blue-1">€{item.price}</span>
+                    À partir de{" "}
+                    <span className="text-blue-1">
+                      €{item.price}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -201,14 +200,12 @@ const Hotels3 = () => {
         ))}
       </Swiper>
 
-      <button className="section-slider-nav -prev flex-center button -blue-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-filter2-prev">
+      <button className="section-slider-nav -prev flex-center button -blue-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-topservices-prev">
         <i className="icon icon-chevron-left text-12" />
       </button>
-      <button className="section-slider-nav -next flex-center button -blue-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-filter2-next">
+      <button className="section-slider-nav -next flex-center button -blue-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-topservices-next">
         <i className="icon icon-chevron-right text-12" />
       </button>
     </>
   );
-};
-
-export default Hotels3;
+}

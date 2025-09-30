@@ -16,6 +16,7 @@ import Testimonial from "@/components/home/home-5/Testimonial";
 import Brand2 from "@/components/brand/Brand2";
 import HotelTypes from "@/components/home/home-7/HotelTypes";
 import Hotels3 from "@/components/hotels/Hotels3";
+import TopServices from "@/components/services/TopServicesV2";
 
 
 
@@ -81,7 +82,7 @@ const home_5 = () => {
 
           <div className="relative  pt-40 sm:pt-20">
             <div className="row y-gap-30">
-              <Hotels3 />
+              <TopServices />
             </div>
           </div>
           {/* End relative */}
