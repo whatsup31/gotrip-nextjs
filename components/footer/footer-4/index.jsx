@@ -12,7 +12,11 @@ const index = () => {
         <div className="pt-60 pb-60">
           <div className="row y-gap-40 justify-between xl:justify-start">
             <div className="col-xl-4 col-lg-6">
-              <img src="/img/general/logo-omi-white.png" alt="image" />
+            <img 
+  src="/img/general/logo-omi-white.png" 
+  alt="image" 
+  style={{ width: "140px", height: "auto" }} 
+/>
               <div className="row y-gap-30 justify-between pt-30">
                 <ContactInfo />
               </div>
@@ -20,7 +24,7 @@ const index = () => {
 
               <div className="row x-gap-20 y-gap-15 pt-60">
                 <div className="col-12">
-                  <h5 className="text-16 fw-500">Your all-in-one travel app</h5>
+                  <h5 className="text-16 fw-500">Téléchargez l'application mobile</h5>
                 </div>
                 {/* End .col */}
 
@@ -30,7 +34,7 @@ const index = () => {
 
               <div className="mt-60">
                 <h5 className="text-16 fw-500 mb-10">
-                  Follow us on social media
+                  Encore plus d'exclusivités
                 </h5>
                 <div className="d-flex x-gap-20 items-center">
                   <Social />

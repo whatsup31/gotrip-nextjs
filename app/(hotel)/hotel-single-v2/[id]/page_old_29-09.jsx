@@ -87,7 +87,7 @@ export default async function HotelSingleV2Page({ params }) {
                   <span className="text-14 fw-400"> / nuit</span>
                 </div>	
                 <Link href={`/booking-page?listingId=${item.id}`} className="button -dark-1 bg-blue-1 text-white w-100 mt-20">
-					Réserver <i className="icon-arrow-top-right ml-10" />
+					Réserver <i className="icon-arrow-right ml-10" />
 				</Link>
                 <div className="text-13 text-light-1 mt-15">
                   Paiement à l’étape suivante.

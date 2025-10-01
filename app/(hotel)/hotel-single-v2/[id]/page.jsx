@@ -27,6 +27,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { supabaseRSC } from "@/utils/supabase-rsc";
 
+import PopularRoutes from "@/components/home/home-10/PopularRoutes";
+
 export const metadata = {
   title: "Logement | Détail",
   description: "Fiche logement avec données Supabase + services (POC)",
@@ -115,19 +117,45 @@ export default async function HotelSingleV2Page({ params }) {
         </div>
       </section>
 
-      {/* Services proposés */}
-      <section id="services" className="pt-30">
+      <section className="layout-pt-lg layout-pb-lg">
         <div className="container">
-          <AvailableServices services={hotel.services} />
+          <div className="row justify-between items-end">
+            <div className="col-auto">
+              <div className="sectionTitle -md">
+                <h2 className="sectionTitle__title">Services proposés</h2>
+                <p className=" sectionTitle__text mt-5 sm:mt-0">
+                  Simplifiez votre séjour et faites des économies
+                </p>
+              </div>
+            </div>
+            {/* End .col */}
+
+            <div className="col-auto">
+              <Link
+                href="#"
+                className="button -md -blue-1 bg-blue-1-05 text-blue-1"
+              >
+                Plus de services <div className="icon-arrow-top-right ml-15" />
+              </Link>
+            </div>
+          </div>
+          {/* End .row */}
+
+          <div className="relative mt-40 sm:mt-20">
+            <PopularRoutes />
+          </div>
+          {/* End relative */}
         </div>
+        {/* End .container */}
       </section>
+      {/* End popular routes Section */}
 
       {/* Facilities */}
       <section className="mt-40" id="facilities">
         <div className="container">
           <div className="row x-gap-40 y-gap-40">
             <div className="col-12">
-              <h3 className="text-22 fw-500">Facilities of this Hotel</h3>
+              <h3 className="text-22 fw-500">Équipements du logement</h3>
               <div className="row x-gap-40 y-gap-40 pt-20"><Facilities /></div>
             </div>
           </div>
@@ -214,7 +242,7 @@ export default async function HotelSingleV2Page({ params }) {
                 <span className="text-14 fw-400"> / nuit</span>
               </div>
               <Link href={`/booking-page?listingId=${item.id}`} className="button -dark-1 bg-blue-1 text-white w-100 mt-20">
-                Réserver <i className="icon-arrow-top-right ml-10" />
+                Réserver <i className="icon-arrow-right ml-10" />
               </Link>
               <div className="text-13 text-light-1 mt-15">Paiement à l’étape suivante.</div>
             </div>

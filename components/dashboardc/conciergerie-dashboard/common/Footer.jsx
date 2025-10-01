@@ -35,7 +35,7 @@ function Footer() {
 
         <div className="col-auto">
           <div className="d-flex x-gap-5 y-gap-5 items-center">
-            <button className="text-14 fw-500 underline">English (US)</button>
+            <button className="text-14 fw-500 underline">Français (FR)</button>
             <button className="text-14 fw-500 underline">EUR</button>
           </div>
         </div>

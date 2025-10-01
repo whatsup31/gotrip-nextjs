@@ -30,7 +30,7 @@ const index = () => {
 
               <div className="mt-60">
                 <h5 className="text-16 fw-500 mb-10">
-                  Follow us on social media
+                  Encore plus d'exclusivités
                 </h5>
                 <div className="d-flex x-gap-20 items-center">
                   <Social />

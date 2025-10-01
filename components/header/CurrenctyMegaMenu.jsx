@@ -8,7 +8,7 @@ const CurrenctyMegaMenu = ({ textClass }) => {
   const handleCurrency = () => setClick((prevState) => !prevState);
 
   const currencyContent = [
-    { id: 1, name: "United States dollar", currency: "USD", symbol: "$" },
+    { id: 1, name: "Euro", currency: "EUR", symbol: "€" },
     { id: 2, name: "Australian dollar", currency: "AUD", symbol: "$" },
     { id: 3, name: "Brazilian real", currency: "BRL", symbol: "R$" },
     { id: 4, name: "Bulgarian lev", currency: "BGN", symbol: "лв." },

@@ -29,25 +29,29 @@ export default async function Page({ searchParams }) {
   const h = headers();
   const host = h.get("host") || "localhost:3000";
   const protocol = process.env.VERCEL ? "https" : "http";
-  // Si tu as défini NEXT_PUBLIC_BASE_URL (prod), on la prend; sinon on construit dynamiquement
   const base = process.env.NEXT_PUBLIC_BASE_URL || `${protocol}://${host}`;
 
-  const res = await fetch(`${base}/api/listings?${qs.toString()}`, {
-    cache: "no-store",
-  });
+  let items = [];
+  let total = 0;
 
-  if (!res.ok) {
-    // option: meilleure gestion d'erreur UI
-    throw new Error(`Fetch /api/listings failed: ${res.status}`);
+  try {
+    const res = await fetch(`${base}/api/listings?${qs.toString()}`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      console.error(`❌ Fetch /api/listings failed: ${res.status}`);
+    } else {
+      const json = await res.json();
+      items = json?.data?.items ?? [];
+      total = json?.data?.total ?? 0;
+    }
+  } catch (err) {
+    console.error("❌ Erreur fetch /api/listings:", err);
   }
-
-  const json = await res.json();
-  const { items = [], total = 0 } = json?.data ?? {};
 
   return (
     <>
-      {/* End Page Title */}
-
       <div className="header-margin"></div>
       {/* header top margin */}
 

@@ -92,7 +92,7 @@ export default function HotelProperties({ listings = [] }) {
                     href={`/hotel-single-v2/${item.id}`}
                     className="button py-10 px-20 -dark-1 bg-blue-1 text-white mt-10"
                   >
-                    Voir la dispo <div className="icon-arrow-top-right ml-15"></div>
+                    Découvrir <div className="icon-arrow-right ml-15"></div>
                   </Link>
                 </div>
               </div>

@@ -94,7 +94,7 @@ const HotelSingleV2Dynamic = ({ params }) => {
         <div className="container">
           <div className="row x-gap-40 y-gap-40">
             <div className="col-12">
-              <h3 className="text-22 fw-500">Facilities of this Hotel</h3>
+              <h3 className="text-22 fw-500">Équipements</h3>
               <div className="row x-gap-40 y-gap-40 pt-20">
                 <Facilities />
               </div>

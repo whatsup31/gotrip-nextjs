@@ -1,31 +1,39 @@
 // components/hotel-single/AvailableServices.jsx
-import ServiceCardHotelStyle from "./ServiceCardHotelStyle";
+import ServiceCardHotels3 from "./ServiceCardHotels3";
+
+function pickImage(s) {
+  const arr = Array.isArray(s?.photos) ? s.photos : [];
+  const first = arr.length ? arr[0] : null;
+
+  const candidates = [
+    s?.image,
+    s?.image_url,
+    s?.picture,
+    s?.photo,
+    s?.cover,
+    s?.cover_url,
+    first,
+    "/img/others/placeholder.jpg",
+  ];
+
+  for (const u of candidates) {
+    if (u && typeof u === "string") {
+      return u.startsWith("//") ? `https:${u}` : u;
+    }
+  }
+  return "/img/others/placeholder.jpg";
+}
 
 function toCardProps(s) {
-  const title = s?.title || s?.name || "Service";
-  const image = s?.image || s?.image_url || s?.picture || "/img/others/placeholder.jpg";
-  const priceNum = Number(s?.price ?? 0);
-  const rating =
-    typeof s?.rating === "number" ? s.rating : 4.7 + Math.random() * 0.2; // look & feel
-  const reviews =
-    typeof s?.reviews === "number" ? s.reviews : Math.floor(100 + Math.random() * 1200);
-  const location = s?.location || s?.city || "";
-
-  // petit badge démo pour matcher GoTrip
-  const badges = [undefined, "BEST SELLER", "TOP RATED", "POPULAR"];
-  const badge = badges[Math.floor(Math.random() * badges.length)];
-
   return {
     id: s?.id ?? Math.random().toString(36).slice(2),
-    title,
-    image,
-    category: s?.category || "",
-    location,
-    rating,
-    reviews,
-    price: Number.isFinite(priceNum) ? priceNum : 0,
+    title: s?.title || s?.name || "Service",
+    image: pickImage(s),
+    location: s?.location || s?.city || "",
+    rating: typeof s?.rating === "number" ? s.rating : 4.8,
+    reviews: typeof s?.reviews === "number" ? s.reviews : 0,
+    price: Number(s?.price ?? 0) || 0,
     href: "#",
-    badge,
   };
 }
 
@@ -35,7 +43,9 @@ export default function AvailableServices({ services = [] }) {
   return (
     <div className="row y-gap-30">
       {services.map((s) => (
-        <ServiceCardHotelStyle key={String(s?.id ?? Math.random())} {...toCardProps(s)} />
+        <div key={String(s?.id ?? Math.random())} className="col-xl-4 col-md-6">
+          <ServiceCardHotels3 {...toCardProps(s)} />
+        </div>
       ))}
     </div>
   );

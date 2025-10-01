@@ -39,11 +39,11 @@ const Copyright = () => {
             <div className="d-flex items-center">
               <button className="d-flex items-center text-14 fw-500 text-white mr-10">
                 <i className="icon-globe text-16 mr-10" />
-                <span className="underline">English (US)</span>
+                <span className="underline">Français (FR)</span>
               </button>
               <button className="d-flex items-center text-14 fw-500 text-white mr-10">
                 <i className="icon-usd text-16 mr-10" />
-                <span className="underline">USD</span>
+                <span className="underline">EUR</span>
               </button>
             </div>
           </div>

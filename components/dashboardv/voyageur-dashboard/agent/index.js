@@ -37,7 +37,7 @@ const Index = () => {
             </div>
 
             {/* Bloc principal : on remplace l'ancien textarea+btn par OmiChat */}
-            <div className="py-30 px-30 rounded-4 bg-white shadow-3">
+            <div className="shadow-3">
               <OmiChat />
             </div>
 
