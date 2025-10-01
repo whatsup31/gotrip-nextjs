@@ -4,7 +4,7 @@ const HotelPolicy = () => {
       <div className="row x-gap-20 y-gap-20">
         <div className="col-12">
           <div className="form-input ">
-            <input type="text" required />
+            <input type="text" name="rating_standard" />
             <label className="lh-1 text-16 text-light-1">
               Hotel rating standard
             </label>
@@ -30,7 +30,7 @@ const HotelPolicy = () => {
               <tr>
                 <td className="col-5">
                   <div className="form-input ">
-                    <input type="text" required />
+                    <input type="text" />
                     <label className="lh-1 text-16 text-light-1">
                       Eg: Which footwear is most suitable?
                     </label>
@@ -40,7 +40,7 @@ const HotelPolicy = () => {
 
                 <td className="col-7">
                   <div className="form-input ">
-                    <textarea required rows={5} defaultValue={""} />
+                    <textarea rows={5} defaultValue={""} />
                     <label className="lh-1 text-16 text-light-1">Content</label>
                   </div>
                 </td>
@@ -58,9 +58,9 @@ const HotelPolicy = () => {
               <tr>
                 <td className="col-5">
                   <div className="form-input ">
-                    <input type="text" required />
+                    <input type="text" />
                     <label className="lh-1 text-16 text-light-1">
-                      Eg: Whhic hotel is most suitable?
+                      Eg: Which hotel is most suitable?
                     </label>
                   </div>
                 </td>
@@ -68,7 +68,7 @@ const HotelPolicy = () => {
 
                 <td className="col-7">
                   <div className="form-input ">
-                    <textarea required rows={5} defaultValue={""} />
+                    <textarea rows={5} defaultValue={""} />
                     <label className="lh-1 text-16 text-light-1">Content</label>
                   </div>
                 </td>

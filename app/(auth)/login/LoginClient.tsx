@@ -1,6 +1,7 @@
 // app/(auth)/login/LoginClient.tsx
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { getDashboardPath } from '@/utils/role-routing';
@@ -10,6 +11,7 @@ export default function LoginClient() {
   const qs = useSearchParams();
   const redirectTo = qs.get('redirect');
 
+  // Conserve la valeur par défaut utilisée dans l’implémentation actuelle
   const [email, setEmail] = useState('hote@omi.com');
   const [password, setPassword] = useState('');
   const [err, setErr] = useState<string | null>(null);
@@ -21,20 +23,21 @@ export default function LoginClient() {
     setLoading(true);
 
     try {
-      // Import dynamique pour éviter qu’un import top-level casse le rendu
       const { supabaseBrowser } = await import('@/utils/supabase-browser');
-	  //const { supabaseBrowser } = await import('../../../utils/supabase-browser');
       const supabase = supabaseBrowser();
 
-      // 1) Authentification
-      const { error: signErr } = await supabase.auth.signInWithPassword({ email, password });
+      // 1) Auth
+      const { error: signErr } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
       if (signErr) throw signErr;
 
-      // 2) Lecture user
+      // 2) User
       const { data: ures, error: uerr } = await supabase.auth.getUser();
       if (uerr || !ures?.user) throw uerr || new Error('No user');
 
-      // 3) Lecture rôle dans profiles (clé: user_id)
+      // 3) Rôle
       const { data: profile, error: profErr } = await supabase
         .from('profiles')
         .select('role')
@@ -55,40 +58,66 @@ export default function LoginClient() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
-      <h1 className="text-22 fw-600 mb-30">Se connecter</h1>
-
-      <div className="mb-20">
-        <label className="text-14 lh-14 text-dark-1 mb-10">Email</label>
-        <input
-          className="form-input"
-          type="email"
-          placeholder="you@example.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          name="email"
-          required
-        />
+    <form onSubmit={onSubmit} className="row y-gap-20">
+      <div className="col-12">
+        <h1 className="text-22 fw-500">Welcome back</h1>
+        <p className="mt-10">
+          Don&apos;t have an account yet?{' '}
+          <Link href="/signup" className="text-blue-1">
+            Sign up for free
+          </Link>
+        </p>
       </div>
 
-      <div className="mb-20">
-        <label className="text-14 lh-14 text-dark-1 mb-10">Mot de passe</label>
-        <input
-          className="form-input"
-          type="password"
-          placeholder="********"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          name="password"
-          required
-        />
+      <div className="col-12">
+        <div className="form-input">
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            name="email"
+            placeholder=" " /* nécessaire pour certains styles de label flottant */
+          />
+          <label className="lh-1 text-14 text-light-1">Email</label>
+        </div>
       </div>
 
-      {err && <div className="text-red-500 text-14 mb-20">{String(err)}</div>}
+      <div className="col-12">
+        <div className="form-input">
+          <input
+            type="password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            placeholder=" "
+          />
+          <label className="lh-1 text-14 text-light-1">Password</label>
+        </div>
+      </div>
 
-      <button className="button -md -blue-1-05 w-full" disabled={loading}>
-        {loading ? 'Connexion…' : 'Se connecter'}
-      </button>
+      {err && (
+        <div className="col-12">
+          <div className="text-red-500 text-14">{String(err)}</div>
+        </div>
+      )}
+
+      <div className="col-12">
+        <Link href="/forgot-password" className="text-14 fw-500 text-blue-1 underline">
+          Forgot your password?
+        </Link>
+      </div>
+
+      <div className="col-12">
+        <button
+          type="submit"
+          className="button py-20 -dark-1 bg-blue-1 text-white w-100"
+          disabled={loading}
+        >
+          {loading ? 'Signing in…' : 'Sign In'} <div className="icon-arrow-top-right ml-15" />
+        </button>
+      </div>
     </form>
   );
 }

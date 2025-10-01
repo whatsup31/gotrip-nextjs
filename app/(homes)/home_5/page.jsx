@@ -1,3 +1,4 @@
+// app/(homes)/home_5/page.jsx
 import Header5 from "@/components/header/header-5";
 import Hero5 from "@/components/hero/hero-5";
 import Link from "next/link";
