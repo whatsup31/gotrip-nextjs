@@ -53,7 +53,7 @@ const HeaderDashBoard = () => {
                 </div>
 
                 {/* === XP pill progress === */}
-                <div className="omi-pill md:d-none ml-20">
+                <div className="omi-pill md:d-none ml-120">
                   {/* Avatar */}
                   <div className="omi-pill__avatar">
                     <Image src="/img/general/euro.png" alt="Treasure" width={40} height={40} />
@@ -108,7 +108,7 @@ const HeaderDashBoard = () => {
                   <Image
                     width={50}
                     height={50}
-                    src="/img/avatars/3.png"
+                    src="/img/general/userpicture.webp"
                     alt="image"
                     className="size-50 rounded-22 object-cover"
                   />
@@ -141,9 +141,9 @@ const HeaderDashBoard = () => {
           flex: 1 1 auto;
         }
         .omi-pill__title {
-          font-size: 14px;
+          font-size: 12px;
           font-weight: 600;
-          margin-bottom: 6px;
+          margin-bottom: 2px;
           color: #111827;
         }
         .omi-pill__bar {
@@ -159,18 +159,16 @@ const HeaderDashBoard = () => {
           transition: width 0.3s ease;
         }
         .omi-pill__sub {
-          font-size: 12px;
+          font-size: 11px;
           color: #6b7280;
-          display: flex;
-          align-items: center;
+          align-items: left;
           gap: 4px;
         }
         .omi-pill__cta {
           flex: 0 0 auto;
-          width: 28px;
-          height: 28px;
+          width: 22px;
+          height: 22px;
           border-radius: 50%;
-          background: #f3f4f6;
           display: grid;
           place-items: center;
         }

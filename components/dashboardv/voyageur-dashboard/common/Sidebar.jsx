@@ -115,7 +115,7 @@ const Sidebar = () => {
             style={{ backgroundColor: "#007ad5" }}
           >
             Réserver un logement
-            <div className="icon-home ml-15" />
+            <div className="icon-calendar ml-15" />
           </Link>
         </div>
         {/* End accordion__item */}
