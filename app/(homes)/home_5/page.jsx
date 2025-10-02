@@ -17,6 +17,7 @@ import Brand2 from "@/components/brand/Brand2";
 import HotelTypes from "@/components/home/home-7/HotelTypes";
 import Hotels3 from "@/components/hotels/Hotels3";
 import TopServices from "@/components/services/TopServicesV2";
+import AvailableServices from "@/components/hotel-single/AvailableServices";
 
 
 
@@ -68,7 +69,7 @@ const home_5 = () => {
           <div className="row y-gap-10 justify-between items-end">
             <div className="col-auto">
               <div className="sectionTitle -md">
-                <h2 className="sectionTitle__title">Services les plus demandés</h2> 
+                <h2 className="sectionTitle__title">Services demandés</h2> 
               </div>
             </div>
             {/* End .col-auto */}
@@ -82,7 +83,7 @@ const home_5 = () => {
 
           <div className="relative  pt-40 sm:pt-20">
             <div className="row y-gap-30">
-              <TopServices />
+              <Hotels3 />
             </div>
           </div>
           {/* End relative */}
