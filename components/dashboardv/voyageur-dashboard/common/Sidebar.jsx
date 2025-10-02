@@ -112,7 +112,7 @@ const Sidebar = () => {
           <Link
             href="/"
             className="button h-50 px-24 text-white d-flex items-center justify-center"
-            style={{ backgroundColor: "#0d6efd" }}
+            style={{ backgroundColor: "#007ad5" }}
           >
             Réserver un logement
             <div className="icon-home ml-15" />
