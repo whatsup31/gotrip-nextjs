@@ -117,38 +117,11 @@ export default async function HotelSingleV2Page({ params }) {
         </div>
       </section>
 
-      <section className="layout-pt-lg layout-pb-lg">
+      <section id="services" className="pt-30">
         <div className="container">
-          <div className="row justify-between items-end">
-            <div className="col-auto">
-              <div className="sectionTitle -md">
-                <h2 className="sectionTitle__title">Services proposés</h2>
-                <p className=" sectionTitle__text mt-5 sm:mt-0">
-                  Simplifiez votre séjour et faites des économies
-                </p>
-              </div>
-            </div>
-            {/* End .col */}
-
-            <div className="col-auto">
-              <Link
-                href="#"
-                className="button -md -blue-1 bg-blue-1-05 text-blue-1"
-              >
-                Plus de services <div className="icon-arrow-top-right ml-15" />
-              </Link>
-            </div>
-          </div>
-          {/* End .row */}
-
-          <div className="relative mt-40 sm:mt-20">
-            <PopularRoutes />
-          </div>
-          {/* End relative */}
+          <AvailableServices services={hotel.services} />
         </div>
-        {/* End .container */}
       </section>
-      {/* End popular routes Section */}
 
       {/* Facilities */}
       <section className="mt-40" id="facilities">
