@@ -13,6 +13,7 @@ import "../styles/index.scss";
 import "rc-slider/assets/index.css";
 import { Provider } from "react-redux";
 import { store } from "../store/store";
+import Script from "next/script"; // 👈 ajout
 
 export default function RootLayout({ children }) {
   useEffect(() => {
@@ -48,6 +49,12 @@ export default function RootLayout({ children }) {
             <SrollTop />
           </Provider>
         </main>
+
+        {/* 👇 Ajout Google Maps API */}
+        <Script
+          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`}
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
