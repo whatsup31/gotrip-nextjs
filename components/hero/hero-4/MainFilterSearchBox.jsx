@@ -21,7 +21,7 @@ const MainFilterSearchBox = () => {
           <div className="searchMenu-date px-30 lg:py-20  sm:px-20 js-form-dd js-calendar">
             <div>
               <h4 className="text-15 fw-500 ls-2 lh-16">
-                Check in - Check out
+                Arrivée - Départ
               </h4>
               <DateSearch />
             </div>

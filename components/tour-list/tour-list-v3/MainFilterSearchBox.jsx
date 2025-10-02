@@ -16,7 +16,7 @@ const MainFilterSearchBox = () => {
 
               <div className="ml-10">
                 <h4 className="text-15 fw-500 ls-2 lh-16">
-                  Check in - Check out
+                  Arrivée - Départ
                 </h4>
                 <DateSearch />
               </div>
