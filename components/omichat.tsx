@@ -273,7 +273,7 @@ export default function OmiChatGoTrip() {
   }
 
   return (
-    <div className="container-xxl">
+    <div className="container-l">
       {/* Fil de chat */}
       <div className="d-flex flex-column gap-3 mb-3">
         {thread.map((m, i) => (
@@ -308,7 +308,6 @@ export default function OmiChatGoTrip() {
       {/* Saisie */}
       <div className="card border rounded-4 shadow-sm">
         <div className="card-body">
-          <label className="form-label small text-muted">Exemple d’intention</label>
           <textarea
             className="form-control"
             placeholder="Bali 10 jours en couple en juin, plage + temples, budget 2500€, départ Lyon…"
