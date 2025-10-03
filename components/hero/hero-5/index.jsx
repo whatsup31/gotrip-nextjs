@@ -1,3 +1,4 @@
+// components/hero/hero-5/index.jsx
 import MainFilterSearchBox from "./MainFilterSearchBox";
 
 const Index = () => {

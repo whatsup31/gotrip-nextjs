@@ -2,8 +2,6 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { useSearchParams } from "next/navigation";
-import Link from "next/link";
 import { Gallery, Item } from "react-photoswipe-gallery";
 import Overview from "@/components/hotel-single/Overview";
 import PopularFacilities from "@/components/hotel-single/PopularFacilities";
@@ -13,6 +11,7 @@ import PropertyHighlights2 from "@/components/hotel-single/PropertyHighlights2";
 import ModalVideo from "../common/ModalVideo";
 
 function ensureJpg(src = "") {
+  // si le dernier segment n'a pas d'extension, on ajoute .jpg
   try {
     const url = String(src);
     const last = url.split("/").pop() || "";
@@ -22,6 +21,7 @@ function ensureJpg(src = "") {
     return src;
   }
 }
+
 function normalizePhotos(photos) {
   if (Array.isArray(photos)) return photos.map(ensureJpg).filter(Boolean);
   if (typeof photos === "string") {
@@ -41,12 +41,9 @@ function normalizePhotos(photos) {
 
 export default function GalleryTwo({ hotel }) {
   const [isOpen, setOpen] = useState(false);
-
-  const sp = useSearchParams();
-  const keep = sp?.toString() || "";
-
   const photos = useMemo(() => normalizePhotos(hotel?.photos), [hotel?.photos]);
-  const thumbs = photos.slice(0, 4);
+
+  const thumbs = photos.slice(0, 4); // v1: on montre 4 vignettes; le reste sera visible dans la lightbox
 
   return (
     <>
@@ -87,12 +84,7 @@ export default function GalleryTwo({ hotel }) {
                       <div className="absolute px-10 py-10 col-12 h-full d-flex justify-end items-end">
                         <Item original={photos[0]} thumbnail={photos[0]} width={362} height={302}>
                           {({ ref, open }) => (
-                            <div
-                              className="button -blue-1 px-24 py-15 bg-white text-dark-1 js-gallery"
-                              ref={ref}
-                              onClick={open}
-                              role="button"
-                            >
+                            <div className="button -blue-1 px-24 py-15 bg-white text-dark-1 js-gallery" ref={ref} onClick={open} role="button">
                               See All Photos
                             </div>
                           )}
@@ -105,7 +97,7 @@ export default function GalleryTwo({ hotel }) {
 
               <div className="row justify-between items-end pt-40">
                 <div className="col-auto">
-                  <div className="row x-gap-20 items-center">
+                  <div className="row x-gap-20  items-center">
                     <div className="col-auto">
                       <h1 className="text-30 sm:text-25 fw-600">{hotel?.title?.slice(0, 60)}</h1>
                     </div>
@@ -137,13 +129,9 @@ export default function GalleryTwo({ hotel }) {
                   <div className="text-14 text-md-end">
                     From <span className="text-22 text-dark-1 fw-500">€{hotel?.price}</span>
                   </div>
-
-                  <Link
-                    href={`/booking-page?listingId=${hotel?.id}${keep ? `&${keep}` : ""}`}
-                    className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
-                  >
+                  <a href="#rooms" className="button h-50 px-24 -dark-1 bg-blue-1 text-white">
                     Select Room <div className="icon-arrow-top-right ml-15" />
-                  </Link>
+                  </a>
                 </div>
               </div>
 

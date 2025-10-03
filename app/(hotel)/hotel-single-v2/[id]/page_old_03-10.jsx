@@ -23,6 +23,7 @@ import CallToActions from "@/components/common/CallToActions";
 import AvailableServices from "@/components/hotel-single/AvailableServices";
 
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { supabaseRSC } from "@/utils/supabase-rsc";
 
@@ -31,7 +32,9 @@ export const metadata = {
   description: "Fiche logement avec données Supabase + services (POC)",
 };
 
-/** POC: sélection de services “pertinents” */
+/** POC: sélection de services “pertinents”
+ * mélange + tri prix croissant si dispo, limite 6
+ */
 function selectRelevantServices(allServices, listing, limit = 6) {
   if (!Array.isArray(allServices)) return [];
   const shuffled = [...allServices].sort(() => Math.random() - 0.5);
@@ -73,6 +76,7 @@ export default async function HotelSingleV2Page({ params }) {
   const avgRating = Number(item?.avg_rating) || Number(item?.rating) || 4.8;
   const reviewsCount = Number(item?.reviews_count) || 0;
 
+  // On NE traite pas ici les photos : on passe `item.photos` tel quel et la Gallery s’occupe de normaliser.
   const hotel = {
     id: item.id,
     name: item.title,
@@ -81,7 +85,7 @@ export default async function HotelSingleV2Page({ params }) {
     address: item.address || "",
     description: item.description || "",
     price: Number(item.price_per_night || 0),
-    photos: item.photos,
+    photos: item.photos,    // <— JSONB: ['.../10.1.jpg','.../10.2.jpg',...]
     rating: avgRating,
     reviews: reviewsCount,
     amenities,
@@ -198,6 +202,26 @@ export default async function HotelSingleV2Page({ params }) {
           </div>
         </div>
       </section>
+
+      {/* Booking quick box */}
+      <section className="pt-30">
+        <div className="container">
+          <div className="row y-gap-30"><aside className="col-lg-4 ml-auto">
+            <div className="border-light rounded-4 p-30 bg-light-2">
+              <div className="text-14 text-light-1">Tarif</div>
+              <div className="text-28 fw-700 mt-5">
+                €{Number(item.price_per_night || 0).toLocaleString("fr-FR")}
+                <span className="text-14 fw-400"> / nuit</span>
+              </div>
+              <Link href={`/booking-page?listingId=${item.id}`} className="button -dark-1 bg-blue-1 text-white w-100 mt-20">
+                Réserver <i className="icon-arrow-top-right ml-10" />
+              </Link>
+              <div className="text-13 text-light-1 mt-15">Paiement à l’étape suivante.</div>
+            </div>
+          </aside></div>
+        </div>
+      </section>
+
       <CallToActions />
       <DefaultFooter />
     </>

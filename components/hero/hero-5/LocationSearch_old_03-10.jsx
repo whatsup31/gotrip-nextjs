@@ -1,9 +1,9 @@
-// components/hotel-single/filter-box-2/LocationSearch.jsx
+
 'use client'
 
 import { useState } from "react";
 
-const SearchBar = () => {
+const LocationSearch = () => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -42,25 +42,24 @@ const SearchBar = () => {
 
   return (
     <>
-      <div className="searchMenu-loc pl-20 lg:py-20 pr-20 lg:px-0 js-form-dd js-liverSearch">
+      <div className="searchMenu-loc px-30 lg:py-20 lg:px-0 js-form-dd js-liverSearch">
         <div
           data-bs-toggle="dropdown"
           data-bs-auto-close="true"
           data-bs-offset="0,22"
         >
-          <h4 className="text-15 fw-500 ls-2 lh-16">Location</h4>
+          <h4 className="text-15 fw-500 ls-2 lh-16">Destination</h4>
           <div className="text-15 text-light-1 ls-2 lh-16">
             <input
               autoComplete="off"
               type="search"
-              placeholder="Where are you going?"
+              placeholder="Rechercher un logement"
               className="js-search js-dd-focus"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
             />
           </div>
         </div>
-        {/* End location Field */}
 
         <div className="shadow-2 dropdown-menu min-width-400">
           <div className="bg-white px-20 py-20 sm:px-0 sm:py-15 rounded-4">
@@ -95,4 +94,4 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default LocationSearch;

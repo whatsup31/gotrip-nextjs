@@ -1,4 +1,4 @@
-// components/hotel-single/filter-box-2/GuestSearch.jsx
+
 'use client'
 
 import React, { useState } from "react";
@@ -71,19 +71,19 @@ const GuestSearch = () => {
     setGuestCounts((prevState) => ({ ...prevState, [name]: value }));
   };
   return (
-    <div className="searchMenu-guests px-30 lg:py-20  sm:px-20 js-form-dd js-form-counters position-relative">
+    <div className="searchMenu-guests px-30 lg:py-20 lg:px-0 js-form-dd js-form-counters position-relative">
       <div
         data-bs-toggle="dropdown"
         data-bs-auto-close="outside"
         aria-expanded="false"
         data-bs-offset="0,22"
       >
-        <h4 className="text-15 fw-500 ls-2 lh-16">Guest</h4>
+        <h4 className="text-15 fw-500 ls-2 lh-16">Voyageurs</h4>
         <div className="text-15 text-light-1 ls-2 lh-16">
-          <span className="js-count-adult">{guestCounts.Adults}</span> adults -{" "}
+          <span className="js-count-adult">{guestCounts.Adults}</span> adultes -{" "}
           <span className="js-count-child">{guestCounts.Children}</span>{" "}
-          childeren - <span className="js-count-room">{guestCounts.Rooms}</span>{" "}
-          room
+          enfants - <span className="js-count-room">{guestCounts.Rooms}</span>{" "}
+          chambre
         </div>
       </div>
       {/* End guest */}

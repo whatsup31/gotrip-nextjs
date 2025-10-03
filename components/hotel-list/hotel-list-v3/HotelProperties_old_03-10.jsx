@@ -1,22 +1,12 @@
 // components/hotel-list/hotel-list-v3/HotelProperties.jsx
 "use client";
 
-import { useMemo } from "react";
-import { useSearchParams } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination as SwiperPagination } from "swiper/modules";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function HotelProperties({ listings = [], keepQS: injectedQS }) {
-  const sp = useSearchParams();
-
-  // QS à propager vers la page single : priorité à la prop, sinon QS de l'URL
-  const keepQS = useMemo(() => {
-    if (injectedQS && String(injectedQS).length) return String(injectedQS);
-    return sp?.toString?.() || "";
-  }, [injectedQS, sp]);
-
+export default function HotelProperties({ listings = [] }) {
   if (!Array.isArray(listings) || listings.length === 0) {
     return (
       <div className="col-12">
@@ -32,8 +22,7 @@ export default function HotelProperties({ listings = [], keepQS: injectedQS }) {
   return (
     <>
       {listings.map((item) => {
-        const rawPhotos = Array.isArray(item?.photos) ? item.photos : [];
-        const photos = rawPhotos.filter(Boolean);
+        const photos = Array.isArray(item?.photos) ? item.photos.filter(Boolean) : [];
         const slides = photos.length ? photos.slice(0, 5) : ["/img/placeholder.jpg"];
         const price = Number(item?.price_per_night ?? 0);
 
@@ -66,10 +55,7 @@ export default function HotelProperties({ listings = [], keepQS: injectedQS }) {
                     </div>
 
                     <div className="cardImage__wishlist">
-                      <button
-                        className="button -blue-1 bg-white size-30 rounded-full shadow-2"
-                        aria-label="wishlist"
-                      >
+                      <button className="button -blue-1 bg-white size-30 rounded-full shadow-2" aria-label="wishlist">
                         <i className="icon-heart text-12" />
                       </button>
                     </div>
@@ -87,9 +73,7 @@ export default function HotelProperties({ listings = [], keepQS: injectedQS }) {
                   <div className="row x-gap-10 y-gap-10 pt-20">
                     {(item?.amenities ?? []).slice(0, 4).map((a, i) => (
                       <div className="col-auto" key={i}>
-                        <div className="border-light rounded-100 py-5 px-20 text-14 lh-14">
-                          {a}
-                        </div>
+                        <div className="border-light rounded-100 py-5 px-20 text-14 lh-14">{a}</div>
                       </div>
                     ))}
                   </div>
@@ -105,10 +89,10 @@ export default function HotelProperties({ listings = [], keepQS: injectedQS }) {
                   </div>
 
                   <Link
-                    href={`/hotel-single-v2/${item.id}${keepQS ? `?${keepQS}` : ""}`}
+                    href={`/hotel-single-v2/${item.id}`}
                     className="button py-10 px-20 -dark-1 bg-blue-1 text-white mt-10"
                   >
-                    Voir la dispo <div className="icon-arrow-top-right ml-15" />
+                    Voir la dispo <div className="icon-arrow-top-right ml-15"></div>
                   </Link>
                 </div>
               </div>
