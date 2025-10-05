@@ -1,25 +1,29 @@
-// components/hero/hero-5/MainFilterSearchBox.jsx
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import DateSearch from "@/components/hero/DateSearch";
+import DateSearch from "@/components/hero/DateSearch"; // ✅ bon chemin
 import GuestSearch from "@/components/hero/hero-5/GuestSearch";
 import LocationSearch from "@/components/hero/hero-5/LocationSearch";
-import { parseSearch, toQS, saveToSession, loadFromSession, hydrate } from "@/lib/searchParams";
+import {
+  parseSearch,
+  toQS,
+  saveToSession,
+  loadFromSession,
+  hydrate,
+} from "@/lib/searchParams";
 
 export default function MainFilterSearchBox() {
   const router = useRouter();
   const sp = useSearchParams();
 
-  // état contrôlé
   const [city, setCity] = useState("");
   const [checkin, setCheckin] = useState("");
   const [checkout, setCheckout] = useState("");
   const [adults, setAdults] = useState(2);
-  const [children, setChildren] = useState(1);
+  const [children, setChildren] = useState(0);
   const [rooms, setRooms] = useState(1);
 
-  // hydrate avec URL et session (si l'utilisateur revient)
+  // Hydrate initialement à partir de l'URL ou session
   useEffect(() => {
     const urlObj = parseSearch(sp);
     const sesObj = loadFromSession();
@@ -34,11 +38,21 @@ export default function MainFilterSearchBox() {
     setAdults(Number(h.adults || 2));
     setChildren(Number(h.children || 0));
     setRooms(Number(h.rooms || 1));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sp]);
 
   const onSubmit = () => {
-    const q = { city, checkin, checkout, adults, children, rooms };
+    let q = { city, checkin, checkout, adults, children, rooms };
+
+    // ✅ Ajout d’un fallback si l’utilisateur ne choisit qu’une seule date
+    if (q.checkin && !q.checkout) {
+      const d = new Date(q.checkin);
+      if (!Number.isNaN(d)) {
+        d.setDate(d.getDate() + 1);
+        q.checkout = d.toISOString().slice(0, 10);
+        setCheckout(q.checkout);
+      }
+    }
+
     saveToSession(q);
     router.push(`/hotel-list-v3?${toQS(q)}`);
   };

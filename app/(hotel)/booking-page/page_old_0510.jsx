@@ -14,14 +14,6 @@ export const metadata = {
 
 export default async function Page({ searchParams }) {
   const listingId = Number(searchParams?.listingId);
-
-  const checkin  = searchParams?.checkin || "";
-  const checkout = searchParams?.checkout || "";
-  const adults   = Number(searchParams?.adults ?? 0);
-  const children = Number(searchParams?.children ?? 0);
-  const rooms    = Number(searchParams?.rooms ?? 1);
-  const guests   = Math.max(1, (adults || 0) + (children || 0));
-
   if (!listingId) {
     return (
       <>
@@ -70,18 +62,8 @@ export default async function Page({ searchParams }) {
                       €{Number(listing.price_per_night || 0).toLocaleString("fr-FR")}
                       <span className="text-14 fw-400"> / nuit</span>
                     </div>
-
                     <div className="mt-20">
-                      <BookingForm
-                        listingId={listing.id}
-                        pricePerNight={Number(listing.price_per_night || 0)}
-                        initialCheckIn={checkin}
-                        initialCheckOut={checkout}
-                        initialGuests={guests}
-                        initialRooms={rooms}
-                        initialAdults={adults}
-                        initialChildren={children}
-                      />
+                      <BookingForm listingId={listing.id} pricePerNight={Number(listing.price_per_night || 0)} />
                     </div>
                   </>
                 ) : (

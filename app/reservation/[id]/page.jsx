@@ -32,7 +32,7 @@ export default async function Page({ params }) {
           <p className="mt-5">Du {r.check_in} au {r.check_out} — {r.guests} voyageur(s)</p>
           <p className="mt-10 fw-700">Total: €{Number(r.total_amount||0).toLocaleString("fr-FR")}</p>
           <p className="mt-10">Statut: {r.status}</p>
-          <div className="mt-20 text-14 text-light-1">Paiement simulé — aucun débit réel.</div>
+          <div className="mt-20 text-14 text-light-1"> </div>
         </div>
 		<div className="mt-30">
 			<Link href="/traveler-dashboard/booking" className="button -dark-1 bg-blue-1 text-white px-20 py-10">
