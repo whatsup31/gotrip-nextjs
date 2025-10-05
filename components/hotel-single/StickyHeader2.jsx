@@ -62,7 +62,7 @@ const StickyHeader2 = ({ hotel }) => {
                       href={`/booking-page?listingId=${hotel?.id}${keep ? `&${keep}` : ""}`}
                       className="button h-50 px-24 -dark-1 bg-blue-1 text-white"
                     >
-                      Select Room <div className="icon-arrow-top-right ml-15" />
+                      Réserver <div className="icon-arrow-top-right ml-15" />
                     </Link>
                   </div>
                 </div>
