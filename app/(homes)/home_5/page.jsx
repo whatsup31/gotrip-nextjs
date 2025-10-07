@@ -36,7 +36,7 @@ const home_5 = () => {
       <Hero5 />
       {/* End Hero 5 */}
 
-      <section className="layout-pt-md layout-pb-lg">
+      <section className="layout-pt-md layout-pb-md">
         <div className="container">
           <div className="row y-gap-10 justify-between items-end">
             <div className="col-auto">
@@ -63,12 +63,12 @@ const home_5 = () => {
       </section>
       {/* End Best Seller Hotels Sections */}
 
-      <section className="layout-pt-md layout-pb-lg">
+      <section className="layout-pt-md layout-pb-md">
         <div className="container">
           <div className="row y-gap-10 justify-between items-end">
             <div className="col-auto">
               <div className="sectionTitle -md">
-                <h2 className="sectionTitle__title">Services les plus demandés</h2> 
+                <h2 className="sectionTitle__title">Services demandés</h2> 
               </div>
             </div>
             {/* End .col-auto */}

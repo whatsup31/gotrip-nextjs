@@ -2,10 +2,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import isTextMatched from "../../utils/isTextMatched";
 import { createClient } from "@supabase/supabase-js";
 
@@ -34,7 +33,6 @@ const Hotels3 = () => {
 
     async function load() {
       try {
-        // Lecture directe dans la table listings
         if (!supabase) {
           console.warn("Supabase env vars manquantes, aucun fetch effectué.");
           setItems([]);
@@ -49,22 +47,21 @@ const Hotels3 = () => {
 
         if (error) throw error;
 
-        const mapped = toArray(data).map((it, idx) => ({
-          id: it.id,
-          title: it.title || "Listing",
-          location: it.location || "",
-          price: it.price_per_night ?? 0,
-          tag: "",
-
-          slideImg: (() => {
-            const arr = normalizePhotos(it.photos);
-            return arr.length ? arr.slice(0, 5) : ["/img/hotels/1.jpg"];
-          })(),
-
-          ratings: 4.8,
-          numberOfReviews: 12,
-          delayAnimation: (idx % 5) * 50,
-        }));
+        const mapped = toArray(data).map((it, idx) => {
+          const arr = normalizePhotos(it.photos);
+          return {
+            id: it.id,
+            title: it.title || "Listing",
+            location: it.location || "",
+            price: it.price_per_night ?? 0,
+            tag: "",
+            // on garde le tableau existant pour compat, mais on affichera seulement la première image
+            slideImg: arr.length ? arr.slice(0, 5) : ["/img/hotels/1.jpg"],
+            ratings: 4.8,
+            numberOfReviews: 12,
+            delayAnimation: (idx % 5) * 50,
+          };
+        });
 
         if (!alive) return;
         setItems(mapped);
@@ -109,98 +106,103 @@ const Hotels3 = () => {
           1200: { slidesPerView: 4 },
         }}
       >
-        {slides.map((item) => (
-          <SwiperSlide key={item.id}>
-            <Link
-              href={`/hotel-single-v2/${item.id}`}
-              className="hotelsCard -type-1 hover-inside-slider"
-              data-aos="fade"
-              data-aos-delay={item.delayAnimation}
-            >
-              <div className="hotelsCard__image">
-                <div className="cardImage ratio ratio-1:1">
-                  <div className="cardImage__content">
-                    <div className="cardImage-slider rounded-4 overflow-hidden custom_inside-slider">
-                      <Swiper
-                        className="mySwiper"
-                        modules={[Pagination, Navigation]}
-                        pagination={{ clickable: true }}
-                        navigation={true}
+        {slides.map((item) => {
+          const cover = item.slideImg?.[0] || "/img/hotels/1.jpg";
+          return (
+            <SwiperSlide key={item.id}>
+              <Link
+                href={`/hotel-single-v2/${item.id}`}
+                className="hotelsCard -type-1 hover-inside-slider"
+                data-aos="fade"
+                data-aos-delay={item.delayAnimation}
+              >
+                {/* Image UNIQUE, pas de slider interne */}
+                <div className="hotelsCard__image">
+                  <div className="cardImage ratio ratio-1:1">
+                    <div className="cardImage__content">
+                      <img
+                        src={cover}
+                        alt={item.title || "Listing"}
+                        className="rounded-4 col-12 js-lazy"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover", // remplit, zoom/crop propre
+                          display: "block",
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Wishlist */}
+                  <div className="cardImage__wishlist">
+                    <button
+                      className="button -blue-1 bg-white size-30 rounded-full shadow-2"
+                      type="button"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      <i className="icon-heart text-12" />
+                    </button>
+                  </div>
+
+                  {/* Badge éventuel */}
+                  {item.tag ? (
+                    <div className="cardImage__leftBadge">
+                      <div
+                        className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase ${
+                          isTextMatched(item.tag, "breakfast included")
+                            ? "bg-dark-1 text-white"
+                            : ""
+                        } ${
+                          isTextMatched(item.tag, "best seller")
+                            ? "bg-blue-1 text-white"
+                            : ""
+                        } ${
+                          isTextMatched(item.tag, "-25% today")
+                            ? "bg-brown-1 text-white"
+                            : ""
+                        } ${
+                          isTextMatched(item.tag, "top rated")
+                            ? "bg-yellow-1 text-dark-1"
+                            : ""
+                        }`}
                       >
-                        {item.slideImg.map((src, i) => (
-                          <SwiperSlide key={i}>
-                            <Image
-                              width={300}
-                              height={300}
-                              className="rounded-4 col-12 js-lazy"
-                              src={src}
-                              alt={`image ${i + 1}`}
-                            />
-                          </SwiperSlide>
-                        ))}
-                      </Swiper>
+                        {item.tag}
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+
+                {/* Contenu carte */}
+                <div className="hotelsCard__content mt-10">
+                  <h4 className="hotelsCard__title text-dark-1 text-18 lh-16 fw-500">
+                    <span>{item.title}</span>
+                  </h4>
+                  <p className="text-light-1 lh-14 text-14 mt-5">{item.location}</p>
+
+                  <div className="d-flex items-center mt-20">
+                    <div className="flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white">
+                      {item.ratings}
+                    </div>
+                    <div className="text-14 text-dark-1 fw-500 ml-10">Exceptional</div>
+                    <div className="text-14 text-light-1 ml-10">
+                      {item.numberOfReviews} reviews
+                    </div>
+                  </div>
+
+                  <div className="mt-5">
+                    <div className="fw-500">
+                      Starting from <span className="text-blue-1">€{item.price}</span>
                     </div>
                   </div>
                 </div>
-
-                <div className="cardImage__wishlist">
-                  <button className="button -blue-1 bg-white size-30 rounded-full shadow-2">
-                    <i className="icon-heart text-12" />
-                  </button>
-                </div>
-
-                <div className="cardImage__leftBadge">
-                  <div
-                    className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase ${
-                      isTextMatched(item.tag, "breakfast included")
-                        ? "bg-dark-1 text-white"
-                        : ""
-                    } ${
-                      isTextMatched(item.tag, "best seller")
-                        ? "bg-blue-1 text-white"
-                        : ""
-                    } ${
-                      isTextMatched(item.tag, "-25% today")
-                        ? "bg-brown-1 text-white"
-                        : ""
-                    } ${
-                      isTextMatched(item.tag, "top rated")
-                        ? "bg-yellow-1 text-dark-1"
-                        : ""
-                    }`}
-                  >
-                    {item.tag}
-                  </div>
-                </div>
-              </div>
-
-              <div className="hotelsCard__content mt-10">
-                <h4 className="hotelsCard__title text-dark-1 text-18 lh-16 fw-500">
-                  <span>{item.title}</span>
-                </h4>
-                <p className="text-light-1 lh-14 text-14 mt-5">{item.location}</p>
-
-                <div className="d-flex items-center mt-20">
-                  <div className="flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white">
-                    {item.ratings}
-                  </div>
-                  <div className="text-14 text-dark-1 fw-500 ml-10">Exceptional</div>
-                  <div className="text-14 text-light-1 ml-10">
-                    {item.numberOfReviews} reviews
-                  </div>
-                </div>
-
-                <div className="mt-5">
-                  <div className="fw-500">
-                    Starting from <span className="text-blue-1">€{item.price}</span>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </SwiperSlide>
-        ))}
+              </Link>
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
 
+      {/* flèches carrousel */}
       <button className="section-slider-nav -prev flex-center button -blue-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-filter2-prev">
         <i className="icon icon-chevron-left text-12" />
       </button>

@@ -1,281 +1,279 @@
 // components/hotel-single/AvailableServices.jsx
-'use client';
+"use client";
 
-import { useMemo, useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import { useMemo, useState } from "react";
+import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
+/* --------- Utils --------- */
 function formatPrice(value) {
   const n = Number(value);
-  if (Number.isNaN(n)) return 'Prix sur demande';
-  return `€${n.toLocaleString('fr-FR')}`;
+  if (Number.isNaN(n)) return "Prix sur demande";
+  return `€${n.toLocaleString("fr-FR")}`;
 }
 
-// Ajouter .jpg si le dernier segment n'a pas d'extension
-function ensureJpg(src = '') {
+function ensureJpg(src = "") {
   try {
     const url = String(src);
-    const last = url.split('/').pop() || '';
-    if (!last.includes('.')) return `${url}.jpg`;
+    const last = url.split("/").pop() || "";
+    if (!last.includes(".")) return `${url}.jpg`;
     return url;
   } catch {
     return src;
   }
 }
 
-// Extrait une image de couverture depuis s.images (JSONB) ou s.cover_url
+// On ne garde qu’UNE image : la première dispo (images[0] -> cover_url -> placeholder)
 function coverFrom(service) {
   if (Array.isArray(service?.images) && service.images.length) {
     return ensureJpg(service.images[0]);
   }
   if (service?.cover_url) return ensureJpg(service.cover_url);
-  return null;
+  return "/img/others/placeholder.jpg";
 }
 
-/**
- * AvailableServices
- * - Affiche une grille de services avec recherche, tri et "Voir plus"
- *
- * Props:
- *  - services: Array<{
- *      id: string|number,
- *      title: string,
- *      description?: string,
- *      price?: number,
- *      duration?: string,      // ex: "2h"
- *      category?: string,      // ex: "Ménage"
- *      images?: string[],      // ex: ["/img/services/6.1", ...] (extension auto .jpg)
- *      cover_url?: string,
- *      avg_rating?: number,
- *      reviews_count?: number
- *    }>
- *  - initialPageSize?: number  // défaut 6
- *  - onSelect?: (service) => void // si fourni, le CTA appelle onSelect au lieu de rediriger
- */
+function badgeClasses(tag = "") {
+  const t = String(tag).toLowerCase();
+  if (!t) return "";
+  if (t.includes("breakfast included")) return "bg-dark-1 text-white";
+  if (t.includes("best seller")) return "bg-blue-1 text-white";
+  if (t.includes("-25% today")) return "bg-brown-1 text-white";
+  if (t.includes("top rated")) return "bg-yellow-1 text-dark-1";
+  return "bg-dark-1 text-white";
+}
+/* ------------------------- */
+
 export default function AvailableServices({
   services = [],
-  initialPageSize = 6,
+  initialPageSize = 12,
   onSelect,
+  title = "Services proposés",
 }) {
-  const [q, setQ] = useState('');
-  const [sort, setSort] = useState('recommended'); // 'recommended' | 'price_asc' | 'price_desc'
-  const [visible, setVisible] = useState(initialPageSize);
+  const [q, setQ] = useState("");
+  const [sort, setSort] = useState("recommended");
 
   const filtered = useMemo(() => {
     let arr = Array.isArray(services) ? [...services] : [];
 
-    // filtre texte
     const needle = q.trim().toLowerCase();
     if (needle) {
       arr = arr.filter((s) => {
-        const hay = `${s.title ?? ''} ${s.description ?? ''} ${s.category ?? ''}`.toLowerCase();
+        const hay = `${s.title ?? ""} ${s.description ?? ""} ${s.category ?? ""}`.toLowerCase();
         return hay.includes(needle);
       });
     }
 
-    // tri
-    if (sort === 'price_asc') {
+    if (sort === "price_asc") {
       arr.sort((a, b) => (Number(a.price) || 9e9) - (Number(b.price) || 9e9));
-    } else if (sort === 'price_desc') {
+    } else if (sort === "price_desc") {
       arr.sort((a, b) => (Number(b.price) || -1) - (Number(a.price) || -1));
     } else {
-      // Pertinence POC: note desc, puis prix asc, puis titre
       arr.sort((a, b) => {
         const ra = Number(a.avg_rating) || 0;
         const rb = Number(b.avg_rating) || 0;
         if (rb !== ra) return rb - ra;
-
         const pa = Number(a.price);
         const pb = Number(b.price);
         const aa = Number.isFinite(pa) ? pa : 9e9;
         const bb = Number.isFinite(pb) ? pb : 9e9;
         if (aa !== bb) return aa - bb;
-
-        return String(a.title || '').localeCompare(String(b.title || ''));
+        return String(a.title || "").localeCompare(String(b.title || ""));
       });
     }
 
-    return arr;
-  }, [services, q, sort]);
-
-  const toShow = filtered.slice(0, visible);
-  const canShowMore = visible < filtered.length;
+    return arr.slice(0, initialPageSize);
+  }, [services, q, sort, initialPageSize]);
 
   return (
-    <div className="mt-10">
-      {/* Header + contrôles */}
-      <div className="row y-gap-10 justify-between items-end">
-        <div className="col-auto">
-          <div className="sectionTitle -md">
-            <h3 className="sectionTitle__title">Services proposés</h3>
-            <p className="sectionTitle__text">
-              {filtered.length} service{filtered.length > 1 ? 's' : ''} trouvés
-            </p>
-          </div>
-        </div>
-        <div className="col-auto">
-          <div className="row x-gap-10">
-            <div className="col-auto">
-              <input
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-                placeholder="Rechercher un service…"
-                className="form-control h-50 rounded-200 px-20"
-                style={{ minWidth: 240 }}
-                aria-label="Rechercher un service"
-              />
+    <section className="layout-pt-md layout-pb-lg">
+      <div className="container">
+        {/* Header */}
+        <div className="row y-gap-10 justify-between items-end">
+          <div className="col-auto">
+            <div className="sectionTitle -md">
+              <h2 className="sectionTitle__title">{title}</h2>
+              <p className="sectionTitle__text mt-5 sm:mt-0">
+                {filtered.length} service{filtered.length > 1 ? "s" : ""} disponibles
+              </p>
             </div>
-
-            <div className="col-auto">
-              <div className="dropdown js-dropdown js-category-active">
-                <div
-                  className="dropdown__button d-flex items-center rounded-200 border-light px-20 h-50"
-                  data-bs-toggle="dropdown"
-                  data-bs-auto-close="true"
-                  aria-expanded="false"
-                  role="button"
-                >
-                  <span className="js-dropdown-title">
-                    {sort === 'recommended'
-                      ? 'Pertinence'
-                      : sort === 'price_asc'
-                      ? 'Prix ↑'
-                      : 'Prix ↓'}
-                  </span>
-                  <i className="icon-chevron-down ml-10 text-10" />
-                </div>
-
-                <div className="dropdown-menu">
-                  <div className="px-20 py-10">
-                    <button
-                      className={`dropdown-item ${sort === 'recommended' ? 'active' : ''}`}
-                      onClick={() => setSort('recommended')}
-                    >
-                      Pertinence
-                    </button>
-                    <button
-                      className={`dropdown-item ${sort === 'price_asc' ? 'active' : ''}`}
-                      onClick={() => setSort('price_asc')}
-                    >
-                      Prix (croissant)
-                    </button>
-                    <button
-                      className={`dropdown-item ${sort === 'price_desc' ? 'active' : ''}`}
-                      onClick={() => setSort('price_desc')}
-                    >
-                      Prix (décroissant)
-                    </button>
+          </div>
+          <div className="col-sm-auto">
+            <div className="row x-gap-10">
+              <div className="col-auto">
+                <input
+                  value={q}
+                  onChange={(e) => setQ(e.target.value)}
+                  placeholder="Rechercher un service…"
+                  className="form-control h-50 rounded-200 px-20"
+                  style={{ minWidth: 240 }}
+                  aria-label="Rechercher un service"
+                />
+              </div>
+              <div className="col-auto">
+                <div className="dropdown js-dropdown js-category-active">
+                  <div
+                    className="dropdown__button d-flex items-center rounded-200 border-light px-20 h-50"
+                    data-bs-toggle="dropdown"
+                    data-bs-auto-close="true"
+                    aria-expanded="false"
+                    role="button"
+                  >
+                    <span className="js-dropdown-title">
+                      {sort === "recommended" ? "Pertinence" : sort === "price_asc" ? "Prix ↑" : "Prix ↓"}
+                    </span>
+                    <i className="icon-chevron-down ml-10 text-10" />
+                  </div>
+                  <div className="dropdown-menu">
+                    <div className="px-20 py-10">
+                      <button className={`dropdown-item ${sort === "recommended" ? "active" : ""}`} onClick={() => setSort("recommended")}>Pertinence</button>
+                      <button className={`dropdown-item ${sort === "price_asc" ? "active" : ""}`} onClick={() => setSort("price_asc")}>Prix (croissant)</button>
+                      <button className={`dropdown-item ${sort === "price_desc" ? "active" : ""}`} onClick={() => setSort("price_desc")}>Prix (décroissant)</button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>  
 
-      {/* Grid */}
-      <div className="row y-gap-30 pt-30">
-        {toShow.length === 0 && (
-          <div className="col-12">
-            <div className="px-24 py-20 rounded-4 bg-light-2">
-              Aucun service ne correspond à votre recherche.
-            </div>
-          </div>
-        )}
-
-        {toShow.map((s) => {
-          const href = `/services/${s.id}`;
-          const price = formatPrice(s.price);
-          const cover = coverFrom(s);
-
-          return (
-            <div key={s.id} className="col-xl-4 col-md-6">
-              <div className="border-light rounded-4 h-100 d-flex flex-column">
-                {/* Image / cover */}
-                <div className="ratio ratio-16x9 rounded-top-4 overflow-hidden bg-light-2">
-                  {cover ? (
-                    /* next/image pour meilleures perfs */
-                    <Image
-                      src={cover}
-                      alt={s.title || 'Service'}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover"
-                      priority={false}
-                    />
-                  ) : (
-                    <div className="w-100 h-100 d-flex align-items-center justify-content-center text-light-1">
-                      <i className="icon-image text-24" />
-                    </div>
-                  )}
-                </div>
-
-                {/* Body */}
-                <div className="p-20 d-flex flex-column gap-10 flex-grow-1">
-                  <div className="d-flex justify-between items-start">
-                    <h4 className="text-18 fw-500 pr-10">{s.title}</h4>
-
-                    {/* Rating (optionnel) */}
-                    {typeof s.avg_rating !== 'undefined' && (
-                      <div className="d-flex items-center">
-                        <div className="size-30 bg-blue-1 rounded-4 text-center text-white lh-30 text-13 fw-600">
-                          {Number(s.avg_rating).toFixed(1)}
-                        </div>
-                        {typeof s.reviews_count !== 'undefined' && (
-                          <div className="text-13 text-light-1 ml-8">
-                            ({s.reviews_count})
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-
-                  {s.category && (
-                    <div className="text-13 text-blue-1 fw-500">{s.category}</div>
-                  )}
-
-                  <p className="text-14 text-light-1 line-clamp-3">
-                    {s.description || 'Service sans description.'}
-                  </p>
-
-                  <div className="d-flex justify-between items-center mt-auto pt-5">
-                    <div className="text-16 fw-600">{price}</div>
-                    <div className="text-13 text-light-1">
-                      {s.duration ? `~ ${s.duration}` : '\u00A0'}
-                    </div>
-                  </div>
-
-                  {/* CTA */}
-                  {typeof onSelect === 'function' ? (
-                    <button
-                      className="button -dark-1 bg-blue-1 text-white w-100 mt-10"
-                      onClick={() => onSelect(s)}
-                    >
-                      Commander <i className="icon-arrow-top-right ml-10" />
-                    </button>
-                  ) : (
-                    <Link href={href} className="button -dark-1 bg-blue-1 text-white w-100 mt-10">
-                      Voir le service <i className="icon-arrow-top-right ml-10" />
-                    </Link>
-                  )}
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Voir plus */}
-      {canShowMore && (
-        <div className="d-flex justify-center mt-30">
-          <button
-            className="button -outline-blue-1 text-blue-1"
-            onClick={() => setVisible((v) => v + initialPageSize)}
+        {/* Carrousel (cartes style “Hotels”, SANS slider photo) */}
+        <div className="relative overflow-hidden pt-40 sm:pt-20">
+          <Swiper
+            spaceBetween={30}
+            modules={[Navigation, Pagination]}
+            navigation={{ nextEl: ".js-services-next", prevEl: ".js-services-prev" }}
+            pagination={{ el: ".js-services-pag", clickable: true }}
+            breakpoints={{
+              540: { slidesPerView: 2, spaceBetween: 20 },
+              768: { slidesPerView: 2, spaceBetween: 22 },
+              1024: { slidesPerView: 3 },
+              1200: { slidesPerView: 4 },
+            }}
           >
-            Voir plus
-          </button>
+            {filtered.map((s) => {
+              const href = `/services/${s.id}`;
+              const cover = coverFrom(s);
+              const rating = Number(s?.avg_rating ?? 0);
+              const reviews = Number(s?.reviews_count ?? 0);
+              const tag = s?.tag || "";
+              const priceText = formatPrice(s?.price);
+
+              return (
+                <SwiperSlide key={s.id}>
+                  <div className="hotelsCard -type-1 hover-inside-slider" data-aos="fade">
+                    {/* Image UNIQUE (remplit le cadre, zoom si nécessaire) */}
+                    <div className="hotelsCard__image">
+                      <div className="cardImage ratio ratio-1:1">
+                        <div className="cardImage__content">
+                          <img
+                            src={cover}
+                            alt={s.title || "Service"}
+                            className="rounded-4 col-12 js-lazy"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "cover",   // ← remplit le cadre (zoom/crop propre)
+                              display: "block",
+                            }}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Wishlist */}
+                      <div className="cardImage__wishlist">
+                        <button
+                          className="button -blue-1 bg-white size-30 rounded-full shadow-2"
+                          type="button"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          <i className="icon-heart text-12" />
+                        </button>
+                      </div>
+
+                      {/* Badge (si présent) */}
+                      {tag ? (
+                        <div className="cardImage__leftBadge">
+                          <div className={`py-5 px-15 rounded-right-4 text-12 lh-16 fw-500 uppercase ${badgeClasses(tag)}`}>
+                            {tag}
+                          </div>
+                        </div>
+                      ) : null}
+                    </div>
+
+                    {/* Contenu */}
+                    <div className="hotelsCard__content mt-10">
+                      <h4 className="hotelsCard__title text-dark-1 text-18 lh-16 fw-500">
+                        <span>{s.title}</span>
+                      </h4>
+
+                      <p className="text-light-1 lh-14 text-14 mt-5">
+                        {s.category || "Service"}
+                        {s.duration ? (
+                          <>
+                            <span className="size-3 bg-light-1 rounded-full mx-10 inline-block" />
+                            ~ {s.duration}
+                          </>
+                        ) : null}
+                      </p>
+
+                      <div className="d-flex items-center mt-20">
+                        <div className="flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white">
+                          {rating ? rating.toFixed(1) : "4.8"}
+                        </div>
+                        <div className="text-14 text-dark-1 fw-500 ml-10">Exceptional</div>
+                        <div className="text-14 text-light-1 ml-10">{reviews || 0} reviews</div>
+                      </div>
+
+                      {/* Footer prix + CTA “Select Room” */}
+                      <div className="d-flex items-center justify-between mt-10">
+                        <div className="fw-500">
+                          Starting from <span className="text-blue-1">{priceText}</span>
+                        </div>
+
+                        <Link
+                          href={href}
+                          className="button -md -dark-1 bg-blue-1 text-white"
+                          onClick={(e) => {
+                            if (typeof onSelect === "function") {
+                              e.preventDefault();
+                              onSelect(s);
+                            }
+                          }}
+                          style={{ whiteSpace: "nowrap" }}
+                        >
+                          Ajouter
+                          <i className="icon-plus ml-10" />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+
+          {/* flèches + pagination */}
+          <div className="d-flex x-gap-15 items-center justify-center sm:justify-start pt-40 sm:pt-20">
+            <div className="col-auto">
+              <button className="d-flex items-center text-24 arrow-left-hover js-services-prev">
+                <i className="icon icon-arrow-left" />
+              </button>
+            </div>
+            <div className="col-auto">
+              <div className="pagination -dots text-border js-services-pag" />
+            </div>
+            <div className="col-auto">
+              <button className="d-flex items-center text-24 arrow-right-hover js-services-next">
+                <i className="icon icon-arrow-right" />
+              </button>
+            </div>
+          </div>
         </div>
-      )}
-    </div>
+      </div>
+    </section>
   );
 }
