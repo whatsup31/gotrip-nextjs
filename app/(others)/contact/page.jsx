@@ -61,7 +61,7 @@ const Contact = () => {
 
             <div className="col-auto">
               <div className="text-14 text-light-1">
-                Follow us on social media
+                Encore plus d'exclusivités
               </div>
               <div className="d-flex x-gap-20 items-center mt-10">
                 <Social />

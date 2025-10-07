@@ -13,7 +13,7 @@ const AvailableRooms = ({ hotel }) => {
                 <div>Benefits</div>
                 <div>Sleeps</div>
                 <div>Price for 5 nights</div>
-                <div>Select Rooms</div>
+                <div>Réservers</div>
                 <div />
               </div>
               {/* End .roomGrid__header */}
@@ -267,7 +267,7 @@ const AvailableRooms = ({ hotel }) => {
                 <div>Benefits</div>
                 <div>Sleeps</div>
                 <div>Price for 5 nights</div>
-                <div>Select Rooms</div>
+                <div>Réservers</div>
                 <div />
               </div>
               {/* End .roomGrid__header */}

@@ -4,7 +4,7 @@ const AppButton = () => {
       id: 1,
       icon: "icon-apple",
       link: "https://www.apple.com/app-store/",
-      text: "Download on the",
+      text: "Télécharger sur",
       market: "Apple Store",
       colClass: "",
     },

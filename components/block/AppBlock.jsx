@@ -12,7 +12,7 @@ const AppBlock = () => {
           <div className="d-flex items-center px-20 py-10 rounded-8 border-white-15 text-white bg-dark-3">
             <div className="icon-apple text-24" />
             <div className="ml-20">
-              <div className="text-14">Download on the</div>
+              <div className="text-14">Télécharger sur</div>
               <div className="text-15 lh-1 fw-500">Apple Store</div>
             </div>
           </div>
