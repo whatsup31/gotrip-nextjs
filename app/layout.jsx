@@ -1,3 +1,4 @@
+// app/layout.jsx
 "use client";
 
 import Aos from "aos";
@@ -13,7 +14,7 @@ import "../styles/index.scss";
 import "rc-slider/assets/index.css";
 import { Provider } from "react-redux";
 import { store } from "../store/store";
-import Script from "next/script"; // 👈 ajout
+import Script from "next/script"; 
 
 export default function RootLayout({ children }) {
   useEffect(() => {

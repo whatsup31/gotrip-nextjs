@@ -28,7 +28,7 @@ const Sidebar = () => {
 
         <div className="sidebar__item ">
           <a
-            href="/partenaire-dashboard/booking"
+            href="/partenaire-dashboard/service-orders"
             className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
           >
             <Image
@@ -45,7 +45,7 @@ const Sidebar = () => {
 
         <div className="sidebar__item ">
           <a
-            href="/partenaire-dashboard/hotels"
+            href="/partenaire-dashboard/services"
             className="sidebar__button d-flex items-center text-15 lh-1 fw-500"
           >
             <Image

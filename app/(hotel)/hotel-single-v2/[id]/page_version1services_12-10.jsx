@@ -108,17 +108,11 @@ export default async function HotelSingleV2Page({ params }) {
       </section>
 
       {/* Services proposés */}
-		<section id="services" className="pt-30">
-		  <div className="container">
-			<AvailableServices
-			  title="Services proposés"
-			  services={hotel.services}
-			  listingId={hotel.id}
-			  moreLink="/services"
-			  redirectTo="/booking"   
-			/>
-		  </div>
-		</section>
+      <section id="services" className="pt-30">
+        <div className="container">
+          <AvailableServices services={hotel.services} />
+        </div>
+      </section>
 
       {/* Facilities */}
       <section className="mt-40" id="facilities">
