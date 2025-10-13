@@ -42,24 +42,9 @@ export default async function Page({ searchParams }) {
   const supabase = supabaseRSC();
   const { data: listing } = await supabase
     .from("listings")
-    .select("id, title, location, price_per_night, photos, avg_rating, rating, reviews_count")
+    .select("id, title, location, price_per_night")
     .eq("id", listingId)
     .single();
-
-  // ---------- Normalisation visuelle (cover / rating / reviews)
-  let cover = "/img/hotels/placeholder.jpg";
-  if (listing?.photos) {
-    try {
-      if (Array.isArray(listing.photos) && listing.photos.length) {
-        cover = listing.photos[0];
-      } else if (typeof listing.photos === "string") {
-        const parsed = JSON.parse(listing.photos);
-        if (Array.isArray(parsed) && parsed.length) cover = parsed[0];
-      }
-    } catch {}
-  }
-  const hotelRating  = Number(listing?.avg_rating ?? listing?.rating ?? 0) || null;
-  const hotelReviews = Number(listing?.reviews_count ?? 0) || null;
 
   return (
     <>
@@ -69,36 +54,40 @@ export default async function Page({ searchParams }) {
       <section className="pt-40 layout-pb-md">
         <div className="container">
           <div className="row y-gap-30">
-            {/* Colonne gauche : étapes/formulaires existants */}
             <div className="col-lg-7">
+              {/* Visuel existant de la template */}
               <StepperBooking />
             </div>
 
-            {/* Colonne droite : BookingForm (remplace BookingDetails) */}
             <aside className="col-lg-5">
-              {listing ? (
-                <BookingForm
-                  listingId={listing.id}
-                  pricePerNight={Number(listing.price_per_night || 0)}
-                  initialCheckIn={checkin}
-                  initialCheckOut={checkout}
-                  initialGuests={guests}
-                  initialRooms={rooms}
-                  initialAdults={adults}
-                  initialChildren={children}
+              {/* Formulaire réellement connecté */}
+              <div className="border-light rounded-4 p-20 bg-light-2">
+                {listing ? (
+                  <>
+                    <h3 className="text-20 fw-700">{listing.title}</h3>
+                    <div className="text-14 text-light-1">{listing.location}</div>
+                    <div className="text-18 fw-700 mt-10">
+                      €{Number(listing.price_per_night || 0).toLocaleString("fr-FR")}
+                      <span className="text-14 fw-400"> / nuit</span>
+                    </div>
 
-                  // --- Props visuelles (design BookingDetails)
-                  hotelCover={cover}
-                  hotelTitle={listing.title}
-                  hotelLocation={listing.location}
-                  hotelRating={hotelRating}
-                  hotelReviews={hotelReviews}
-                />
-              ) : (
-                <div className="border-light rounded-4 p-20 bg-light-2">
+                    <div className="mt-20">
+                      <BookingForm
+                        listingId={listing.id}
+                        pricePerNight={Number(listing.price_per_night || 0)}
+                        initialCheckIn={checkin}
+                        initialCheckOut={checkout}
+                        initialGuests={guests}
+                        initialRooms={rooms}
+                        initialAdults={adults}
+                        initialChildren={children}
+                      />
+                    </div>
+                  </>
+                ) : (
                   <div className="text-15">Logement introuvable.</div>
-                </div>
-              )}
+                )}
+              </div>
             </aside>
           </div>
         </div>

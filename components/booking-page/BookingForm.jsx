@@ -30,6 +30,13 @@ export default function BookingForm({
   initialRooms = 1,
   initialAdults = 0,
   initialChildren = 0,
+
+  // ---- Props visuelles façon BookingDetails
+  hotelCover = "/img/backgrounds/1.png",
+  hotelTitle,
+  hotelLocation,
+  hotelRating = null,   // ex: 4.8
+  hotelReviews = null,  // ex: 3014
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -41,14 +48,14 @@ export default function BookingForm({
   const [mustLogin, setMustLogin] = useState(false);
   const [pending, startTransition] = useTransition();
 
-  // Sync props si l’URL change
+  // sync des props quand l’URL change
   useEffect(() => {
     setCheckIn(initialCheckIn || "");
     setCheckOut(initialCheckOut || "");
     setGuests(initialGuests || 1);
   }, [initialCheckIn, initialCheckOut, initialGuests]);
 
-  // Charger les services depuis localStorage
+  // charger services choisis
   useEffect(() => {
     const load = () => setServices(readSelected(listingId));
     load();
@@ -61,7 +68,7 @@ export default function BookingForm({
     };
   }, [listingId]);
 
-  // Calculs totaux
+  // ------ calculs
   const nights = useMemo(() => {
     if (!checkIn || !checkOut) return 0;
     const d1 = Date.parse(checkIn);
@@ -108,7 +115,6 @@ export default function BookingForm({
       checkIn,
       checkOut,
       guests,
-      // on transmet qty et unitPrice pour fiabiliser côté serveur
       services: services.map(({ serviceId, levelId, unitPrice, qty }) => ({
         serviceId,
         levelId,
@@ -122,9 +128,9 @@ export default function BookingForm({
       res = await fetch("/api/reservations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(payload),
       });
-      // si 401 → non authentifié
       if (res.status === 401) {
         setMustLogin(true);
         return;
@@ -140,117 +146,225 @@ export default function BookingForm({
       return;
     }
 
-    // succès → on vide les services liés à ce listing et on redirige
+    // succès → purge des services de ce listing + redirection
     clearServices();
     startTransition(() => router.push(`/reservation/${json.data.id}`));
   };
 
   const goToLogin = () => {
-    // On reconstruit l’URL actuelle pour revenir ici après connexion
-    const current = typeof window !== "undefined" ? window.location.pathname + window.location.search : "/booking-page";
+    const current =
+      typeof window !== "undefined" ? window.location.pathname + window.location.search : "/booking-page";
     router.push(`/login?redirect=${encodeURIComponent(current)}`);
   };
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="row y-gap-15">
-        {/* Dates & Guests */}
-        <div className="col-12">
-          <label className="text-14">Check-in</label>
-          <input type="date" className="form-control" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} required />
+      <div className="px-30 py-30 border-light rounded-4 bg-white">
+        <div className="text-20 fw-500 mb-30">Your booking details</div>
+
+        {/* --- en-tête visuel façon BookingDetails (photo, étoiles, rating, reviews) */}
+        {(hotelTitle || hotelLocation || hotelRating || hotelReviews) && (
+          <>
+            <div className="row x-gap-15 y-gap-20">
+              <div className="col-auto">
+                <img
+                  width={140}
+                  height={140}
+                  src={hotelCover}
+                  alt="cover"
+                  className="size-140 rounded-4 object-cover"
+                />
+              </div>
+              <div className="col">
+                <div className="d-flex x-gap-5 pb-10">
+                  <i className="icon-star text-yellow-1 text-10" />
+                  <i className="icon-star text-yellow-1 text-10" />
+                  <i className="icon-star text-yellow-1 text-10" />
+                  <i className="icon-star text-yellow-1 text-10" />
+                  <i className="icon-star text-yellow-1 text-10" />
+                </div>
+                <div className="lh-17 fw-500">{hotelTitle || "Your selected property"}</div>
+                {hotelLocation && <div className="text-14 lh-15 mt-5">{hotelLocation}</div>}
+                {(hotelRating || hotelReviews) && (
+                  <div className="row x-gap-10 y-gap-10 items-center pt-10">
+                    {hotelRating != null && (
+                      <div className="col-auto">
+                        <div className="d-flex items-center">
+                          <div className="size-30 flex-center bg-blue-1 rounded-4">
+                            <div className="text-12 fw-600 text-white">{Number(hotelRating).toFixed(1)}</div>
+                          </div>
+                          <div className="text-14 fw-500 ml-10">Exceptional</div>
+                        </div>
+                      </div>
+                    )}
+                    {hotelReviews != null && (
+                      <div className="col-auto">
+                        <div className="text-14">{hotelReviews.toLocaleString("en-US")} reviews</div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="border-top-light mt-30 mb-20" />
+          </>
+        )}
+
+        {/* --- Dates */}
+        <div className="row y-gap-20 justify-between">
+          <div className="col-md-6">
+            <div className="text-15 mb-5">Check-in</div>
+            <input
+              type="date"
+              className="form-control"
+              value={checkIn}
+              onChange={(e) => setCheckIn(e.target.value)}
+              required
+            />
+            <div className="text-13 text-light-1 mt-5">À partir de 15:00 (indicatif)</div>
+          </div>
+
+          <div className="col-auto md:d-none">
+            <div className="h-full w-1 bg-border" />
+          </div>
+
+          <div className="col-md-6">
+            <div className="text-15 mb-5">Check-out</div>
+            <input
+              type="date"
+              className="form-control"
+              value={checkOut}
+              onChange={(e) => setCheckOut(e.target.value)}
+              required
+            />
+            <div className="text-13 text-light-1 mt-5">Jusqu’à 11:00 (indicatif)</div>
+          </div>
         </div>
-        <div className="col-12">
-          <label className="text-14">Check-out</label>
-          <input type="date" className="form-control" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} required />
-        </div>
-        <div className="col-12">
-          <label className="text-14">Guests</label>
-          <input type="number" min={1} className="form-control" value={guests} onChange={(e) => setGuests(Number(e.target.value))} />
+
+        <div className="border-top-light mt-30 mb-20" />
+
+        {/* --- Guests */}
+        <div className="row y-gap-20 justify-between items-center">
+          <div className="col-md-6">
+            <div className="text-15 mb-5">Guests</div>
+            <input
+              type="number"
+              min={1}
+              className="form-control"
+              value={guests}
+              onChange={(e) => setGuests(Number(e.target.value))}
+            />
+          </div>
           {(initialAdults || initialChildren) ? (
-            <div className="text-12 text-light-1 mt-5">
-              {initialAdults} adultes · {initialChildren} enfants · {initialRooms} chambre(s)
+            <div className="col-md-6 text-right md:text-left">
+              <div className="text-15">You selected:</div>
+              <div className="fw-500">
+                {initialRooms} room{initialRooms > 1 ? "s" : ""},{" "}
+                {initialAdults} adult{initialAdults > 1 ? "s" : ""} ·{" "}
+                {initialChildren} child{initialChildren > 1 ? "ren" : ""}
+              </div>
             </div>
           ) : null}
         </div>
 
-        {/* Récap services */}
-        <div className="col-12">
-          <div className="border-light rounded-4 p-15 bg-white">
-            <div className="d-flex justify-between items-center">
-              <h4 className="text-16 fw-600 mb-10">Services sélectionnés</h4>
-              {services.length ? (
-                <button type="button" onClick={clearServices} className="text-13 text-blue-1 underline">
-                  Vider
-                </button>
-              ) : null}
-            </div>
+        <div className="border-top-light mt-30 mb-20" />
 
-            {services.length === 0 ? (
-              <div className="text-14 text-light-1">Aucun service ajouté. Retournez à la fiche logement pour en ajouter.</div>
-            ) : (
-              <ul className="y-gap-10">
-                {services.map((s) => {
-                  const unit = Number.isFinite(Number(s.unitPrice)) ? Number(s.unitPrice) : Number(s.price) || 0;
-                  const qty = Number(s.qty) || 1;
-                  return (
-                    <li key={s.serviceId} className="d-flex justify-between items-center">
-                      <div className="d-flex items-center">
-                        <img src={s.cover} alt="" width={44} height={44} className="rounded-4 mr-10" style={{ objectFit: "cover" }} />
-                        <div>
-                          <div className="text-14 fw-500">{s.title}</div>
-                          <div className="text-12 text-light-1">{s.levelName}</div>
-                        </div>
-                      </div>
-                      <div className="d-flex items-center">
-                        <div className="text-14 fw-600 mr-15">{(unit * qty).toLocaleString("fr-FR")}€</div>
-                        <button type="button" className="button -blue-1 bg-light-2 px-10 py-5" onClick={() => removeService(s.serviceId)}>
-                          Retirer
-                        </button>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
+        {/* --- Services sélectionnés */}
+        <div className="d-flex justify-between items-center mb-10">
+          <div className="text-15">Services sélectionnés</div>
+          {services.length ? (
+            <button type="button" onClick={clearServices} className="text-13 text-blue-1 underline">
+              Vider
+            </button>
+          ) : null}
+        </div>
+
+        {services.length === 0 ? (
+          <div className="text-14 text-light-1">
+            Aucun service ajouté. Retournez à la fiche logement pour en ajouter.
+          </div>
+        ) : (
+          <ul className="y-gap-10">
+            {services.map((s) => {
+              const unit = Number.isFinite(Number(s.unitPrice)) ? Number(s.unitPrice) : Number(s.price) || 0;
+              const qty = Number(s.qty) || 1;
+              return (
+                <li key={s.serviceId} className="d-flex justify-between items-center">
+                  <div className="d-flex items-center">
+                    <img
+                      src={s.cover}
+                      alt=""
+                      width={44}
+                      height={44}
+                      className="rounded-4 mr-10"
+                      style={{ objectFit: "cover" }}
+                    />
+                    <div>
+                      <div className="text-14 fw-500">{s.title}</div>
+                      <div className="text-12 text-light-1">{s.levelName}</div>
+                    </div>
+                  </div>
+                  <div className="d-flex items-center">
+                    <div className="text-14 fw-600 mr-15">{(unit * qty).toLocaleString("fr-FR")}€</div>
+                    <button
+                      type="button"
+                      className="button -blue-1 bg-light-2 px-10 py-5"
+                      onClick={() => removeService(s.serviceId)}
+                    >
+                      Retirer
+                    </button>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+
+        <div className="border-top-light mt-30 mb-20" />
+
+        {/* --- Totaux */}
+        <div className="row y-gap-10">
+          <div className="col-12">
+            <div className="text-15">Total length of stay:</div>
+            <div className="fw-500">
+              {nights} night{nights > 1 ? "s" : ""}
+            </div>
+          </div>
+
+          <div className="col-12">
+            <div className="d-flex justify-between mt-10">
+              <div className="text-14 text-light-1">
+                {nights} nuit(s) × {pricePerNight.toLocaleString("fr-FR")}€
+              </div>
+              <div className="text-16 fw-600">{lodgingTotal.toLocaleString("fr-FR")}€</div>
+            </div>
+            <div className="d-flex justify-between mt-5">
+              <div className="text-14 text-light-1">Services</div>
+              <div className="text-16 fw-600">{servicesTotal.toLocaleString("fr-FR")}€</div>
+            </div>
+            <div className="d-flex justify-between mt-10">
+              <div className="text-18 fw-700">Total</div>
+              <div className="text-20 fw-700">{grandTotal.toLocaleString("fr-FR")}€</div>
+            </div>
           </div>
         </div>
 
-        {/* Totaux */}
-        <div className="col-12">
-          <div className="d-flex justify-between mt-10">
-            <div className="text-14 text-light-1">
-              {nights} nuit(s) × {pricePerNight.toLocaleString("fr-FR")}€
-            </div>
-            <div className="text-16 fw-600">{lodgingTotal.toLocaleString("fr-FR")}€</div>
-          </div>
-          <div className="d-flex justify-between mt-5">
-            <div className="text-14 text-light-1">Services</div>
-            <div className="text-16 fw-600">{servicesTotal.toLocaleString("fr-FR")}€</div>
-          </div>
-          <div className="d-flex justify-between mt-10">
-            <div className="text-18 fw-700">Total</div>
-            <div className="text-20 fw-700">{grandTotal.toLocaleString("fr-FR")}€</div>
-          </div>
-        </div>
+        {/* --- Erreurs / Auth */}
+        {(mustLogin || error) && <div className="border-top-light mt-30 mb-20" />}
 
-        {/* Erreurs / Auth */}
         {mustLogin && (
-          <div className="col-12">
-            <div className="alert alert-warning">
-              <div className="mb-10">Utilisateur non authentifié. Connectez-vous pour confirmer votre réservation.</div>
-              <button type="button" className="button -dark-1 bg-blue-1 text-white" onClick={goToLogin}>
-                Se connecter
-              </button>
-            </div>
-          </div>
-        )}
-        {error && (
-          <div className="col-12">
-            <div className="alert alert-danger">{error}</div>
+          <div className="alert alert-warning">
+            <div className="mb-10">Utilisateur non authentifié. Connectez-vous pour confirmer votre réservation.</div>
+            <button type="button" className="button -dark-1 bg-blue-1 text-white" onClick={goToLogin}>
+              Se connecter
+            </button>
           </div>
         )}
 
-        <div className="col-12">
+        {error && <div className="alert alert-danger">{error}</div>}
+
+        <div className="mt-20">
           <button className="button -dark-1 bg-blue-1 text-white w-100" disabled={pending || nights === 0}>
             {pending ? "Création..." : "Confirmer la réservation"}
           </button>

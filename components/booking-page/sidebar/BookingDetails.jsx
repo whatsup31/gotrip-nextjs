@@ -1,3 +1,4 @@
+// components/booking-page/sidebar/BookingDetails.jsx
 import Image from "next/image";
 
 const BookingDetails = () => {

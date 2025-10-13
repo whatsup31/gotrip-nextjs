@@ -1,4 +1,4 @@
-// components/header/header-11/index.jsx
+// components/header/default-header/index.jsx
 'use client';
 
 import Link from 'next/link';
@@ -8,36 +8,33 @@ import CurrenctyMegaMenu from '../CurrenctyMegaMenu';
 import LanguageMegaMenu from '../LanguageMegaMenu';
 import MobileMenu from '../MobileMenu';
 
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { supabaseBrowser } from '@/utils/supabase-browser';
 import { getDashboardPath } from '@/utils/role-routing';
 
-const Header11 = () => {
+const Header1 = () => {
   const [navbar, setNavbar] = useState(false);
 
-  // ---- Auth state ----
+  // --- Auth state ---
   const [loaded, setLoaded] = useState(false);
   const [displayName, setDisplayName] = useState(null);
   const [role, setRole] = useState(null);
 
-  // Sticky header
+  // Sticky behavior
   useEffect(() => {
-    const onScroll = () => setNavbar(window.scrollY >= 10);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    const changeBackground = () => setNavbar(window.scrollY >= 10);
+    window.addEventListener('scroll', changeBackground);
+    return () => window.removeEventListener('scroll', changeBackground);
   }, []);
 
-  // Fetch user + profile & listen to auth changes
+  // Load user + profile
   useEffect(() => {
-    const supabase = createClientComponentClient();
-
-    const load = async () => {
+    (async () => {
       try {
+        const supabase = supabaseBrowser();
         const { data: userRes } = await supabase.auth.getUser();
         const user = userRes?.user;
 
         if (!user) {
-          setDisplayName(null);
-          setRole(null);
           setLoaded(true);
           return;
         }
@@ -49,32 +46,19 @@ const Header11 = () => {
           .single();
 
         if (error) {
-          console.error('[header-11] profiles fetch error:', error);
-          setDisplayName(user.email || 'Mon compte');
-          setRole(null);
+          console.error('[default-header] profiles fetch error:', error);
           setLoaded(true);
           return;
         }
 
-        setDisplayName(profile?.display_name || user.email || 'Mon compte');
+        setDisplayName(profile?.display_name ?? 'Mon compte');
         setRole(profile?.role ?? null);
         setLoaded(true);
       } catch (e) {
-        console.error('[header-11] auth error:', e);
+        console.error('[default-header] auth error:', e);
         setLoaded(true);
       }
-    };
-
-    load();
-
-    const { data: sub } = supabase.auth.onAuthStateChange(() => {
-      setLoaded(false);
-      load();
-    });
-
-    return () => {
-      sub?.subscription?.unsubscribe?.();
-    };
+    })();
   }, []);
 
   const isLoggedIn = !!displayName;
@@ -82,19 +66,19 @@ const Header11 = () => {
 
   return (
     <>
-      <header className={`header bg-dark-3 ${navbar ? 'is-sticky' : ''}`}>
+      <header className={`header bg-white ${navbar ? 'is-sticky' : ''}`}>
         <div className="header__container px-30 sm:px-20">
           <div className="row justify-between items-center">
             <div className="col-auto">
               <div className="d-flex items-center">
                 <Link href="/" className="header-logo mr-20">
-                  <img src="/img/general/logo-omi-white.png" alt="logo icon" />
+                  <img src="/img/general/logo-omi.png" alt="logo icon" />
                   <img src="/img/general/logo-omi.png" alt="logo icon" />
                 </Link>
 
                 <div className="header-menu">
                   <div className="header-menu__content">
-                    <MainMenu style="text-white" />
+                    <MainMenu style="text-dark-1" />
                   </div>
                 </div>
               </div>
@@ -103,20 +87,20 @@ const Header11 = () => {
             <div className="col-auto">
               <div className="d-flex items-center">
                 <div className="row x-gap-20 items-center xxl:d-none">
-                  <CurrenctyMegaMenu textClass="text-white" />
+                  <CurrenctyMegaMenu textClass="text-dark-1" />
 
                   <div className="col-auto">
                     <div className="w-1 h-20 bg-white-20" />
                   </div>
 
-                  <LanguageMegaMenu textClass="text-white" />
+                  <LanguageMegaMenu textClass="text-dark-1" />
                 </div>
 
                 {/* Boutons desktop */}
                 <div className="d-flex items-center ml-20 is-menu-opened-hide md:d-none">
                   <Link
-                    href="/login"
-                    className="button px-30 fw-400 text-14 -white bg-white h-50 text-dark-1"
+                    href="/voyageur-dashboard/agent"
+                    className="button px-30 fw-400 text-14 -blue-1 bg-blue-1 h-50 text-white"
                   >
                     Mon assistant voyage
                   </Link>
@@ -124,22 +108,25 @@ const Header11 = () => {
                   {loaded && isLoggedIn ? (
                     <Link
                       href={dashboardHref}
-                      className="button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ml-20"
+                      className="button px-30 fw-400 text-14 -outline-blue-1 h-50 text-blue-1 ml-20"
+                      title={displayName}
+                      aria-label={displayName}
                     >
                       {displayName}
                     </Link>
                   ) : (
                     <Link
                       href="/login"
-                      className="button px-30 fw-400 text-14 border-white -outline-white h-50 text-white ml-20"
+                      className="button px-30 fw-400 text-14 -outline-blue-1 h-50 text-blue-1 ml-20"
                     >
                       Se connecter
                     </Link>
                   )}
                 </div>
+                {/* Fin boutons desktop */}
 
-                {/* Icône mobile */}
-                <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-white">
+                {/* Icônes mobile */}
+                <div className="d-none xl:d-flex x-gap-20 items-center pl-30 text-dark-1">
                   <div>
                     <Link
                       href={loaded && isLoggedIn ? dashboardHref : '/login'}
@@ -166,7 +153,7 @@ const Header11 = () => {
                     </div>
                   </div>
                 </div>
-                {/* Fin mobile */}
+                {/* Fin icônes mobile */}
               </div>
             </div>
           </div>
@@ -176,4 +163,4 @@ const Header11 = () => {
   );
 };
 
-export default Header11;
+export default Header1;

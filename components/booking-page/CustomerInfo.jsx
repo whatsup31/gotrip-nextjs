@@ -21,7 +21,7 @@ const CustomerInfo = () => {
         <div className="row x-gap-20 y-gap-20 pt-20">
           <div className="col-12">
             <div className="form-input ">
-              <input type="text" required />
+              <input type="text"  />
               <label className="lh-1 text-16 text-light-1">Full Name</label>
             </div>
           </div>
@@ -29,7 +29,7 @@ const CustomerInfo = () => {
 
           <div className="col-md-6">
             <div className="form-input ">
-              <input type="text" required />
+              <input type="text"  />
               <label className="lh-1 text-16 text-light-1">Email</label>
             </div>
           </div>
@@ -37,7 +37,7 @@ const CustomerInfo = () => {
 
           <div className="col-md-6">
             <div className="form-input ">
-              <input type="text" required />
+              <input type="text"  />
               <label className="lh-1 text-16 text-light-1">Phone Number</label>
             </div>
           </div>
@@ -45,7 +45,7 @@ const CustomerInfo = () => {
 
           <div className="col-12">
             <div className="form-input ">
-              <input type="text" required />
+              <input type="text"  />
               <label className="lh-1 text-16 text-light-1">
                 Address line 1
               </label>
@@ -55,7 +55,7 @@ const CustomerInfo = () => {
 
           <div className="col-12">
             <div className="form-input ">
-              <input type="text" required />
+              <input type="text"  />
               <label className="lh-1 text-16 text-light-1">
                 Address line 2
               </label>
@@ -65,7 +65,7 @@ const CustomerInfo = () => {
 
           <div className="col-md-6">
             <div className="form-input ">
-              <input type="text" required />
+              <input type="text"  />
               <label className="lh-1 text-16 text-light-1">
                 State/Province/Region
               </label>
@@ -75,7 +75,7 @@ const CustomerInfo = () => {
 
           <div className="col-md-6">
             <div className="form-input ">
-              <input type="text" required />
+              <input type="text"  />
               <label className="lh-1 text-16 text-light-1">
                 ZIP code/Postal code
               </label>
@@ -85,7 +85,7 @@ const CustomerInfo = () => {
 
           <div className="col-12">
             <div className="form-input ">
-              <textarea required rows={6} defaultValue={""} />
+              <textarea  rows={6} defaultValue={""} />
               <label className="lh-1 text-16 text-light-1">
                 Special Requests
               </label>
@@ -97,7 +97,7 @@ const CustomerInfo = () => {
             <div className="row y-gap-20 items-center justify-between">
               <div className="col-auto">
                 <div className="text-14 text-light-1">
-                  By proceeding with this booking, I agree to GoTrip Terms of
+                  By proceeding with this booking, I agree to OMI Terms of
                   Use and Privacy Policy.
                 </div>
               </div>

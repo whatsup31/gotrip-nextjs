@@ -3,6 +3,20 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { createClient } from "@supabase/supabase-js";
+
+/* =========================
+   Supabase (client public)
+========================= */
+const supabase =
+  typeof window !== "undefined" &&
+  process.env.NEXT_PUBLIC_SUPABASE_URL &&
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    ? createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+      )
+    : null;
 
 /* =========================
    Local storage helpers
@@ -32,9 +46,6 @@ function upsertService(payload) {
 function removeService(serviceId) {
   const items = readServices().filter((x) => x.serviceId !== serviceId);
   writeServices(items);
-}
-function clearAllServices() {
-  writeServices([]);
 }
 
 /* =========================
@@ -89,22 +100,70 @@ function formatPrice(v) {
 export default function AvailableServices({
   services = [],
   moreLink = "/services",
-  title = "Services proposés",
-  listingId, // utilisé uniquement pour taguer l'item ajouté
+  title = "Available services",
+  listingId,
 }) {
   // { [serviceId]: { checked, levelId, qty } }
   const [selected, setSelected] = useState({});
   const [query, setQuery] = useState("");
 
-  /* -------------------------------------------------
-     RESET TOTAL À L’ARRIVÉE SUR LA PAGE
-     - On vide le storage + l'état local au mount.
-     - On le refait aussi si le listingId change (navigation interne).
-  -------------------------------------------------- */
+  // Infos complémentaires depuis la DB si manquantes en props
+  // shape: { [id]: { description, rating_avg } }
+  const [dbDetails, setDbDetails] = useState({});
+
+  // Hydrate l'état à partir du localStorage (si retour sur la page)
   useEffect(() => {
-    clearAllServices();
-    setSelected({});
-  }, [listingId]);
+    const stored = readServices();
+    if (!Array.isArray(stored) || !stored.length) return;
+    setSelected((prev) => {
+      const next = { ...prev };
+      stored.forEach((it) => {
+        next[it.serviceId] = {
+          ...(next[it.serviceId] || {}),
+          checked: true,
+          levelId: it.levelId,
+          qty: it.qty || 1,
+        };
+      });
+      return next;
+    });
+  }, []);
+
+  // Récupère description + rating_avg depuis Supabase si non présents
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        if (!supabase) return;
+        const ids = (services || [])
+          .map((s) => s?.id)
+          .filter((x) => x !== undefined && x !== null);
+        if (!ids.length) return;
+
+        const { data, error } = await supabase
+          .from("services")
+          .select("id, description, rating_avg")
+          .in("id", ids);
+
+        if (error) throw error;
+
+        const map = {};
+        (data || []).forEach((row) => {
+          map[row.id] = {
+            description: row.description ?? "",
+            rating_avg: row.rating_avg != null ? Number(row.rating_avg) : null,
+          };
+        });
+
+        if (alive) setDbDetails(map);
+      } catch (e) {
+        console.error("AvailableServices: supabase fetch error", e);
+      }
+    })();
+    return () => {
+      alive = false;
+    };
+  }, [services]);
 
   const filtered = useMemo(() => {
     const needle = query.trim().toLowerCase();
@@ -134,7 +193,7 @@ export default function AvailableServices({
       levelName: level.name,
       unitPrice,
       qty,
-      price: unitPrice * qty,
+      price: unitPrice * qty, // utilisé par BookingForm pour totaliser
       listingId: listingId ?? svc.listing_id ?? null,
       cover: coverFrom(svc),
     });
@@ -142,6 +201,7 @@ export default function AvailableServices({
 
   const handleLevelChange = (serviceId, levelId, svc) => {
     setLocalState(serviceId, { levelId });
+    // MAJ panier si déjà coché
     const levels = asLevels(svc);
     const lv = levels.find((l) => l.id === levelId) || levels[0];
     const qty = Number(selected[serviceId]?.qty || 1);
@@ -151,6 +211,7 @@ export default function AvailableServices({
   const handleQtyChange = (serviceId, value, svc) => {
     const qty = Math.max(1, Number(value) || 1);
     setLocalState(serviceId, { qty });
+    // MAJ panier si déjà coché
     const levels = asLevels(svc);
     const levelId = selected[serviceId]?.levelId || levels[0]?.id;
     const lv = levels.find((l) => l.id === levelId) || levels[0];
@@ -183,6 +244,7 @@ export default function AvailableServices({
     setLocalState(svc.id, { checked: true });
   };
 
+  // largeur fixe pour uniformiser “Ajouter” et “Ajouté”
   const BUTTON_WIDTH = 160;
 
   return (
@@ -232,6 +294,19 @@ export default function AvailableServices({
           const qty = Number(sel.qty || 1);
           const isChecked = !!sel.checked;
 
+          // description : props > DB
+          const desc =
+            (typeof svc.description === "string" && svc.description?.trim()) ||
+            dbDetails[svc.id]?.description ||
+            "";
+
+          // rating_avg : props > DB
+          const rating =
+            (svc.rating_avg != null ? Number(svc.rating_avg) : null) ??
+            (dbDetails[svc.id]?.rating_avg != null
+              ? Number(dbDetails[svc.id]?.rating_avg)
+              : null);
+
           return (
             <div
               key={svc.id ?? idx}
@@ -258,6 +333,13 @@ export default function AvailableServices({
                       <div className="text-18 fw-500">
                         {svc.title || "Service"}
                       </div>
+
+                      {/* Pastille note (style TopServicesV2) */}
+                      {Number.isFinite(rating) ? (
+                        <div className="flex-center bg-blue-1 rounded-4 size-30 text-12 fw-600 text-white ml-10">
+                          {Number(rating).toFixed(1)}
+                        </div>
+                      ) : null}
                     </div>
 
                     {svc.category ? (
@@ -284,9 +366,7 @@ export default function AvailableServices({
                       {/* Description */}
                       <div className="col-lg col-md-6">
                         <div className="text-15 fw-500 mb-10">Description</div>
-                        <div className="text-14">
-                          {(svc.description || "").trim() || "—"}
-                        </div>
+                        <div className="text-14">{desc || "—"}</div>
                         <div className="d-flex items-center text-green-2 mt-10">
                           <i className="icon-check text-12 mr-10" />
                           <div className="text-15">Prestataire vérifié</div>
@@ -340,7 +420,11 @@ export default function AvailableServices({
                                 className="form-checkbox mr-10"
                                 checked={isChecked}
                                 onChange={(e) =>
-                                  handleCheck(svc.id, e.target.checked, svc)
+                                  handleCheck(
+                                    svc.id,
+                                    e.target.checked,
+                                    svc
+                                  )
                                 }
                               />
                               <span className="text-15 lh-14">
@@ -359,20 +443,24 @@ export default function AvailableServices({
                             )}
                           </div>
 
-                          {/* Bouton Ajouter / Ajouté */}
+                          {/* Bouton Ajouter / Ajouté (taille uniforme) */}
                           <button
                             type="button"
                             onClick={() => handleAddClick(svc)}
                             className={`button h-50 px-35 mt-10 ${
-                              isChecked ? "" : "-dark-1 bg-blue-1 text-white"
+                              isChecked
+                                ? "" // on gère le style en inline pour forcer le vert visible en disabled
+                                : "-dark-1 bg-blue-1 text-white"
                             }`}
                             disabled={isChecked}
                             style={{
-                              width: 160,
+                              // taille fixe + centrage pour uniformiser
+                              width: BUTTON_WIDTH,
                               display: "inline-flex",
                               alignItems: "center",
                               justifyContent: "center",
                               gap: 8,
+                              // style du bouton "Ajouté" (disabled) pour rester vert et visible
                               ...(isChecked
                                 ? {
                                     backgroundColor: "#22c55e",

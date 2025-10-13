@@ -7,8 +7,7 @@ import MainMenu from '../MainMenu';
 import CurrenctyMegaMenu from '../CurrenctyMegaMenu';
 import LanguageMegaMenu from '../LanguageMegaMenu';
 import MobileMenu from '../MobileMenu';
-
-import { supabaseBrowser } from '@/utils/supabase-browser';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { getDashboardPath } from '@/utils/role-routing';
 
 const Header1 = () => {
@@ -26,15 +25,17 @@ const Header1 = () => {
     return () => window.removeEventListener('scroll', changeBackground);
   }, []);
 
-  // Load user + profile
+  // Load user + profile via auth-helpers & listen changes
   useEffect(() => {
-    (async () => {
+    const supabase = createClientComponentClient();
+
+    const load = async () => {
       try {
-        const supabase = supabaseBrowser();
         const { data: userRes } = await supabase.auth.getUser();
         const user = userRes?.user;
-
         if (!user) {
+          setDisplayName(null);
+          setRole(null);
           setLoaded(true);
           return;
         }
@@ -47,18 +48,33 @@ const Header1 = () => {
 
         if (error) {
           console.error('[default-header] profiles fetch error:', error);
+          // fallback : email si pas de profil
+          setDisplayName(user.email || 'Mon compte');
+          setRole(null);
           setLoaded(true);
           return;
         }
 
-        setDisplayName(profile?.display_name ?? 'Mon compte');
+        setDisplayName(profile?.display_name || user.email || 'Mon compte');
         setRole(profile?.role ?? null);
         setLoaded(true);
       } catch (e) {
         console.error('[default-header] auth error:', e);
         setLoaded(true);
       }
-    })();
+    };
+
+    load();
+
+    // se réabonner aux changements de session
+    const { data: sub } = supabase.auth.onAuthStateChange(() => {
+      setLoaded(false);
+      load();
+    });
+
+    return () => {
+      sub.subscription.unsubscribe();
+    };
   }, []);
 
   const isLoggedIn = !!displayName;
@@ -72,8 +88,8 @@ const Header1 = () => {
             <div className="col-auto">
               <div className="d-flex items-center">
                 <Link href="/" className="header-logo mr-20">
-                  <img src="/img/general/logo-omi.png" alt="logo icon" />
-                  <img src="/img/general/logo-omi.png" alt="logo icon" />
+                  <img src="/img/general/logo-omi.png" alt="OMI" />
+                  <img src="/img/general/logo-omi.png" alt="OMI" />
                 </Link>
 
                 <div className="header-menu">

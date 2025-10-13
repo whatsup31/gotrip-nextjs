@@ -2,30 +2,20 @@
 import { NextRequest } from "next/server";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { createClient } from "@supabase/supabase-js";
-
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
 
 /**
  * Crée une réservation + les service_orders associées.
- * - Identifie le voyageur via auth-helpers-nextjs (cookies Supabase)
- * - Calcule le total serveur (nuits * price_per_night + Σ services)
- * - Renseigne reservations.user_id + service_orders.traveler_id/provider_id/…
+ * - Lit l'utilisateur via auth-helpers (cookies sb-*)
+ * - Utilise le même client auth-helpers pour TOUTES les requêtes DB
+ * - Calcule le total (nuits + services)
  */
 export async function POST(req: NextRequest) {
   try {
-    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-      return Response.json(
-        { ok: false, error: "Supabase env missing (URL/ANON KEY)" },
-        { status: 500 }
-      );
-    }
+    const supabase = createRouteHandlerClient({ cookies });
 
-    // 0) Contexte utilisateur via auth-helpers (fiable)
-    const supaAuth = createRouteHandlerClient({ cookies });
-    const { data: userRes, error: uErr } = await supaAuth.auth.getUser();
-    if (uErr || !userRes?.user) {
+    // 1) Utilisateur connecté (voyageur)
+    const { data: userRes, error: userErr } = await supabase.auth.getUser();
+    if (userErr || !userRes?.user) {
       return Response.json(
         { ok: false, error: "Utilisateur non authentifié" },
         { status: 401 }
@@ -33,7 +23,7 @@ export async function POST(req: NextRequest) {
     }
     const travelerId = userRes.user.id;
 
-    // 1) Payload
+    // 2) Payload
     const body = await req.json();
     const listingId: number = Number(body?.listingId);
     const checkIn: string = String(body?.checkIn || "");
@@ -52,15 +42,7 @@ export async function POST(req: NextRequest) {
       return Response.json({ ok: false, error: "Champs manquants" }, { status: 400 });
     }
 
-    // 2) Client DB “classique” pour requêtes (on garde le SDK standard)
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-      // on propage aussi le token auth pour les policies si RLS activé
-      global: {
-        headers: { Authorization: `Bearer ${(await supaAuth.auth.getSession()).data.session?.access_token ?? ""}` },
-      },
-    });
-
-    // 3) Listing & tarifs
+    // 3) Récup listing & prix
     const { data: listing, error: listingErr } = await supabase
       .from("listings")
       .select("id, host_id, price_per_night")
@@ -71,7 +53,7 @@ export async function POST(req: NextRequest) {
       return Response.json({ ok: false, error: "Listing introuvable" }, { status: 404 });
     }
 
-    // 4) Calculs
+    // 4) Calculs (nuits + totaux)
     const d1 = Date.parse(checkIn);
     const d2 = Date.parse(checkOut);
     const nights =
@@ -89,7 +71,6 @@ export async function POST(req: NextRequest) {
       const serviceId = Number(it?.serviceId);
       if (!serviceId) continue;
 
-      // provider & prix service
       const { data: svc } = await supabase
         .from("services")
         .select("id, provider_id, price")
@@ -105,34 +86,34 @@ export async function POST(req: NextRequest) {
       servicesTotal += total_price;
 
       ordersToInsert.push({
-        reservation_id: null, // on ajoutera l'id après insert
+        reservation_id: null,             // on mettra l'id après
         listing_id: listingId,
-        traveler_id: travelerId,                 // ✅ VOYAGEUR
-        provider_id: svc?.provider_id || null,   // ✅ PRESTATAIRE
+        traveler_id: travelerId,          // ✅ voyageur
+        provider_id: svc?.provider_id || null, // ✅ prestataire
         service_id: serviceId,
         level_id: it?.levelId || null,
         unit_price: unitPrice,
         qty,
         total_price,
         status: "pending",
-        scheduled_at: checkIn ? new Date(`${checkIn}T10:00:00Z`).toISOString() : null, // POC: 10h jour du check-in
+        scheduled_at: checkIn ? new Date(`${checkIn}T10:00:00Z`).toISOString() : null, // POC
         address_text: null,
       });
     }
 
     const totalAmount = lodgingTotal + servicesTotal;
 
-    // 5) Création de la réservation
+    // 5) Réservation
     const { data: created, error: insErr } = await supabase
       .from("reservations")
       .insert({
         listing_id: listingId,
-        user_id: travelerId,  // ✅ user_id rempli
+        user_id: travelerId,         // ✅ lie au voyageur
         check_in: checkIn,
         check_out: checkOut,
         guests,
-        services: items,      // trace JSON
-        total_amount: totalAmount,
+        services: items,             // trace JSON
+        total_amount: totalAmount,   // ✅ total côté serveur
         status: "pending",
       })
       .select("id")
@@ -145,7 +126,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 6) Service orders
+    // 6) service_orders liées
     if (ordersToInsert.length) {
       await supabase.from("service_orders").insert(
         ordersToInsert.map((o) => ({ ...o, reservation_id: created.id }))

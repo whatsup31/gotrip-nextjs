@@ -8,7 +8,7 @@ import CurrenctyMegaMenu from '../CurrenctyMegaMenu';
 import LanguageMegaMenu from '../LanguageMegaMenu';
 import MobileMenu from '../MobileMenu';
 
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { supabaseBrowser } from '@/utils/supabase-browser';
 import { getDashboardPath } from '@/utils/role-routing';
 
 const Header11 = () => {
@@ -26,18 +26,14 @@ const Header11 = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Fetch user + profile & listen to auth changes
+  // Fetch user + profile
   useEffect(() => {
-    const supabase = createClientComponentClient();
-
-    const load = async () => {
+    (async () => {
       try {
+        const supabase = supabaseBrowser();
         const { data: userRes } = await supabase.auth.getUser();
         const user = userRes?.user;
-
         if (!user) {
-          setDisplayName(null);
-          setRole(null);
           setLoaded(true);
           return;
         }
@@ -50,31 +46,18 @@ const Header11 = () => {
 
         if (error) {
           console.error('[header-11] profiles fetch error:', error);
-          setDisplayName(user.email || 'Mon compte');
-          setRole(null);
           setLoaded(true);
           return;
         }
 
-        setDisplayName(profile?.display_name || user.email || 'Mon compte');
+        setDisplayName(profile?.display_name ?? 'Mon compte');
         setRole(profile?.role ?? null);
         setLoaded(true);
       } catch (e) {
         console.error('[header-11] auth error:', e);
         setLoaded(true);
       }
-    };
-
-    load();
-
-    const { data: sub } = supabase.auth.onAuthStateChange(() => {
-      setLoaded(false);
-      load();
-    });
-
-    return () => {
-      sub?.subscription?.unsubscribe?.();
-    };
+    })();
   }, []);
 
   const isLoggedIn = !!displayName;

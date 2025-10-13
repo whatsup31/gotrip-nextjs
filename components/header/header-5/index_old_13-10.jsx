@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import MainMenu from '../MainMenu';
 import MobileMenu from '../MobileMenu';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+
+import { supabaseBrowser } from '@/utils/supabase-browser';
 import { getDashboardPath } from '@/utils/role-routing';
 
 const Header5 = () => {
@@ -18,23 +19,22 @@ const Header5 = () => {
 
   // Sticky header
   useEffect(() => {
-    const changeBackground = () => setNavbar(window.scrollY >= 10);
+    const changeBackground = () => {
+      setNavbar(window.scrollY >= 10);
+    };
     window.addEventListener('scroll', changeBackground);
     return () => window.removeEventListener('scroll', changeBackground);
   }, []);
 
-  // Load user + profile + listen auth changes
+  // Load user + profile (display_name, role)
   useEffect(() => {
-    const supabase = createClientComponentClient();
-
-    const load = async () => {
+    (async () => {
       try {
+        const supabase = supabaseBrowser();
         const { data: userRes } = await supabase.auth.getUser();
         const user = userRes?.user;
 
         if (!user) {
-          setDisplayName(null);
-          setRole(null);
           setLoaded(true);
           return;
         }
@@ -47,28 +47,18 @@ const Header5 = () => {
 
         if (error) {
           console.error('[header-5] profiles fetch error:', error);
-          setDisplayName(user.email || 'Mon compte');
-          setRole(null);
           setLoaded(true);
           return;
         }
 
-        setDisplayName(profile?.display_name || user.email || 'Mon compte');
+        setDisplayName(profile?.display_name ?? 'Mon compte');
         setRole(profile?.role ?? null);
         setLoaded(true);
       } catch (e) {
         console.error('[header-5] auth error:', e);
         setLoaded(true);
       }
-    };
-
-    load();
-
-    const { data: sub } = supabase.auth.onAuthStateChange(() => {
-      setLoaded(false);
-      load();
-    });
-    return () => sub.subscription.unsubscribe();
+    })();
   }, []);
 
   const isLoggedIn = !!displayName;
@@ -95,7 +85,7 @@ const Header5 = () => {
                   data-bs-toggle="offcanvas"
                   aria-controls="mobile-sidebar_menu"
                   data-bs-target="#mobile-sidebar_menu"
-                />
+                ></button>
 
                 <div
                   className="offcanvas offcanvas-start mobile_menu-contnet"
@@ -109,8 +99,8 @@ const Header5 = () => {
               </div>
 
               <Link href="/" className="header-logo mr-20">
-                <img src="/img/general/logo-omi.png" alt="OMI" />
-                <img src="/img/general/logo-omi.png" alt="OMI" />
+                <img src="/img/general/logo-omi.png" alt="logo icon" />
+                <img src="/img/general/logo-omi.png" alt="logo icon" />
               </Link>
 
               <div className="header-menu">
