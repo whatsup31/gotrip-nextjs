@@ -109,13 +109,12 @@ const CustomerInfo = () => {
         {/* End .row */}
       </div>
       {/* End .col-xl-7 */}
-	{/*
+
       <div className="col-xl-5 col-lg-4 mt-30">
         <div className="booking-sidebar">
           <BookingDetails />
         </div>
       </div>
-	*/}
       {/*  */}
     </>
   );

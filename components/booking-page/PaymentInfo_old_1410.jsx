@@ -152,7 +152,7 @@ const PaymentInfo = () => {
         {/* End terms and conditons */}
       </div>
       {/* End payment details */}
-{/*
+
       <div className="col-xl-5 col-lg-4">
         <div className="booking-sidebar">
           <PricingSummary />
@@ -160,7 +160,6 @@ const PaymentInfo = () => {
           <PromoCode />
         </div>
       </div>
-*/}
       {/* payment sidebar info */}
     </>
   );

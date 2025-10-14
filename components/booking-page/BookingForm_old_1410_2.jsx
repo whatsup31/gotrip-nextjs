@@ -2,10 +2,10 @@
 "use client";
 
 import { useEffect, useMemo, useState, useTransition } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const STORAGE_KEY = "booking_services";
 
-/** --- utils localStorage pour services sélectionnés --- */
 function readSelected(listingId) {
   if (typeof window === "undefined") return [];
   try {
@@ -21,22 +21,6 @@ function writeSelected(items) {
   window.dispatchEvent(new Event("booking:services-changed"));
 }
 
-/**
- * BookingForm – version UI "BookingDetails"
- *
- * Props attendues côté page:
- * - listingId (number|uuid)
- * - pricePerNight (number)
- * - initialCheckIn / initialCheckOut (YYYY-MM-DD)
- * - initialGuests / initialRooms / initialAdults / initialChildren
- * - listing: {
- *     title?: string,
- *     location?: string,
- *     rating_avg?: number,           // ex: 4.8
- *     reviews_count?: number,        // optionnel
- *     photos?: string[] | string     // ex: '["/img/hotels/10.1.jpg", ...]' ou array
- *   }
- */
 export default function BookingForm({
   listingId,
   pricePerNight = 0,
@@ -46,8 +30,16 @@ export default function BookingForm({
   initialRooms = 1,
   initialAdults = 0,
   initialChildren = 0,
-  listing = {},
+
+  // ---- Props visuelles façon BookingDetails
+  hotelCover = "/img/backgrounds/1.png",
+  hotelTitle,
+  hotelLocation,
+  hotelRating = null,   // ex: 4.8
+  hotelReviews = null,  // ex: 3014
 }) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [checkIn, setCheckIn] = useState(initialCheckIn);
   const [checkOut, setCheckOut] = useState(initialCheckOut);
   const [guests, setGuests] = useState(initialGuests || 1);
@@ -56,21 +48,7 @@ export default function BookingForm({
   const [mustLogin, setMustLogin] = useState(false);
   const [pending, startTransition] = useTransition();
 
-  // ---- Derivés UI depuis listing (photos, rating, etc.)
-  const { title, location, rating_avg, reviews_count } = listing || {};
-
-  const cover = useMemo(() => {
-    if (!listing) return "/img/backgrounds/1.png";
-    let photos = listing.photos;
-    try {
-      if (typeof photos === "string") photos = JSON.parse(photos || "[]");
-    } catch {
-      photos = [];
-    }
-    return Array.isArray(photos) && photos.length ? photos[0] : "/img/backgrounds/1.png";
-  }, [listing]);
-
-  // sync des props quand l’URL ou la page change
+  // sync des props quand l’URL change
   useEffect(() => {
     setCheckIn(initialCheckIn || "");
     setCheckOut(initialCheckOut || "");
@@ -82,14 +60,12 @@ export default function BookingForm({
     const load = () => setServices(readSelected(listingId));
     load();
     const onChange = () => load();
-    if (typeof window !== "undefined") {
-      window.addEventListener("booking:services-changed", onChange);
-      window.addEventListener("storage", onChange);
-      return () => {
-        window.removeEventListener("booking:services-changed", onChange);
-        window.removeEventListener("storage", onChange);
-      };
-    }
+    window.addEventListener("booking:services-changed", onChange);
+    window.addEventListener("storage", onChange);
+    return () => {
+      window.removeEventListener("booking:services-changed", onChange);
+      window.removeEventListener("storage", onChange);
+    };
   }, [listingId]);
 
   // ------ calculs
@@ -160,7 +136,7 @@ export default function BookingForm({
         return;
       }
       json = await res.json();
-    } catch {
+    } catch (err) {
       setError("Erreur réseau. Merci de réessayer.");
       return;
     }
@@ -172,14 +148,13 @@ export default function BookingForm({
 
     // succès → purge des services de ce listing + redirection
     clearServices();
-    // NOTE: startTransition évite le blocage du bouton pendant la navigation
-    startTransition(() => (window.location.href = `/reservation/${json.data.id}`));
+    startTransition(() => router.push(`/reservation/${json.data.id}`));
   };
 
   const goToLogin = () => {
     const current =
       typeof window !== "undefined" ? window.location.pathname + window.location.search : "/booking-page";
-    window.location.href = `/login?redirect=${encodeURIComponent(current)}`;
+    router.push(`/login?redirect=${encodeURIComponent(current)}`);
   };
 
   return (
@@ -187,57 +162,54 @@ export default function BookingForm({
       <div className="px-30 py-30 border-light rounded-4 bg-white">
         <div className="text-20 fw-500 mb-30">Your booking details</div>
 
-        {/* --- En-tête visuel (photo, étoiles, rating, reviews) : UI BookingDetails */}
-        <div className="row x-gap-15 y-gap-20">
-          <div className="col-auto">
-            <img
-              width={140}
-              height={140}
-              src={cover}
-              alt="cover"
-              className="size-140 rounded-4 object-cover"
-            />
-          </div>
-
-          <div className="col">
-            <div className="d-flex x-gap-5 pb-10">
-              <i className="icon-star text-yellow-1 text-10" />
-              <i className="icon-star text-yellow-1 text-10" />
-              <i className="icon-star text-yellow-1 text-10" />
-              <i className="icon-star text-yellow-1 text-10" />
-              <i className="icon-star text-yellow-1 text-10" />
-            </div>
-
-            <div className="lh-17 fw-500">{title || "Your selected property"}</div>
-            {location && <div className="text-14 lh-15 mt-5">{location}</div>}
-
-            { (
-              <div className="row x-gap-10 y-gap-10 items-center pt-10">
-                {(
-                  <div className="col-auto">
-                    <div className="d-flex items-center">
-                      <div className="size-30 flex-center bg-blue-1 rounded-4">
-                        <div className="text-12 fw-600 text-white">
-                          {Number(rating_avg).toFixed(1)}
+        {/* --- en-tête visuel façon BookingDetails (photo, étoiles, rating, reviews) */}
+        {(hotelTitle || hotelLocation || hotelRating || hotelReviews) && (
+          <>
+            <div className="row x-gap-15 y-gap-20">
+              <div className="col-auto">
+                <img
+                  width={140}
+                  height={140}
+                  src={hotelCover}
+                  alt="cover"
+                  className="size-140 rounded-4 object-cover"
+                />
+              </div>
+              <div className="col">
+                <div className="d-flex x-gap-5 pb-10">
+                  <i className="icon-star text-yellow-1 text-10" />
+                  <i className="icon-star text-yellow-1 text-10" />
+                  <i className="icon-star text-yellow-1 text-10" />
+                  <i className="icon-star text-yellow-1 text-10" />
+                  <i className="icon-star text-yellow-1 text-10" />
+                </div>
+                <div className="lh-17 fw-500">{hotelTitle || "Your selected property"}</div>
+                {hotelLocation && <div className="text-14 lh-15 mt-5">{hotelLocation}</div>}
+                {(hotelRating || hotelReviews) && (
+                  <div className="row x-gap-10 y-gap-10 items-center pt-10">
+                    {hotelRating != null && (
+                      <div className="col-auto">
+                        <div className="d-flex items-center">
+                          <div className="size-30 flex-center bg-blue-1 rounded-4">
+                            <div className="text-12 fw-600 text-white">{Number(hotelRating).toFixed(1)}</div>
+                          </div>
+                          <div className="text-14 fw-500 ml-10">Exceptional</div>
                         </div>
                       </div>
-                      <div className="text-14 fw-500 ml-10">Exceptional</div>
-                    </div>
-                  </div>
-                )}
-                { (
-                  <div className="col-auto">
-                    <div className="text-14">
-                      {reviews_count} reviews
-                    </div>
+                    )}
+                    {hotelReviews != null && (
+                      <div className="col-auto">
+                        <div className="text-14">{hotelReviews.toLocaleString("en-US")} reviews</div>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
-            )}
-          </div>
-        </div>
+            </div>
 
-        <div className="border-top-light mt-30 mb-20" />
+            <div className="border-top-light mt-30 mb-20" />
+          </>
+        )}
 
         {/* --- Dates */}
         <div className="row y-gap-20 justify-between">
@@ -250,7 +222,7 @@ export default function BookingForm({
               onChange={(e) => setCheckIn(e.target.value)}
               required
             />
-            <div className="text-13 text-light-1 mt-5">15:00 – 23:00</div>
+            <div className="text-13 text-light-1 mt-5">À partir de 15:00 (indicatif)</div>
           </div>
 
           <div className="col-auto md:d-none">
@@ -266,7 +238,7 @@ export default function BookingForm({
               onChange={(e) => setCheckOut(e.target.value)}
               required
             />
-            <div className="text-13 text-light-1 mt-5">01:00 – 11:00</div>
+            <div className="text-13 text-light-1 mt-5">Jusqu’à 11:00 (indicatif)</div>
           </div>
         </div>
 
@@ -284,7 +256,6 @@ export default function BookingForm({
               onChange={(e) => setGuests(Number(e.target.value))}
             />
           </div>
-
           {(initialAdults || initialChildren) ? (
             <div className="col-md-6 text-right md:text-left">
               <div className="text-15">You selected:</div>
@@ -379,6 +350,7 @@ export default function BookingForm({
           </div>
         </div>
 
+        {/* --- Erreurs / Auth */}
         {(mustLogin || error) && <div className="border-top-light mt-30 mb-20" />}
 
         {mustLogin && (
