@@ -56,7 +56,7 @@ export default async function Page({ searchParams }) {
           <div className="row y-gap-30">
             <div className="col-lg-7">
               {/* Visuel existant de la template */}
-				  {/*<StepperBooking />*/}
+              <StepperBooking />
             </div>
 
             <aside className="col-lg-5">
