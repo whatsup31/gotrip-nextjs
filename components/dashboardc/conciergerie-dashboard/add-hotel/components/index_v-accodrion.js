@@ -1,4 +1,3 @@
-// components/dashboardc/conciergerie-dashbord/add-hotel/components/index.js
 'use client'
 
 import React, { useState } from 'react'
@@ -7,7 +6,7 @@ import LocationTabContent from './LocationTabContent'
 import PricingTabContent from './PricingTabContent'
 import AttributesTabContent from './AttributesTabContent'
 
-/** Accordéon inspiré de l’exemple fourni (JS pur) */
+// Un item d'accordéon simple (JS pur, pas de TypeScript)
 const AccordionItem = ({ title, defaultOpen = false, children }) => {
   const [open, setOpen] = useState(defaultOpen)
 
@@ -18,7 +17,7 @@ const AccordionItem = ({ title, defaultOpen = false, children }) => {
         type="button"
         className="w-100 px-30 py-20 lg:px-20 lg:py-16 d-flex items-center justify-between text-left"
         aria-expanded={open}
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => setOpen(v => !v)}
       >
         <span className="text-18 lg:text-16 fw-600">{title}</span>
         <span className={`icon ${open ? 'icon-minus' : 'icon-plus'}`} />
@@ -53,10 +52,20 @@ const Index = () => {
         <PricingTabContent />
       </AccordionItem>
 
-      <AccordionItem title="4. Type de logement & équipements">
+      <AccordionItem title="4. Type de logement">
         <AttributesTabContent />
       </AccordionItem>
 
+      {/* Bouton unique en bas */}
+      <div className="pt-10 text-center">
+        <button
+          className="button h-50 px-24 -dark-1 text-white"
+          style={{ backgroundColor: '#0d6efd' }}
+        >
+           le logement
+          <div className="icon-arrow-top-right ml-15" />
+        </button>
+      </div>
     </div>
   )
 }

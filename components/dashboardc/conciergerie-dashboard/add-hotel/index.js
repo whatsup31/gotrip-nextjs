@@ -1,4 +1,4 @@
-
+// components/dashboardc/conciergerie-dashbord/add-hotel/index.js
 import Sidebar from "../common/Sidebar";
 import Header from "../../../../components/header/dashboard-header";
 import SettingsTabs from "./components/index";
@@ -34,14 +34,6 @@ const index = () => {
               </div>
               {/* End .col-auto */}
 
-              <div className="col-auto">
-              <a
-			//	href="/conciergerie-dashboard/add-hotel"
-				className="button h-50 px-24 text-white"  style={{ backgroundColor: "#00d2b5" }}
-                >
-                  Publier le logement<div className="icon-check ml-15"></div>
-                </a>
-              </div>
             </div>
             {/* End .row */}
 

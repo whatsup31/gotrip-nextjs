@@ -1,105 +1,35 @@
-// components/header/dashboard-header/index.jsx
-'use client';
+'use client'
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
-import MainMenu from '../MainMenu';
-import MobileMenu from '../MobileMenu';
-
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { getDashboardPath } from '@/utils/role-routing';
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
+import MainMenu from "../MainMenu";
+import MobileMenu from "../MobileMenu";
 
 const HeaderDashBoard = () => {
   const [navbar, setNavbar] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  // ---- Auth state (via auth-helpers) ----
-  const [loaded, setLoaded] = useState(false);
-  const [displayName, setDisplayName] = useState(null);
-  const [role, setRole] = useState(null);
-  const [avatarUrl, setAvatarUrl] = useState(null);
-
-  // Progress data (inchangé)
+  // Progress data
   const [xp, setXp] = useState(586);
   const [xpTarget, setXpTarget] = useState(1000);
   const left = Math.max(0, xpTarget - xp);
-  const percent = useMemo(
-    () => Math.max(0, Math.min(100, (xp / xpTarget) * 100)),
-    [xp, xpTarget]
-  );
+  const percent = useMemo(() => Math.max(0, Math.min(100, (xp / xpTarget) * 100)), [xp, xpTarget]);
 
   const handleToggle = () => setIsOpen((v) => !v);
   const changeBackground = () => setNavbar(window.scrollY >= 10);
 
   useEffect(() => {
-    window.addEventListener('scroll', changeBackground);
-    const body = document.querySelector('body');
-    if (isOpen) body.classList.add('-is-sidebar-open');
-    else body.classList.remove('-is-sidebar-open');
-    return () => window.removeEventListener('scroll', changeBackground);
+    window.addEventListener("scroll", changeBackground);
+    const body = document.querySelector("body");
+    if (isOpen) body.classList.add("-is-sidebar-open");
+    else body.classList.remove("-is-sidebar-open");
+    return () => window.removeEventListener("scroll", changeBackground);
   }, [isOpen]);
-
-  // ---- Load user + profile and subscribe to auth changes ----
-  useEffect(() => {
-    const supabase = createClientComponentClient();
-
-    const load = async () => {
-      try {
-        const { data: userRes } = await supabase.auth.getUser();
-        const user = userRes?.user;
-
-        if (!user) {
-          setDisplayName(null);
-          setRole(null);
-          setAvatarUrl(null);
-          setLoaded(true);
-          return;
-        }
-
-        const { data: profile, error } = await supabase
-          .from('profiles')
-          .select('display_name, role, avatar_url')
-          .eq('user_id', user.id)
-          .single();
-
-        if (error) {
-          // En fallback, on montre l'email si dispo
-          setDisplayName(user.email || 'Mon compte');
-          setRole(null);
-          setAvatarUrl(null);
-          setLoaded(true);
-          return;
-        }
-
-        setDisplayName(profile?.display_name || user.email || 'Mon compte');
-        setRole(profile?.role ?? null);
-        setAvatarUrl(profile?.avatar_url || null);
-        setLoaded(true);
-      } catch (e) {
-        console.error('[dashboard-header] auth error:', e);
-        setLoaded(true);
-      }
-    };
-
-    load();
-
-    const { data: sub } = supabase.auth.onAuthStateChange(() => {
-      setLoaded(false);
-      load();
-    });
-
-    return () => {
-      sub?.subscription?.unsubscribe?.();
-    };
-  }, []);
-
-  const isLoggedIn = !!displayName;
-  const dashboardHref = getDashboardPath(role);
 
   return (
     <>
-      <header className={`header -dashboard ${navbar ? 'is-sticky bg-white' : ''}`}>
+      <header className={`header -dashboard ${navbar ? "is-sticky bg-white" : ""}`}>
         <div className="header__container px-30 sm:px-20">
           <div className="-left-side">
             <Link href="/" className="header-logo">
@@ -116,11 +46,7 @@ const HeaderDashBoard = () => {
 
                 {/* Search */}
                 <div className="single-field relative d-flex items-center md:d-none ml-30">
-                  <input
-                    className="pl-50 border-light text-dark-1 h-50 rounded-8"
-                    type="text"
-                    placeholder="Search"
-                  />
+                  <input className="pl-50 border-light text-dark-1 h-50 rounded-8" type="text" placeholder="Search" />
                   <button className="absolute d-flex items-center h-full">
                     <i className="icon-search text-20 px-15 text-dark-1"></i>
                   </button>
@@ -135,14 +61,16 @@ const HeaderDashBoard = () => {
 
                   {/* Texte + Progress */}
                   <div className="omi-pill__body">
-                    <div className="omi-pill__title">{left} points cumulés</div>
+                    <div className="omi-pill__title">
+                      {left} points cumulés
+                    </div>
 
                     <div className="omi-pill__bar">
                       <div className="omi-pill__barFill" style={{ width: `${percent}%` }} />
                     </div>
 
                     <div className="omi-pill__sub">
-                      <i className="icon-alert text-14 mr-6" style={{ color: '#ef4444' }} />
+                      <i className="icon-alert text-14 mr-6" style={{ color: "#ef4444" }} />
                       <span>Utilisez vos points pour réserver</span>
                     </div>
                   </div>
@@ -176,21 +104,14 @@ const HeaderDashBoard = () => {
                   </div>
                 </div>
 
-                {/* Avatar (UI identique), mais dynamique + lien contextuel */}
                 <div className="pl-15">
-                  <Link
-                    href={loaded && isLoggedIn ? dashboardHref : '/login'}
-                    title={loaded && isLoggedIn ? displayName : 'Se connecter'}
-                    aria-label={loaded && isLoggedIn ? displayName : 'Se connecter'}
-                  >
-                    <Image
-                      width={50}
-                      height={50}
-                      src={avatarUrl || '/img/general/userpicture.webp'}
-                      alt="image"
-                      className="size-50 rounded-22 object-cover"
-                    />
-                  </Link>
+                  <Image
+                    width={50}
+                    height={50}
+                    src="/img/general/userpicture.webp"
+                    alt="image"
+                    className="size-50 rounded-22 object-cover"
+                  />
                 </div>
               </div>
             </div>
@@ -198,7 +119,7 @@ const HeaderDashBoard = () => {
         </div>
       </header>
 
-      {/* Styles XP pill (inchangés) */}
+      {/* Styles XP pill */}
       <style jsx>{`
         .omi-pill {
           display: flex;

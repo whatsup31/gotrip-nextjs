@@ -17,7 +17,7 @@ const Education = () => {
             <tr>
               <td className="col-2">
                 <div className="form-input ">
-                  <input type="text" required />
+                  <input type="text"  />
                   <label className="lh-1 text-16 text-light-1">
                     Sunny beach
                   </label>
@@ -25,13 +25,13 @@ const Education = () => {
               </td>
               <td className="col-6">
                 <div className="form-input ">
-                  <textarea required rows={5} defaultValue={""} />
+                  <textarea  rows={5} defaultValue={""} />
                   <label className="lh-1 text-16 text-light-1">Content</label>
                 </div>
               </td>
               <td className="col-2">
                 <div className="form-input ">
-                  <input type="text" required />
+                  <input type="text"  />
                   <label className="lh-1 text-16 text-light-1">
                     Sunny beach
                   </label>
@@ -39,7 +39,7 @@ const Education = () => {
               </td>
               <td className="col-2">
                 <div className="form-input ">
-                  <input type="text" required />
+                  <input type="text"  />
                   <label className="lh-1 text-16 text-light-1">
                     Select Country
                   </label>
@@ -54,7 +54,7 @@ const Education = () => {
             <tr>
               <td className="col-2">
                 <div className="form-input ">
-                  <input type="text" required />
+                  <input type="text"  />
                   <label className="lh-1 text-16 text-light-1">
                     Sunny beach
                   </label>
@@ -62,13 +62,13 @@ const Education = () => {
               </td>
               <td className="col-6">
                 <div className="form-input ">
-                  <textarea required rows={5} defaultValue={""} />
+                  <textarea  rows={5} defaultValue={""} />
                   <label className="lh-1 text-16 text-light-1">Content</label>
                 </div>
               </td>
               <td className="col-2">
                 <div className="form-input ">
-                  <input type="text" required />
+                  <input type="text"  />
                   <label className="lh-1 text-16 text-light-1">
                     Sunny beach
                   </label>
@@ -76,7 +76,7 @@ const Education = () => {
               </td>
               <td className="col-2">
                 <div className="form-input ">
-                  <input type="text" required />
+                  <input type="text"  />
                   <label className="lh-1 text-16 text-light-1">
                     Select Country
                   </label>

@@ -4,11 +4,12 @@ import BannerUploader from "./content/BannerUploader";
 import FeaturedUploader from "./content/FeaturedUploader";
 import GalleryUploader from "./content/GalleryUploader";
 
+
 const ContentTabContent = () => {
   return (
     <>
       <div className="col-xl-10">
-        <div className="text-18 fw-500 mb-10">Informations</div>
+        <div className="text-18 fw-500 mb-10">Nom du logement</div>
         <HotelContent />
         {/* End HotelContent */}
 
@@ -31,15 +32,13 @@ const ContentTabContent = () => {
         {/* End hotelpolicy */}
 
         {/* End FeaturedUploader */}
-
-        <div className="d-inline-block pt-30">
-          <button className="button h-50 px-24 -dark-1 bg-blue-1 text-white">
-          Enregistrer les modifications<div className="icon-arrow-top-right ml-15" />
-          </button>
-        </div>
       </div>
     </>
+    
   );
 };
 
+
 export default ContentTabContent;
+
+
