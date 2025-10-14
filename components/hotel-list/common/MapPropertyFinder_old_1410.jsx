@@ -8,8 +8,8 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
 export default function MapPropertyFinder() {
   const defaultProps = {
     center: {
-      lat: 43.6045,
-      lng: 1.4440,
+      lat: 10.99835602,
+      lng: 77.01502627,
     },
     zoom: 11,
   };

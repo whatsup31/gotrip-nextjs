@@ -14,7 +14,7 @@ import "../styles/index.scss";
 import "rc-slider/assets/index.css";
 import { Provider } from "react-redux";
 import { store } from "../store/store";
-import Script from "next/script";
+import Script from "next/script"; 
 
 export default function RootLayout({ children }) {
   useEffect(() => {
@@ -22,27 +22,27 @@ export default function RootLayout({ children }) {
       require("bootstrap/dist/js/bootstrap");
     }
   }, []);
-
   useEffect(() => {
-    Aos.init({ duration: 1200, once: true });
+    Aos.init({
+      duration: 1200,
+      once: true,
+    });
   }, []);
-
   return (
-    <html lang="fr" suppressHydrationWarning>
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
+          crossOrigin="true"
         />
         <link
           href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="./favicon.ico" />
       </head>
-
       <body>
         <main>
           <Provider store={store}>
@@ -51,17 +51,10 @@ export default function RootLayout({ children }) {
           </Provider>
         </main>
 
+        {/* 👇 Ajout Google Maps API */}
         <Script
-          id="google-maps"
-          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places&v=weekly`}
+          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`}
           strategy="afterInteractive"
-          onLoad={() => {
-            window.__gmapsLoaded = true;
-            console.info("Google Maps JS chargé.");
-          }}
-          onError={(e) => {
-            console.error("Échec du chargement Google Maps JS", e);
-          }}
         />
       </body>
     </html>
