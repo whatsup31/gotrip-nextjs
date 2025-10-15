@@ -369,14 +369,23 @@ export default function BookingForm({
 
         {/* Bouton principal aligné Booking.com-like */}
         <div className="mt-30">
-          <button
-            className="button h-56 w-100 text-white fw-600"
-            style={{ backgroundColor: "#0d6efd" }}
-            disabled={pending || nights === 0}
-          >
-            {pending ? "Création..." : "Confirmer la réservation"}
-          </button>
-        </div>
+  <button
+    type="submit"
+    disabled={pending || nights === 0}
+    className="w-100 py-15 rounded-4 fw-500 d-flex justify-center align-center gap-10"
+    style={{
+      backgroundColor: "#0071c2",
+      color: "white",
+      border: "none",
+      fontSize: "16px",
+      transition: "background-color 0.2s ease",
+    }}
+    onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#005fa3")}
+    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#0071c2")}
+  >
+    {pending ? "Création..." : "Confirmer la réservation"}
+  </button>
+</div>
       </div>
     </form>
   );
