@@ -6,8 +6,8 @@ import LoginWithSocial from '@/components/common/LoginWithSocial';
 import LoginClient from './LoginClient';
 
 export const metadata = {
-  title: 'Login || GoTrip - Travel & Tour React NextJS Template',
-  description: 'GoTrip - Travel & Tour React NextJS Template',
+  title: 'Login || ômi - Travel & Tour React NextJS Template',
+  description: 'ômi - Travel & Tour React NextJS Template',
 };
 
 export default function Page() {

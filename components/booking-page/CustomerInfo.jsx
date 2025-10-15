@@ -97,7 +97,7 @@ const CustomerInfo = () => {
             <div className="row y-gap-20 items-center justify-between">
               <div className="col-auto">
                 <div className="text-14 text-light-1">
-                  By proceeding with this booking, I agree to GoTrip Terms of
+                  By proceeding with this booking, I agree to ômi Terms of
                   Use and Privacy Policy.
                 </div>
               </div>

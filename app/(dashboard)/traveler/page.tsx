@@ -5,7 +5,7 @@ export default function Page() {
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-20">
         <div className="rounded-3 border p-20">Next trip (placeholder)</div>
-        <div className="rounded-3 border p-20">Upcoming trips</div>
+        <div className="rounded-3 border p-20">Upcôming trips</div>
         <div className="rounded-3 border p-20">Favorites count</div>
         <div className="rounded-3 border p-20">Messages</div>
       </div>

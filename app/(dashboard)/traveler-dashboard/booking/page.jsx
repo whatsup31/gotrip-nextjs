@@ -2,8 +2,8 @@ import React from "react";
 import DashboardPage from "../../../../components/dashboardv/voyageur-dashboard/booking";
 
 export const metadata = {
-  title: "Vendor History || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Réservations | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 export default function page() {

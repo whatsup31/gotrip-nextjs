@@ -158,7 +158,7 @@ const PopularCars = () => {
                   <div className="mt-5">
                     <div className="text-light-1">
                       <span className="fw-500 text-dark-1">
-                        US${item?.price}
+                        €{item?.price}
                       </span>{" "}
                       total
                     </div>

@@ -4,7 +4,7 @@ const ContactInfo = () => {
       id: 1,
       title: "Need live support?",
       action: "mailto:xyz@abc.com",
-      text: "hi@gotrip.com",
+      text: "hi@ômi.com",
     },
   ];
   return (

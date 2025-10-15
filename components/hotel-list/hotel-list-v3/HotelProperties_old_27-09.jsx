@@ -110,7 +110,7 @@ const HotelProperties = () => {
                 <div className="text-14 text-light-1 mt-70 lg:mt-50 md:mt-24">
                   8 nights
                   <span className="text-22 lh-12 fw-600 text-dark-1 ml-5">
-                    US${item?.price}
+                    €{item?.price}
                   </span>
                 </div>
 

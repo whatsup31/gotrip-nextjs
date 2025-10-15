@@ -164,7 +164,7 @@ export default function GalleryTwo({ hotel }) {
                   <div className="text-14 text-md-end">
                     From{" "}
                     <span className="text-22 text-dark-1 fw-500">
-                      US${hotel?.price}
+                      €{hotel?.price}
                     </span>
                   </div>
                   <a

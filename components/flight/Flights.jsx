@@ -62,7 +62,7 @@ const Flights = () => {
               <div className="col-auto">
                 <div className="d-flex items-center">
                   <div className="text-right mr-24">
-                    <div className="lh-15 fw-500">US${item?.price}</div>
+                    <div className="lh-15 fw-500">€{item?.price}</div>
                     <div className="text-15 lh-15 text-light-1">
                       {item?.deals} deals
                     </div>

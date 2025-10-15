@@ -10,7 +10,7 @@ export default function LoginClient() {
   const qs = useSearchParams();
   const redirectTo = qs.get('redirect');
 
-  const [email, setEmail] = useState('hote@omi.com');
+  const [email, setEmail] = useState('hote@ômi.com');
   const [password, setPassword] = useState('');
   const [err, setErr] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);

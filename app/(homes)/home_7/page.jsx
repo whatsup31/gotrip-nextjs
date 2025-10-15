@@ -11,8 +11,8 @@ import Rentals from "@/components/rentals/Rentals";
 import HotelTypes from "@/components/home/home-7/HotelTypes";
 
 export const metadata = {
-  title: "Home-7 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Home-7 || ômi - Travel & Tour React NextJS Template",
+  description: "ômi - Travel & Tour React NextJS Template",
 };
 
 const home_7 = () => {

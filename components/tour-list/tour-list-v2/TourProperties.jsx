@@ -114,7 +114,7 @@ const TourProperties = () => {
                     From
                     <span className="text-16 fw-500 text-dark-1">
                       {" "}
-                      US${item.price}
+                      €{item.price}
                     </span>
                   </div>
                 </div>

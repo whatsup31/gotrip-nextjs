@@ -140,7 +140,7 @@ const CruiseProperties = () => {
                   <div className="text-14 text-light-1">
                     From{" "}
                     <span className="text-16 fw-500 text-dark-1">
-                      US${item?.price}
+                      €{item?.price}
                     </span>
                   </div>
                 </div>

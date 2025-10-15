@@ -5,8 +5,8 @@ import DefaultFooter from "@/components/footer/default";
 import StepperBooking from "@/components/booking-page/stepper-booking";
 
 export const metadata = {
-  title: "Hotel Booking Page || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Hotel Booking Page || ômi - Travel & Tour React NextJS Template",
+  description: "ômi - Travel & Tour React NextJS Template",
 };
 
 const index = () => {

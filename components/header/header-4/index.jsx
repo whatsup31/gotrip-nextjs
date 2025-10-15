@@ -43,7 +43,7 @@ const Header1 = () => {
 
             <div className="col-auto">
               <Link href="/" className="header-logo">
-                <img src="/img/general/logo-omi-white.png" alt="logo icon" />
+                <img src="/img/general/logo-ômi-white.png" alt="logo icon" />
                 <img src="/img/general/logo-omi.png" alt="logo icon" />
               </Link>
               {/* End logo */}

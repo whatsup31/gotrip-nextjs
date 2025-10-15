@@ -3,7 +3,7 @@ const AppBlock = () => {
     <>
       <h2 className="text-30 lh-15">Download the App</h2>
       <p className="text-dark-1 pr-40 lg:pr-0 mt-15 sm:mt-5">
-        Book in advance or last-minute with GoTrip. Receive instant
+        Book in advance or last-minute with ômi. Receive instant
         confirmation. Access your booking info offline.
       </p>
 

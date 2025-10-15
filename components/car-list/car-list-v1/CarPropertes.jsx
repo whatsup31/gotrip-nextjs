@@ -157,7 +157,7 @@ const CarPropertes = () => {
                 {/* End .row */}
 
                 <div className="text-22 lh-12 fw-600 mt-70 md:mt-20">
-                  US${item?.price}
+                  €{item?.price}
                 </div>
                 <div className="text-14 text-light-1 mt-5">Total</div>
                 <Link

@@ -1,7 +1,7 @@
 import Sidebar from "../common/Sidebar";
 import Header from "../../../header/dashboard-header";
 import Footer from "../common/Footer";
-import OmiChat from "@/components/omichat"
+import ômiChat from "@/components/ômichat"
 
 const Index = () => {
   return (
@@ -36,9 +36,9 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Bloc principal : on remplace l'ancien textarea+btn par OmiChat */}
+            {/* Bloc principal : on remplace l'ancien textarea+btn par ômiChat */}
             <div className="shadow-3">
-              <OmiChat />
+              <ômiChat />
             </div>
 
             <Footer />

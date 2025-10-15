@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function InvoiceComponent () {
     const contactData = [
         { url: "#", text: "www.gotirp.com" },
-        { url: "#", text: "invoice@gotrip.com" },
+        { url: "#", text: "invoice@ômi.com" },
         { url: "#", text: "(123) 123-456" },
       ];
     

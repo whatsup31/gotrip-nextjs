@@ -54,8 +54,8 @@ const Index = () => {
           className="button h-50 px-24 -dark-1 text-white"
           style={{ backgroundColor: '#0d6efd' }}
         >
-          Publier le logement
-          <div className="icon-arrow-top-right ml-15" />
+          Publier le produit
+          <div className="icon-check ml-15" />
         </button>
       </div>
     </div>

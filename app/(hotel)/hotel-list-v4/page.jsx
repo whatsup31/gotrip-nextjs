@@ -8,8 +8,8 @@ import Sidebar from "@/components/hotel-list/hotel-list-v4/Sidebar";
 import HotelProperties from "@/components/hotel-list/hotel-list-v4/HotelProperties";
 
 export const metadata = {
-  title: "Hotel List v5 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Hotel List v5 || ômi - Travel & Tour React NextJS Template",
+  description: "ômi - Travel & Tour React NextJS Template",
 };
 
 const index = () => {

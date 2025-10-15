@@ -8,7 +8,7 @@ const SidebarRight = ({ activity }) => {
           <div className="text-14 text-light-1">
             From{" "}
             <span className="text-20 fw-500 text-dark-1 ml-5">
-              US${activity?.price}
+              €{activity?.price}
             </span>
           </div>
           {/* End div */}

@@ -86,7 +86,7 @@ const FlightProperties = () => {
                   <div className="pl-30 border-left-light h-full md:d-none" />
                   <div>
                     <div className="text-right md:text-left mb-10">
-                      <div className="text-18 lh-16 fw-500">US$934</div>
+                      <div className="text-18 lh-16 fw-500">€934</div>
                       <div className="text-15 lh-16 text-light-1">16 deals</div>
                     </div>
                     <div className="accordion__button">

@@ -6,7 +6,7 @@ const SidebarRight = ({ hotel }) => {
       <div className="px-30 py-30 border-light rounded-4 shadow-4">
         <div className="d-flex items-center justify-between">
           <div>
-            <span className="text-20 fw-500">US${hotel?.price}</span>
+            <span className="text-20 fw-500">€{hotel?.price}</span>
             <span className="text-14 text-light-1 ml-5">nights</span>
           </div>
           <div className="d-flex items-center">

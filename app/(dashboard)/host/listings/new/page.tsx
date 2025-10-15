@@ -3,7 +3,7 @@ import { supabaseServer } from '@/utils/supabase-server'
 import { redirect } from 'next/navigation'
 
 export const metadata = {
-  title: 'Create Listing || GoTrip',
+  title: 'Create Listing || ômi',
   description: 'Host create listing page',
 }
 

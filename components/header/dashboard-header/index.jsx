@@ -53,30 +53,30 @@ const HeaderDashBoard = () => {
                 </div>
 
                 {/* === XP pill progress === */}
-                <div className="omi-pill md:d-none ml-120">
+                <div className="ômi-pill md:d-none ml-120">
                   {/* Avatar */}
-                  <div className="omi-pill__avatar">
+                  <div className="ômi-pill__avatar">
                     <Image src="/img/general/euro.png" alt="Treasure" width={40} height={40} />
                   </div>
 
                   {/* Texte + Progress */}
-                  <div className="omi-pill__body">
-                    <div className="omi-pill__title">
+                  <div className="ômi-pill__body">
+                    <div className="ômi-pill__title">
                       {left} points cumulés
                     </div>
 
-                    <div className="omi-pill__bar">
-                      <div className="omi-pill__barFill" style={{ width: `${percent}%` }} />
+                    <div className="ômi-pill__bar">
+                      <div className="ômi-pill__barFill" style={{ width: `${percent}%` }} />
                     </div>
 
-                    <div className="omi-pill__sub">
+                    <div className="ômi-pill__sub">
                       <i className="icon-alert text-14 mr-6" style={{ color: "#ef4444" }} />
                       <span>Utilisez vos points pour réserver</span>
                     </div>
                   </div>
 
                   {/* Chevron */}
-                  <button className="omi-pill__cta" aria-label="Open">
+                  <button className="ômi-pill__cta" aria-label="Open">
                     <i className="icon-chevron-right text-18" />
                   </button>
                 </div>
@@ -121,7 +121,7 @@ const HeaderDashBoard = () => {
 
       {/* Styles XP pill */}
       <style jsx>{`
-        .omi-pill {
+        .ômi-pill {
           display: flex;
           align-items: center;
           gap: 12px;
@@ -132,39 +132,39 @@ const HeaderDashBoard = () => {
           min-width: 320px;
           max-width: 400px;
         }
-        .omi-pill__avatar {
+        .ômi-pill__avatar {
           flex: 0 0 auto;
           display: grid;
           place-items: center;
         }
-        .omi-pill__body {
+        .ômi-pill__body {
           flex: 1 1 auto;
         }
-        .omi-pill__title {
+        .ômi-pill__title {
           font-size: 12px;
           font-weight: 600;
           margin-bottom: 2px;
           color: #111827;
         }
-        .omi-pill__bar {
+        .ômi-pill__bar {
           height: 6px;
           border-radius: 999px;
           background: #e5e7eb;
           overflow: hidden;
           margin-bottom: 2px;
         }
-        .omi-pill__barFill {
+        .ômi-pill__barFill {
           height: 100%;
           background: #ffc70f;
           transition: width 0.3s ease;
         }
-        .omi-pill__sub {
+        .ômi-pill__sub {
           font-size: 11px;
           color: #6b7280;
           align-items: left;
           gap: 4px;
         }
-        .omi-pill__cta {
+        .ômi-pill__cta {
           flex: 0 0 auto;
           width: 22px;
           height: 22px;

@@ -8,7 +8,7 @@ const SidebarRight = ({ rental }) => {
           <div className="col-auto">
             <div className="text-14 text-light-1">
               <span className="text-20 fw-500 text-dark-1 mr-5">
-                US${rental?.price}
+                €{rental?.price}
               </span>{" "}
               nights
             </div>

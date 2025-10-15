@@ -7,8 +7,8 @@ import Pagination from "@/components/cruise-list/common/Pagination";
 import Sidebar from "@/components/cruise-list/cruise-list-v2/Sidebar";
 
 export const metadata = {
-  title: "Cruise List v2 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Cruise List v2 || ômi - Travel & Tour React NextJS Template",
+  description: "ômi - Travel & Tour React NextJS Template",
 };
 
 const index = () => {

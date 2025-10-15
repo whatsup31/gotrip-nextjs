@@ -7,7 +7,7 @@ export default function Page() {
       </div>
 
       <div className="rounded-3 border p-20">
-        <p>Incoming requests list (placeholder)</p>
+        <p>Incôming requests list (placeholder)</p>
         {/* Ex: <RequestsTable /> */}
       </div>
     </div>

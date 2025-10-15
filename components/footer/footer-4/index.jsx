@@ -13,7 +13,7 @@ const index = () => {
           <div className="row y-gap-40 justify-between xl:justify-start">
             <div className="col-xl-4 col-lg-6">
             <img 
-  src="/img/general/logo-omi-white.png" 
+  src="/img/general/logo-ômi-white.png" 
   alt="image" 
   style={{ width: "140px", height: "auto" }} 
 />

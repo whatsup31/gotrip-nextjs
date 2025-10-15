@@ -3,7 +3,7 @@ import DashboardPage from "../../../../components/dashboardc/conciergerie-dashbo
 
 export const metadata = {
   title: "Ajouter un logement | ômi",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  description: "ômi - Travel & Tour React NextJS Template",
 };
 
 export default function page() {

@@ -3,7 +3,7 @@ import DashboardPage from "../../../../components/dashboardp/partenaire-dashboar
 
 export const metadata = {
   title: "Ajouter un produit | ômie",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  description: "ômi - Travel & Tour React NextJS Template",
 };
 
 export default function page() {

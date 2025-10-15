@@ -11,7 +11,7 @@ type SearchParams = { listing?: string }
 export default async function NewBooking({
   searchParams,
 }: {
-  searchParams: Promise<SearchParams>
+  searchParams: Prômise<SearchParams>
 }) {
   const sp = await searchParams
   const listingId = Number(sp?.listing || 0)

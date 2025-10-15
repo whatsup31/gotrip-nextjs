@@ -14,8 +14,8 @@ import AddBanner from "@/components/home/home-3/AddBanner";
 import WhyChoose from "@/components/home/home-3/WhyChoose";
 
 export const metadata = {
-  title: "Home-3 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Home-3 || ômi - Travel & Tour React NextJS Template",
+  description: "ômi - Travel & Tour React NextJS Template",
 };
 
 const home_3 = () => {

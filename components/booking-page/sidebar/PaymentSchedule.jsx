@@ -8,7 +8,7 @@ const PaymentSchedule = () => {
         </div>
         {/* End col */}
         <div className="col-auto">
-          <div className="text-15">US$4,047</div>
+          <div className="text-15">€4,047</div>
         </div>
         {/* End col */}
       </div>

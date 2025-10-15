@@ -102,7 +102,7 @@ const CruiseProperties = () => {
                 </div>
                 <div className="text-14 text-light-1 mt-40">From</div>
                 <div className="text-22 lh-12 fw-600 mt-5">
-                  US${item?.price}
+                  €{item?.price}
                 </div>
                 <div className="text-14 text-light-1 mt-5">per adult</div>
                 <Link

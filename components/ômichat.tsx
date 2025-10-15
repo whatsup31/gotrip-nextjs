@@ -1,4 +1,4 @@
-// components/OmiChat.GoTrip.tsx
+// components/ômiChat.ômi.tsx
 "use client";
 import { useMemo, useState } from "react";
 
@@ -45,7 +45,7 @@ const EMOJI: Record<string, string> = { Eco: "🟢", "Équilibre": "⚖️", Con
 const nf = (n: number) => new Intl.NumberFormat("fr-FR").format(n);
 const round = (n?: number) => (typeof n === "number" ? Math.round(n) : undefined);
 
-/* ===== Carte Plan (classes GoTrip/Bootstrap) ===== */
+/* ===== Carte Plan (classes ômi/Bootstrap) ===== */
 function PlanCard({ p, currency }: { p: Plan; currency: string }) {
   return (
     <div className="card border rounded-3 shadow-sm h-100">
@@ -245,7 +245,7 @@ function SkeletonCard() {
 }
 
 /* ===== Composant principal (chat) ===== */
-export default function OmiChatGoTrip() {
+export default function ômiChatômi() {
   const [input, setInput] = useState("");
   const [thread, setThread] = useState<{ role: "user" | "assistant"; content: string | Payload }[]>([]);
   const [loading, setLoading] = useState(false);
@@ -258,7 +258,7 @@ export default function OmiChatGoTrip() {
     setInput("");
     setLoading(true);
     try {
-      const r = await fetch("/api/omi-agent", {
+      const r = await fetch("/api/ômi-agent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ intent: text })

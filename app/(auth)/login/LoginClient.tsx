@@ -12,7 +12,7 @@ export default function LoginClient() {
   const redirectTo = qs.get('redirect');
 
   // Conserve la valeur par défaut utilisée dans l’implémentation actuelle
-  const [email, setEmail] = useState('hote@omi.com');
+  const [email, setEmail] = useState('hote@ômi.com');
   const [password, setPassword] = useState('');
   const [err, setErr] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);

@@ -7,8 +7,8 @@ import DropdownSelelctBar from "@/components/cruise-list/common/DropdownSelelctB
 import MapPropertyFinder from "@/components/cruise-list/common/MapPropertyFinder";
 
 export const metadata = {
-  title: "Cruise List v3 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Cruise List v3 || ômi - Travel & Tour React NextJS Template",
+  description: "ômi - Travel & Tour React NextJS Template",
 };
 
 const index = () => {

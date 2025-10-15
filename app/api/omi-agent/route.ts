@@ -1,4 +1,4 @@
-// app/api/omi-agent/route.ts
+// app/api/ômi-agent/route.ts
 import { NextRequest, NextResponse } from "next/server";
 
 export const runtime = "edge"; // rapide pour le PoC
@@ -182,7 +182,7 @@ Pas de liens réels : mets "#". Devise EUR si non précisée.`;
         text: {
           format: {
             type: "json_schema",
-            name: "OmiPlans",
+            name: "ômiPlans",
             schema: SCHEMA,
             strict: true
           }

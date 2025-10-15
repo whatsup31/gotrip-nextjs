@@ -7,8 +7,8 @@ import MapPropertyFinder from "@/components/activity-list/common/MapPropertyFind
 import Pagination from "@/components/activity-list/common/Pagination";
 
 export const metadata = {
-  title: "Activity List v3 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Activity List v3 || ômi - Travel & Tour React NextJS Template",
+  description: "ômi - Travel & Tour React NextJS Template",
 };
 
 const index = () => {

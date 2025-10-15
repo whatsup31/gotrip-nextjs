@@ -7,8 +7,8 @@ import MapPropertyFinder from "@/components/rental-list/common/MapPropertyFinder
 import RentalProperties from "@/components/rental-list/rental-list-v3/RentalProperties";
 
 export const metadata = {
-  title: "Rental List v3 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Rental List v3 || ômi - Travel & Tour React NextJS Template",
+  description: "ômi - Travel & Tour React NextJS Template",
 };
 
 const index = () => {

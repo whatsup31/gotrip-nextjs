@@ -3,8 +3,8 @@ const ContactInfo = () => {
     {
       id: 1,
       title: "Live support",
-      action: "mailto:hello@omi.com",
-      text: "hello@omi.com",
+      action: "mailto:hello@ômi.com",
+      text: "hello@ômi.com",
     },
   ];
   return (
