@@ -3,7 +3,6 @@
 import CallToActions from "@/components/common/CallToActions";
 import Header11 from "@/components/header/header-11";
 import DefaultFooter from "@/components/footer/default";
-import StepperBooking from "@/components/booking-page/stepper-booking";
 import { supabaseRSC } from "@/utils/supabase-rsc";
 import BookingForm from "@/components/booking-page/BookingForm";
 
@@ -48,54 +47,36 @@ export default async function Page({ searchParams }) {
 
   return (
     <>
-      <div className="header-margin"></div>
+      <div className="header-margin" />
       <Header11 />
 
-      <section className="pt-40 layout-pb-md">
+      {/* SECTION CENTRÉE + LARGEUR CONFORTABLE */}
+      <section className="pt-40 pb-60">
         <div className="container">
-          <div className="row y-gap-30">
-            <div className="col-lg-7">
-              {/* Visuel existant de la template */}
-				  {/*<StepperBooking />*/}
+          <div className="row justify-center">
+            <div className="col-xl-8 col-lg-9 col-md-10">
+              {listing ? (
+                <BookingForm
+                  listingId={listing.id}
+                  pricePerNight={Number(listing.price_per_night || 0)}
+                  initialCheckIn={checkin}
+                  initialCheckOut={checkout}
+                  initialGuests={guests}
+                  initialRooms={rooms}
+                  initialAdults={adults}
+                  initialChildren={children}
+                  listing={{
+                    title: listing.title,
+                    location: listing.location,
+                    rating_avg: listing.rating_avg,
+                    reviews_count: listing.reviews_count,
+                    photos: listing.photos,
+                  }}
+                />
+              ) : (
+                <div className="text-15">Logement introuvable.</div>
+              )}
             </div>
-
-            <aside className="col-lg-5">
-              {/* Formulaire réellement connecté */}
-              <div className="border-light rounded-4 p-20 bg-light-2">
-                {listing ? (
-                  <>
-                    <h3 className="text-20 fw-700">{listing.title}</h3>
-                    <div className="text-14 text-light-1">{listing.location}</div>
-                    <div className="text-18 fw-700 mt-10">
-                      €{Number(listing.price_per_night || 0).toLocaleString("fr-FR")}
-                      <span className="text-14 fw-400"> / nuit</span>
-                    </div>
-
-                    <div className="mt-20">
-                      <BookingForm
-                        listingId={listing.id}
-                        pricePerNight={Number(listing.price_per_night || 0)}
-                        initialCheckIn={checkin}
-                        initialCheckOut={checkout}
-                        initialGuests={guests}
-                        initialRooms={rooms}
-                        initialAdults={adults}
-                        initialChildren={children}
-						listing={{
-						title: listing.title,
-						location: listing.location,
-						rating_avg: listing.rating_avg,        
-						reviews_count: listing.reviews_count,  
-						photos: listing.photos,                
-					  }}
-                      />
-                    </div>
-                  </>
-                ) : (
-                  <div className="text-15">Logement introuvable.</div>
-                )}
-              </div>
-            </aside>
           </div>
         </div>
       </section>
