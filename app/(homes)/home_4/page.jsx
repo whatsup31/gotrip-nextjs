@@ -17,8 +17,8 @@ import Travellers from "@/components/home/home-4/Travellers";
 import FilterHotels4 from "@/components/hotels/FilterHotels4";
 
 export const metadata = {
-  title: "Home-4 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Home-4 || ômi - Travel & Tour React NextJS Template",
+  description: "ômi - Travel & Tour React NextJS Template",
 };
 
 const home_4 = () => {

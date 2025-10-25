@@ -14,8 +14,8 @@ import Blog from "@/components/home/home-8/Blog";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Home-8 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Home-8 || ômi - Travel & Tour React NextJS Template",
+  description: "ômi - Travel & Tour React NextJS Template",
 };
 
 const home_8 = () => {
@@ -144,7 +144,7 @@ const home_8 = () => {
           <div className="row y-gap-30 justify-between items-center">
             <div className="col-xl-5 col-lg-6">
               <h2 className="text-30 fw-600">
-                GoTrip is a World Leading Car Hire Booking Platform
+                ômi is a World Leading Car Hire Booking Platform
               </h2>
               <p className="mt-40 lg:mt-20">
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco

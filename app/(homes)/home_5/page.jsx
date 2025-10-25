@@ -21,8 +21,8 @@ import TopServices from "@/components/services/TopServicesV2";
 
 
 export const metadata = {
-  title: "Home-5 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Home-5 || ômi - Travel & Tour React NextJS Template",
+  description: "ômi - Travel & Tour React NextJS Template",
 };
 
 const home_5 = () => {

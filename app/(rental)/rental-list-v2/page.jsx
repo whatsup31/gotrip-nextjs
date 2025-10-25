@@ -7,8 +7,8 @@ import Pagination from "@/components/rental-list/common/Pagination";
 import Sidebar from "@/components/rental-list/rental-list-v2/Sidebar";
 
 export const metadata = {
-  title: "Rental List v2 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Rental List v2 || ômi - Travel & Tour React NextJS Template",
+  description: "ômi - Travel & Tour React NextJS Template",
 };
 
 const index = () => {

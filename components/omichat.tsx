@@ -1,4 +1,4 @@
-// components/OmiChat.GoTrip.tsx
+// components/OmiChat.ômi.tsx
 "use client";
 import { useMemo, useState } from "react";
 
@@ -45,7 +45,7 @@ const EMOJI: Record<string, string> = { Eco: "🟢", "Équilibre": "⚖️", Con
 const nf = (n: number) => new Intl.NumberFormat("fr-FR").format(n);
 const round = (n?: number) => (typeof n === "number" ? Math.round(n) : undefined);
 
-/* ===== Carte Plan (classes GoTrip/Bootstrap) ===== */
+/* ===== Carte Plan (classes ômi/Bootstrap) ===== */
 function PlanCard({ p, currency }: { p: Plan; currency: string }) {
   return (
     <div className="card border rounded-3 shadow-sm h-100">

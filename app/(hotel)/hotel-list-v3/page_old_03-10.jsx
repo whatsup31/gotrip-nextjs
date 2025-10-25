@@ -8,8 +8,8 @@ import MainFilterSearchBox from "@/components/hotel-list/hotel-list-v3/MainFilte
 import TopHeaderFilter from "@/components/hotel-list/hotel-list-v3/TopHeaderFilter";
 
 export const metadata = {
-  title: "Hotel List v3 || GoTrip - Travel & Tour React NextJS Template",
-  description: "GoTrip - Travel & Tour React NextJS Template",
+  title: "Hotel List v3 || ômi - Travel & Tour React NextJS Template",
+  description: "ômi - Travel & Tour React NextJS Template",
 };
 
 export default async function Page({ searchParams }) {

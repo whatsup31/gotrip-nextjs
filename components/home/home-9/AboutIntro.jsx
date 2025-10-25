@@ -21,7 +21,7 @@ const AboutIntro = () => {
         <div className="row">
           <div className="offset-xl-6 col-xl-5 col-lg-6">
             <h2 className="text-30 fw-600">
-              GoTrip is a World Leading Cruise Booking Platform
+              ômi is a World Leading Cruise Booking Platform
             </h2>
             <p className="text-dark-1 mt-40 lg:mt-20 sm:mt-15">
               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
