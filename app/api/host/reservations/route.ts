@@ -1,35 +1,44 @@
 // app/api/host/reservations/route.ts
-
 import { NextResponse } from "next/server";
 import { supabaseServer } from "@/utils/supabase-server";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: Request) {
-  const supabase = supabaseServer();
+  const supabase = await supabaseServer();
+
   const { searchParams } = new URL(req.url);
 
-  // Auth courante
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ ok:false, error:"Not authenticated" }, { status: 401 });
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  // Filtres simples (facultatif)
-  const q = (searchParams.get("q") || "").trim().toLowerCase();
-
-  const { data, error } = await supabase
-    .from("host_reservations")
-    .select("*")
-    .eq("host_id", user.id)
-    .order("reservation_created_at", { ascending: false });
-
-  if (error) {
-    return NextResponse.json({ ok:false, error: error.message }, { status: 400 });
+  if (!user) {
+    return NextResponse.json(
+      { ok: false, error: "Not authenticated" },
+      { status: 401 }
+    );
   }
 
-  // filtre 'q' (recherche sur titre / location)
-  const items = (data || []).filter((r) => {
-    if (!q) return true;
-    const hay = `${r.listing_title ?? ""} ${r.listing_location ?? ""}`.toLowerCase();
-    return hay.includes(q);
-  });
+  const status = searchParams.get("status");
 
-  return NextResponse.json({ ok:true, data:{ items } }, { status: 200 });
+  let query = supabase
+    .from("reservations")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (status) {
+    query = query.eq("status", status);
+  }
+
+  const { data, error } = await query;
+
+  if (error) {
+    return NextResponse.json(
+      { ok: false, error: error.message },
+      { status: 400 }
+    );
+  }
+
+  return NextResponse.json({ ok: true, data: data ?? [] });
 }
