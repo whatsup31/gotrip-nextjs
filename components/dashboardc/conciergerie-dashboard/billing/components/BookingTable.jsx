@@ -67,8 +67,8 @@ const BookingTable = () => {
                         Pending
                       </span>
                     </td>
-                    <td>$0</td>
-                    <td>$35</td>
+                    <td>€0</td>
+                    <td>€35</td>
                 
                     <td>
                       <ActionsButton />
@@ -84,8 +84,8 @@ const BookingTable = () => {
                         Pending
                       </span>
                     </td>
-                    <td>$0</td>
-                    <td>$35</td>
+                    <td>€0</td>
+                    <td>€35</td>
                 
                     <td>
                       <ActionsButton />
@@ -101,8 +101,8 @@ const BookingTable = () => {
                         Pending
                       </span>
                     </td>
-                    <td>$0</td>
-                    <td>$35</td>
+                    <td>€0</td>
+                    <td>€35</td>
                 
                     <td>
                       <ActionsButton />
@@ -118,8 +118,8 @@ const BookingTable = () => {
                         Pending
                       </span>
                     </td>
-                    <td>$0</td>
-                    <td>$35</td>
+                    <td>€0</td>
+                    <td>€35</td>
                 
                     <td>
                       <ActionsButton />
@@ -135,8 +135,8 @@ const BookingTable = () => {
                         Pending
                       </span>
                     </td>
-                    <td>$0</td>
-                    <td>$35</td>
+                    <td>€0</td>
+                    <td>€35</td>
                 
                     <td>
                       <ActionsButton />
