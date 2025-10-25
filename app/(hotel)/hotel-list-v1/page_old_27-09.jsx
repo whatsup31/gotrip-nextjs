@@ -8,8 +8,8 @@ import Pagination from "@/components/hotel-list/common/Pagination";
 import Sidebar from "@/components/hotel-list/hotel-list-v1/Sidebar";
 
 export const metadata = {
-  title: "Hotel List v1 || ômi - Travel & Tour React NextJS Template",
-  description: "ômi - Travel & Tour React NextJS Template",
+  title: "Hotel List v1 | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 const index = () => {

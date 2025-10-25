@@ -2,8 +2,8 @@ import React from "react";
 import DashboardPage from "../../../../components/dashboardp/partenaire-dashboard/billing";
 
 export const metadata = {
-  title: "Vendor History || ômi - Travel & Tour React NextJS Template",
-  description: "ômi - Travel & Tour React NextJS Template",
+  title: "Commandes | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 export default function page() {

@@ -8,8 +8,8 @@ import ContactForm from "@/components/common/ContactForm";
 import LocationTopBar from "@/components/common/LocationTopBar";
 
 export const metadata = {
-  title: "Contact || ômi - Travel & Tour React NextJS Template",
-  description: "ômi - Travel & Tour React NextJS Template",
+  title: "Contact | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 const Contact = () => {

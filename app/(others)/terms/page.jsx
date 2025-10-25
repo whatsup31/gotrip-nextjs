@@ -4,8 +4,8 @@ import DefaultFooter from "@/components/footer/default";
 import TermsConent from "@/components/common/TermsConent";
 
 export const metadata = {
-  title: "Terms & Conditions || ômi - Travel & Tour React NextJS Template",
-  description: "ômi - Travel & Tour React NextJS Template",
+  title: "Terms & Conditions | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 const Terms = () => {

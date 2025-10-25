@@ -149,7 +149,7 @@ const HotelProperties = () => {
                     US${item?.price}
                   </div>
                   <div className="text-14 text-light-1 mt-5">
-                    +US$828 taxes and charges
+                    +€828 taxes and charges
                   </div>
 
                   <Link

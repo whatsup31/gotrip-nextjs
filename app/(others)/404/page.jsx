@@ -4,8 +4,8 @@ import DefaultFooter from "@/components/footer/default";
 import NotFound from "@/components/common/NotFound";
 
 export const metadata = {
-  title: "404 || ômi - Travel & Tour React NextJS Template",
-  description: "ômi - Travel & Tour React NextJS Template",
+  title: "404 | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 const index = () => {

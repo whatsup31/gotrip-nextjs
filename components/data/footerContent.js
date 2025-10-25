@@ -1,7 +1,7 @@
 module.exports = [
   {
     id: 1,
-    title: "Company",
+    title: "ômi",
     menuList: [
       { name: "About Us", routerPath: "/" },
       { name: "Careers", routerPath: "/" },
@@ -23,7 +23,7 @@ module.exports = [
   },
   {
     id: 3,
-    title: "Other Services",
+    title: "Services",
     menuList: [
       { name: "Car hire", routerPath: "/" },
       { name: "Activity Finder", routerPath: "/" },

@@ -16,8 +16,8 @@ import MapPropertyFinder from "@/components/rental-single/MapPropertyFinder";
 import HelpfulFacts from "@/components/rental-single/HelpfulFacts";
 
 export const metadata = {
-  title: "Rental Single || ômi - Travel & Tour React NextJS Template",
-  description: "ômi - Travel & Tour React NextJS Template",
+  title: "Rental Single | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 const TourSingleV1Dynamic = ({ params }) => {

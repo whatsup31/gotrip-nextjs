@@ -19,8 +19,8 @@ import SlideGallery from "@/components/activity-single/SlideGallery";
 import MapPropertyFinder from "@/components/activity-single/MapPropertyFinder";
 
 export const metadata = {
-  title: "Activity Single || ômi - Travel & Tour React NextJS Template",
-  description: "ômi - Travel & Tour React NextJS Template",
+  title: "Activity Single | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 const TourSingleV1Dynamic = ({ params }) => {

@@ -11,8 +11,8 @@ import Counter2 from "@/components/counter/Counter2";
 import Brand from "@/components/brand/Brand";
 
 export const metadata = {
-  title: "About || ômi - Travel & Tour React NextJS Template",
-  description: "ômi - Travel & Tour React NextJS Template",
+  title: "About | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 const About = () => {

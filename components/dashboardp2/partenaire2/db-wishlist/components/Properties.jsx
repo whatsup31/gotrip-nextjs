@@ -101,7 +101,7 @@ const Properties = () => {
                 </div>
                 <div className="pt-24">
                   <div className="fw-500">Starting from</div>
-                  <span className="fw-500 text-blue-1">US$72</span> / night
+                  <span className="fw-500 text-blue-1">€72</span> / night
                 </div>
               </div>
             </div>

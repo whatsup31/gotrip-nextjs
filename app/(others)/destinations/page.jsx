@@ -21,8 +21,8 @@ import Rentals from "@/components/rentals/Rentals";
 import Hotels from "@/components/hotels/Hotels2";
 
 export const metadata = {
-  title: "Destinations || ômi - Travel & Tour React NextJS Template",
-  description: "ômi - Travel & Tour React NextJS Template",
+  title: "Destinations | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 const Destinations = () => {

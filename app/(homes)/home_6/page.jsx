@@ -12,8 +12,8 @@ import Testimonials from "@/components/home/home-6/Testimonials";
 import Activity2 from "@/components/activity/Activity2";
 
 export const metadata = {
-  title: "Home-6 || ômi - Travel & Tour React NextJS Template",
-  description: "ômi - Travel & Tour React NextJS Template",
+  title: "Home-6 | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 const home_6 = () => {

@@ -104,12 +104,12 @@ const AvailableRooms = ({ hotel }) => {
                       <div className="dropdown js-dropdown js-price-1-active">
                         <select className="form-select dropdown__button d-flex items-center rounded-4 border-light px-15 h-50 text-14">
                           <option value="1" defaultValue>
-                            1 (US$ 3,120)
+                            1 (€ 3,120)
                           </option>
-                          <option value="2">2 (US$ 3,120)</option>
-                          <option value="3"> 3 (US$ 3,120)</option>
-                          <option value="4"> 4 (US$ 3,120)</option>
-                          <option value="5"> 5 (US$ 3,120)</option>
+                          <option value="2">2 (€ 3,120)</option>
+                          <option value="3"> 3 (€ 3,120)</option>
+                          <option value="4"> 4 (€ 3,120)</option>
+                          <option value="5"> 5 (€ 3,120)</option>
                         </select>
                       </div>
                     </div>
@@ -158,12 +158,12 @@ const AvailableRooms = ({ hotel }) => {
                       <div className="dropdown js-dropdown js-price-1-active">
                         <select className="form-select dropdown__button d-flex items-center rounded-4 border-light px-15 h-50 text-14">
                           <option value="1" defaultValue>
-                            1 (US$ 3,120)
+                            1 (€ 3,120)
                           </option>
-                          <option value="2">2 (US$ 3,120)</option>
-                          <option value="3"> 3 (US$ 3,120)</option>
-                          <option value="4"> 4 (US$ 3,120)</option>
-                          <option value="5"> 5 (US$ 3,120)</option>
+                          <option value="2">2 (€ 3,120)</option>
+                          <option value="3"> 3 (€ 3,120)</option>
+                          <option value="4"> 4 (€ 3,120)</option>
+                          <option value="5"> 5 (€ 3,120)</option>
                         </select>
                       </div>
                     </div>
@@ -212,12 +212,12 @@ const AvailableRooms = ({ hotel }) => {
                       <div className="dropdown js-dropdown js-price-1-active">
                         <select className="form-select dropdown__button d-flex items-center rounded-4 border-light px-15 h-50 text-14">
                           <option value="1" defaultValue>
-                            1 (US$ 3,120)
+                            1 (€ 3,120)
                           </option>
-                          <option value="2">2 (US$ 3,120)</option>
-                          <option value="3"> 3 (US$ 3,120)</option>
-                          <option value="4"> 4 (US$ 3,120)</option>
-                          <option value="5"> 5 (US$ 3,120)</option>
+                          <option value="2">2 (€ 3,120)</option>
+                          <option value="3"> 3 (€ 3,120)</option>
+                          <option value="4"> 4 (€ 3,120)</option>
+                          <option value="5"> 5 (€ 3,120)</option>
                         </select>
                       </div>
                     </div>
@@ -358,12 +358,12 @@ const AvailableRooms = ({ hotel }) => {
                       <div className="dropdown js-dropdown js-price-1-active">
                         <select className="form-select dropdown__button d-flex items-center rounded-4 border-light px-15 h-50 text-14">
                           <option value="1" defaultValue>
-                            1 (US$ 3,120)
+                            1 (€ 3,120)
                           </option>
-                          <option value="2">2 (US$ 3,120)</option>
-                          <option value="3"> 3 (US$ 3,120)</option>
-                          <option value="4"> 4 (US$ 3,120)</option>
-                          <option value="5"> 5 (US$ 3,120)</option>
+                          <option value="2">2 (€ 3,120)</option>
+                          <option value="3"> 3 (€ 3,120)</option>
+                          <option value="4"> 4 (€ 3,120)</option>
+                          <option value="5"> 5 (€ 3,120)</option>
                         </select>
                       </div>
                     </div>
@@ -412,12 +412,12 @@ const AvailableRooms = ({ hotel }) => {
                       <div className="dropdown js-dropdown js-price-1-active">
                         <select className="form-select dropdown__button d-flex items-center rounded-4 border-light px-15 h-50 text-14">
                           <option value="1" defaultValue>
-                            1 (US$ 3,120)
+                            1 (€ 3,120)
                           </option>
-                          <option value="2">2 (US$ 3,120)</option>
-                          <option value="3"> 3 (US$ 3,120)</option>
-                          <option value="4"> 4 (US$ 3,120)</option>
-                          <option value="5"> 5 (US$ 3,120)</option>
+                          <option value="2">2 (€ 3,120)</option>
+                          <option value="3"> 3 (€ 3,120)</option>
+                          <option value="4"> 4 (€ 3,120)</option>
+                          <option value="5"> 5 (€ 3,120)</option>
                         </select>
                       </div>
                     </div>
@@ -466,12 +466,12 @@ const AvailableRooms = ({ hotel }) => {
                       <div className="dropdown js-dropdown js-price-1-active">
                         <select className="form-select dropdown__button d-flex items-center rounded-4 border-light px-15 h-50 text-14">
                           <option value="1" defaultValue>
-                            1 (US$ 3,120)
+                            1 (€ 3,120)
                           </option>
-                          <option value="2">2 (US$ 3,120)</option>
-                          <option value="3"> 3 (US$ 3,120)</option>
-                          <option value="4"> 4 (US$ 3,120)</option>
-                          <option value="5"> 5 (US$ 3,120)</option>
+                          <option value="2">2 (€ 3,120)</option>
+                          <option value="3"> 3 (€ 3,120)</option>
+                          <option value="4"> 4 (€ 3,120)</option>
+                          <option value="5"> 5 (€ 3,120)</option>
                         </select>
                       </div>
                     </div>

@@ -13,8 +13,8 @@ import Hotels from "@/components/hotels/Hotels";
 import SelectFilter from "@/components/hotels/filter-tabs/SelectFilter";
 
 export const metadata = {
-  title: "Home-1 || ômi - Travel & Tour React NextJS Template",
-  description: "ômi - Travel & Tour React NextJS Template",
+  title: "Home-1 | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 const Home_1 = () => {

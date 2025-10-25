@@ -109,10 +109,10 @@ const AvailableRooms2 = ({ hotel }) => {
                             <option value="1" defaultValue>
                               27/07/2026
                             </option>
-                            <option value="2">2 (US$ 3,120)</option>
-                            <option value="3"> 3 (US$ 3,120)</option>
-                            <option value="4"> 4 (US$ 3,120)</option>
-                            <option value="5"> 5 (US$ 3,120)</option>
+                            <option value="2">2 (€ 3,120)</option>
+                            <option value="3"> 3 (€ 3,120)</option>
+                            <option value="4"> 4 (€ 3,120)</option>
+                            <option value="5"> 5 (€ 3,120)</option>
                           </select>
                         </div>
                       </div>
@@ -239,10 +239,10 @@ const AvailableRooms2 = ({ hotel }) => {
                             <option value="1" defaultValue>
                               27/07/2026
                             </option>
-                            <option value="2">2 (US$ 3,120)</option>
-                            <option value="3"> 3 (US$ 3,120)</option>
-                            <option value="4"> 4 (US$ 3,120)</option>
-                            <option value="5"> 5 (US$ 3,120)</option>
+                            <option value="2">2 (€ 3,120)</option>
+                            <option value="3"> 3 (€ 3,120)</option>
+                            <option value="4"> 4 (€ 3,120)</option>
+                            <option value="5"> 5 (€ 3,120)</option>
                           </select>
                         </div>
                       </div>

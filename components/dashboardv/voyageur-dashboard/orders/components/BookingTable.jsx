@@ -13,8 +13,8 @@ const BookingTable = () => {
   };
 
   const tabItems = [
-    "Toutes les réservations",
-    "Terminée",
+    "Toutes les commandes",
+    "Terminées",
     "En cours",
     "À venir",
     "Annulées",
@@ -47,7 +47,7 @@ const BookingTable = () => {
               <table className="table-3 -border-bottom col-12">
                 <thead className="bg-light-2">
                   <tr>
-                    <th>Type</th>
+                    <th>Numéro</th>
                     <th>Titre</th>
                     <th>Order </th>
                     <th>Execution Time</th>

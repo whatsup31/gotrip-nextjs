@@ -5,8 +5,8 @@ import LoginWithSocial from "@/components/common/LoginWithSocial";
 import SignUpForm from "@/components/common/SignUpForm";
 
 export const metadata = {
-  title: "Sign Up || ômi - Travel & Tour React NextJS Template",
-  description: "ômi - Travel & Tour React NextJS Template",
+  title: "Sign Up | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 const SignUp = () => {

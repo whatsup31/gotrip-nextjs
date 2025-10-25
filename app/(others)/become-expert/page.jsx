@@ -8,8 +8,8 @@ import Faq from "@/components/faq/Faq";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Become Expert || ômi - Travel & Tour React NextJS Template",
-  description: "ômi - Travel & Tour React NextJS Template",
+  title: "Become Expert | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 const BecomeExpert = () => {

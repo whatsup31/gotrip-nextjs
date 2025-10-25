@@ -22,8 +22,8 @@ import StickyHeader2 from "@/components/hotel-single/StickyHeader2";
 import GalleryTwo from "@/components/hotel-single/GalleryTwo";
 
 export const metadata = {
-  title: "Hotel Single v2 || ômi - Travel & Tour React NextJS Template",
-  description: "ômi - Travel & Tour React NextJS Template",
+  title: "Hotel Single v2 | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 const HotelSingleV2Dynamic = ({ params }) => {

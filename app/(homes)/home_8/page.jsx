@@ -14,8 +14,8 @@ import Blog from "@/components/home/home-8/Blog";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Home-8 || ômi - Travel & Tour React NextJS Template",
-  description: "ômi - Travel & Tour React NextJS Template",
+  title: "Home-8 | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 const home_8 = () => {

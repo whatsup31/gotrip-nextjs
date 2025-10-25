@@ -1,8 +1,8 @@
 import InvoiceComponent from "@/components/invoice/Invoice";
 
 export const metadata = {
-  title: "Invoice || ômi - Travel & Tour React NextJS Template",
-  description: "ômi - Travel & Tour React NextJS Template",
+  title: "Invoice | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 const Invoice = () => {

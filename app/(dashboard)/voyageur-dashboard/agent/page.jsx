@@ -2,8 +2,8 @@ import React from "react";
 import DashboardPage from "../../../../components/dashboardv/voyageur-dashboard/agent";
 
 export const metadata = {
-  title: "Vendor Add Hotel || ômi - Travel & Tour React NextJS Template",
-  description: "ômi - Travel & Tour React NextJS Template",
+  title: "Agent Voyage | ômi",
+  description: "ômi - votre voyage commence ici",
 };
 
 export default function page() {
