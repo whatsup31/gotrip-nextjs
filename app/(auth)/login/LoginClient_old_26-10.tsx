@@ -19,7 +19,7 @@ export default function LoginClient() {
   const [err, setErr] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  // Vérifie si déjà connecté
+  // Si déjà connecté -> refresh cookies + redir. éventuelle
   useEffect(() => {
     const supabase = createClientComponentClient();
     (async () => {
@@ -29,7 +29,8 @@ export default function LoginClient() {
         if (redirectTo) window.location.assign(redirectTo);
       }
     })();
-  }, [redirectTo, router]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -39,31 +40,24 @@ export default function LoginClient() {
     try {
       const supabase = createClientComponentClient();
 
-      // Authentification
+      // 1) Auth
       const { error: signErr } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
       if (signErr) throw signErr;
 
-      // Récupération de l'utilisateur + profil lié
-      const { data: ures } = await supabase.auth.getUser();
-      const user = ures?.user;
+      // 2) Rôle
+      const [{ data: ures }, { data: prof }] = await Promise.all([
+        supabase.auth.getUser(),
+        supabase.from('profiles').select('role').limit(1).single<Profile>(),
+      ]);
+      const role = prof?.role ?? null;
 
-      let role: string | null = null;
-      if (user) {
-        const { data: prof } = await supabase
-          .from('profiles')
-          .select('role')
-          .eq('user_id', user.id)
-          .maybeSingle<Profile>();
-        role = prof?.role ?? null;
-      }
-
-      // Rafraîchissement cookies serveur
+      // 3) Propager cookies côté serveur
       router.refresh();
 
-      // Redirection
+      // 4) Redirection (hard navigation = rechargement)
       const target = redirectTo || getDashboardPath(role);
       window.location.assign(target);
     } catch (e: any) {
@@ -86,28 +80,14 @@ export default function LoginClient() {
 
       <div className="col-12">
         <div className="form-input">
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            name="email"
-            placeholder=" "
-          />
+          <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} name="email" placeholder=" " />
           <label className="lh-1 text-14 text-light-1">Email</label>
         </div>
       </div>
 
       <div className="col-12">
         <div className="form-input">
-          <input
-            type="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            name="password"
-            placeholder=" "
-          />
+          <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} name="password" placeholder=" " />
           <label className="lh-1 text-14 text-light-1">Password</label>
         </div>
       </div>
@@ -125,13 +105,8 @@ export default function LoginClient() {
       </div>
 
       <div className="col-12">
-        <button
-          type="submit"
-          className="button py-20 -dark-1 bg-blue-1 text-white w-100"
-          disabled={loading}
-        >
-          {loading ? 'Signing in…' : 'Sign In'}
-          <div className="icon-arrow-top-right ml-15" />
+        <button type="submit" className="button py-20 -dark-1 bg-blue-1 text-white w-100" disabled={loading}>
+          {loading ? 'Signing in…' : 'Sign In'} <div className="icon-arrow-top-right ml-15" />
         </button>
       </div>
     </form>

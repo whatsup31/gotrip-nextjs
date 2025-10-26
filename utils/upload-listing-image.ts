@@ -1,17 +1,27 @@
 // utils/upload-listing-image.ts
-import { supabaseBrowser } from '@/utils/supabase-browser';
+'use server';
 
-export async function uploadListingImage(file: File, userId: string) {
-  const supabase = supabaseBrowser();
-  const ext = file.name.split('.').pop() || 'jpg';
-  const path = `listings/${userId}/${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;
+import { cookies } from 'next/headers';
+import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
 
-  const { error } = await supabase.storage.from('listings').upload(path, file, {
-    cacheControl: '3600',
-    upsert: false,
-  });
+export async function uploadListingImage(file: File, folder = 'listings') {
+  const supabase = createServerActionClient({ cookies });
+
+  if (!file) throw new Error('No file provided');
+
+  const fileName = `${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
+  const { data, error } = await supabase.storage
+    .from('images')
+    .upload(`${folder}/${fileName}`, file, {
+      cacheControl: '3600',
+      upsert: false,
+    });
+
   if (error) throw error;
 
-  const { data } = supabase.storage.from('listings').getPublicUrl(path);
-  return data.publicUrl; // URL publique à stocker dans photos[]
+  const { data: publicUrl } = supabase.storage
+    .from('images')
+    .getPublicUrl(`${folder}/${fileName}`);
+
+  return publicUrl.publicUrl;
 }
