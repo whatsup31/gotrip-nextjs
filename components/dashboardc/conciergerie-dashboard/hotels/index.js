@@ -1,3 +1,4 @@
+// components/dashbaordc/conciergerie-dashboard/hotels/index.js
 
 import Sidebar from "../common/Sidebar";
 import Header from "../../../header/dashboard-header";
