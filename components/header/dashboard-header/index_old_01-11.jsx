@@ -10,14 +10,6 @@ import MobileMenu from '../MobileMenu';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { getDashboardPath } from '@/utils/role-routing';
 
-const POINT_TARGET_BY_ROLE = {
-  traveler: 1000,
-  host: 1200,
-  conciergerie: 1200,
-  provider: 800,
-  default: 1000,
-};
-
 const HeaderDashBoard = () => {
   const [navbar, setNavbar] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -27,13 +19,10 @@ const HeaderDashBoard = () => {
   const [displayName, setDisplayName] = useState(null);
   const [role, setRole] = useState(null);
   const [avatarUrl, setAvatarUrl] = useState(null);
-  
-  const [userId, setUserId] = useState(null);
 
-
-  // Progress points
-  const [xp, setXp] = useState(0);
-  const [xpTarget, setXpTarget] = useState(POINT_TARGET_BY_ROLE.default);
+  // Progress data (inchangé)
+  const [xp, setXp] = useState(586);
+  const [xpTarget, setXpTarget] = useState(1000);
   const left = Math.max(0, xpTarget - xp);
   const percent = useMemo(
     () => Math.max(0, Math.min(100, (xp / xpTarget) * 100)),
@@ -61,7 +50,6 @@ const HeaderDashBoard = () => {
         const user = userRes?.user;
 
         if (!user) {
-		  setUserId(null);
           setDisplayName(null);
           setRole(null);
           setAvatarUrl(null);
@@ -77,15 +65,13 @@ const HeaderDashBoard = () => {
 
         if (error) {
           // En fallback, on montre l'email si dispo
-		  setUserId(user.id);
           setDisplayName(user.email || 'Mon compte');
           setRole(null);
           setAvatarUrl(null);
           setLoaded(true);
           return;
         }
-	
-        setUserId(user.id);
+
         setDisplayName(profile?.display_name || user.email || 'Mon compte');
         setRole(profile?.role ?? null);
         setAvatarUrl(profile?.avatar_url || null);
@@ -107,42 +93,6 @@ const HeaderDashBoard = () => {
       sub?.subscription?.unsubscribe?.();
     };
   }, []);
-
-  // ---- Load user points ----
-  useEffect(() => {
-    if (!userId) {
-      return;
-    }
-    const supabase = createClientComponentClient();
-    const fetchPoints = async () => {
-      // 1. on tente d'abord la vue qu'on a créée dans le SQL
-      let { data, error } = await supabase
-        .from('v_user_points')
-        .select('total_points')
-        .eq('user_id', userId)
-        .maybeSingle();
-      // 2. si la vue n'existe pas encore, on lit directement la table user_points
-      if (error) {
-        const { data: fallback } = await supabase
-          .from('user_points')
-          .select('total_points')
-          .eq('user_id', userId)
-          .maybeSingle();
-        if (fallback?.total_points != null) {
-          setXp(fallback.total_points);
-        } else {
-          setXp(0);
-        }
-        return;
-      }
-      if (data?.total_points != null) {
-        setXp(data.total_points);
-      } else {
-        setXp(0);
-      }
-    };
-    fetchPoints();
-  }, [userId]);
 
   const isLoggedIn = !!displayName;
   const dashboardHref = getDashboardPath(role);
@@ -185,7 +135,7 @@ const HeaderDashBoard = () => {
 
                   {/* Texte + Progress */}
                   <div className="omi-pill__body">
-                    <div className="omi-pill__title">{xp} points cumulés</div>
+                    <div className="omi-pill__title">{left} points cumulés</div>
 
                     <div className="omi-pill__bar">
                       <div className="omi-pill__barFill" style={{ width: `${percent}%` }} />
@@ -198,9 +148,9 @@ const HeaderDashBoard = () => {
                   </div>
 
                   {/* Chevron */}
-				  <Link href="/hotel-list-v3" className="omi-pill__cta" aria-label="Voir les logements">
-					<i className="icon-chevron-right text-18" />
-				  </Link>
+                  <button className="omi-pill__cta" aria-label="Open">
+                    <i className="icon-chevron-right text-18" />
+                  </button>
                 </div>
               </div>
             </div>

@@ -2,7 +2,12 @@
 import React from "react";
 import { createServiceAction } from './actions'
 import InPlaceSubmit from '@/components/common/InPlaceSubmit'
-import AddServiceTabs from "../../../../components/dashboardp/partenaire-dashboard/add-hotel";
+import AddServiceTabs from "../../../../components/dashboardp/partenaire-dashboard/add-service";
+
+export const metadata = {
+  title: "Vendor Add Hotel | ômi",
+  description: "ômi - votre voyage commence ici",
+};
 
 export default function AddServicePage() {
   return (

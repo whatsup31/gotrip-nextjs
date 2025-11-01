@@ -6,7 +6,7 @@ const HotelPolicy = () => {
           <div className="form-input ">
             <input type="text" required />
             <label className="lh-1 text-16 text-light-1">
-              Pas d'échange aprés ouverture
+              Hotel rating standard
             </label>
           </div>
         </div>
@@ -14,13 +14,13 @@ const HotelPolicy = () => {
       {/* End hotel rating standard */}
 
       <div className="mt-20">
-        <div className="fw-500 mb-20">Attributs</div>
+        <div className="fw-500 mb-20">Conditions</div>
         <div className="overflow-scroll scroll-bar-1">
           <table className="table-5 -border-bottom col-12">
             <thead className="bg-light-2">
               <tr>
-                <th>Titre</th>
-                <th>Contenu</th>
+                <th>Title</th>
+                <th>Content</th>
                 <th />
               </tr>
             </thead>
@@ -32,7 +32,7 @@ const HotelPolicy = () => {
                   <div className="form-input ">
                     <input type="text" required />
                     <label className="lh-1 text-16 text-light-1">
-                      Marque du produit
+                      Eg: Which footwear is most suitable?
                     </label>
                   </div>
                 </td>
@@ -41,7 +41,7 @@ const HotelPolicy = () => {
                 <td className="col-7">
                   <div className="form-input ">
                     <textarea required rows={5} defaultValue={""} />
-                    <label className="lh-1 text-16 text-light-1">Produit officiel Apple</label>
+                    <label className="lh-1 text-16 text-light-1">Content</label>
                   </div>
                 </td>
                 {/* End td */}
@@ -60,7 +60,7 @@ const HotelPolicy = () => {
                   <div className="form-input ">
                     <input type="text" required />
                     <label className="lh-1 text-16 text-light-1">
-                      Prise murale
+                      Eg: Whhic hotel is most suitable?
                     </label>
                   </div>
                 </td>
@@ -69,7 +69,7 @@ const HotelPolicy = () => {
                 <td className="col-7">
                   <div className="form-input ">
                     <textarea required rows={5} defaultValue={""} />
-                    <label className="lh-1 text-16 text-light-1">Adapteur usb-c pour prise murale inclus</label>
+                    <label className="lh-1 text-16 text-light-1">Content</label>
                   </div>
                 </td>
                 {/* End td */}

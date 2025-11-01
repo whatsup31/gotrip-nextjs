@@ -96,7 +96,7 @@ const Sidebar = () => {
 
         <div className="d-flex flex-column gap-3 mt-30">
   <a
-    href="/partenaire-dashboard/add-hotel"
+    href="/partenaire-dashboard/add-service"
     className="button h-50 px-24 text-white"  style={{ backgroundColor: "#007cd2" }}
   >
     Ajouter un produit

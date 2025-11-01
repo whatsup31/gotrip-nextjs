@@ -3,34 +3,31 @@ const PricingTabContent = () => {
     <div className="col-xl-9 col-lg-11">
       <div className="row x-gap-20 y-gap-20">
         <div className="col-12">
-          <div className="text-18 fw-500 mb-10">Prix TTC de votre service</div>
+          <div className="text-18 fw-500 mb-10">Tarif par nuit</div>
           <div className="form-input ">
             <input type="text" required />
-            <label className="lh-1 text-16 text-light-1">17,90€</label>
+            <label className="lh-1 text-16 text-light-1">Hotel Price</label>
           </div>
 
+       
+          <div className="fw-500 mt-30">Frais sur services</div>
+
+          <div className="d-flex mt-10">
+            <div className="form-checkbox ">
+              <input type="checkbox" name="name" />
+              <div className="form-checkbox__mark">
+                <div className="form-checkbox__icon icon-check" />
+              </div>
+            </div>
+            <div className="text-15 lh-11 ml-10">Appliquer des frais sur les services supplémentaires</div>
+          </div>
         </div>
         {/* End .col-12 */}
       </div>
       {/* End .row */}
 
       <div className="text-18 fw-500 mb-10 pt-30">
-Frais de livraison      </div>
-
-      <div className="row x-gap-20 y-gap-20">
-        <div className="col-md-6">
-          <div className="form-input ">
-            <input type="text" required />
-            <label className="lh-1 text-16 text-light-1">
-5€            </label>
-          </div>
-        </div>
-        {/* End col-6 */}
-      </div>
-      {/* End row */}
-
-      <div className="text-18 fw-500 mb-10 pt-30">
-        Délais de livraison
+        Heure d'arrivéee et de départ
       </div>
 
       <div className="row x-gap-20 y-gap-20">
@@ -38,24 +35,7 @@ Frais de livraison      </div>
           <div className="form-input ">
             <input type="text" required />
             <label className="lh-1 text-16 text-light-1">
-              30 min
-            </label>
-          </div>
-        </div>
-        {/* End col-6 */}
-      </div>
-      {/* End row */}
-
-      <div className="text-18 fw-500 mb-10 pt-30">
-        Horaires d'ouverture
-      </div>
-
-      <div className="row x-gap-20 y-gap-20">
-        <div className="col-md-6">
-          <div className="form-input ">
-            <input type="text" required />
-            <label className="lh-1 text-16 text-light-1">
-             Mercredi
+              Time for check in
             </label>
           </div>
         </div>
@@ -64,7 +44,7 @@ Frais de livraison      </div>
           <div className="form-input ">
             <input type="text" required />
             <label className="lh-1 text-16 text-light-1">
-              10h - 22h
+              Time for check out
             </label>
           </div>
         </div>
@@ -73,7 +53,7 @@ Frais de livraison      </div>
           <div className="form-input ">
             <input type="text" required />
             <label className="lh-1 text-16 text-light-1">
-              Vendredi
+              Minimum advance reservations
             </label>
           </div>
         </div>
@@ -82,7 +62,7 @@ Frais de livraison      </div>
           <div className="form-input ">
             <input type="text" required />
             <label className="lh-1 text-16 text-light-1">
-            10h - 00h
+              Minimum day stay requirements
             </label>
           </div>
         </div>

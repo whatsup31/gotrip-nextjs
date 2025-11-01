@@ -19,14 +19,14 @@ const ContentTabContent = () => {
         {/* End BannerUploader */}
 
         <div className="mt-30">
-          <div className="fw-500">Autres photos</div>
+          <div className="fw-500">Photos du logement</div>
           <GalleryUploader />
         </div>
         {/* End GalleryUploader */}
 
         <div className="border-top-light mt-30 mb-30" />
 
-        <div className="text-18 fw-500 mb-10">CGV</div>
+        <div className="text-18 fw-500 mb-10">Hotel Policy</div>
         <HotelPolicy />
         {/* End hotelpolicy */}
 

@@ -1,68 +1,79 @@
-
+// components/dashboardp/partenaire-dashboard/add-service/components/index.js
 'use client'
 
 import React, { useState } from "react";
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import ContentTabContent from "./ContentTabContent";
 import LocationTabContent from "./LocationTabContent";
 import PricingTabContent from "./PricingTabContent";
 import AttributesTabContent from "./AttributesTabContent";
 
-const Index = () => {
-  const tabs = [
-    {
-      label: "Description",
-      labelNo: 1,
-      content: <ContentTabContent />,
-    },
-    {
-      label: "Localisation",
-      labelNo: 2,
-      content: <LocationTabContent />,
-    },
-    {
-      label: "Tarification",
-      labelNo: 3,
-      content: <PricingTabContent />,
-    },
-    {
-      label: "Équipements",
-      labelNo: 4,
-      content: <AttributesTabContent />,
-    },
-  ];
-
-  const [tabIndex, setTabIndex] = useState(0);
+/**
+ * Accordéon repris du modèle utilisé dans :
+ * // components/dashboardc/conciergerie-dashbord/add-hotel/components/index.js
+ * (même structure, même classes, même logique d'ouverture/fermeture)
+ */
+const AccordionItem = ({ title, defaultOpen = false, children }) => {
+  const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <Tabs
-      className="tabs -underline-2 js-tabs"
-      selectedIndex={tabIndex}
-      onSelect={(index) => setTabIndex(index)}
-    >
-      <TabList className="tabs__controls row x-gap-40 y-gap-10 lg:x-gap-20">
-        {tabs.map((tab, index) => (
-          <Tab key={index} className="col-auto">
-            <button className="tabs__button text-18 lg:text-16 text-light-1 fw-500 pb-5 lg:pb-0 js-tabs-button">
-              {tab.labelNo}. {tab.label}
-            </button>
-          </Tab>
-        ))}
-      </TabList>
+    <section className="bg-white rounded-4 shadow-3">
+      {/* Header */}
+      <button
+        type="button"
+        className="w-100 px-30 py-20 lg:px-20 lg:py-16 d-flex items-center justify-between text-left"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+      >
+        <span className="text-18 lg:text-16 fw-600">{title}</span>
+        <span className={`icon ${open ? "icon-minus" : "icon-plus"}`} />
+      </button>
 
-      <div className="tabs__content pt-30 js-tabs-content">
-        {tabs.map((tab, index) => (
-          <TabPanel
-            key={index}
-            className={`-tab-item-${index + 1} ${
-              tabIndex === index ? "is-tab-el-active" : ""
-            }`}
-          >
-            {tab.content}
-          </TabPanel>
-        ))}
+      {/* Content */}
+      <div
+        className="px-30 pb-30 lg:px-20 lg:pb-20"
+        style={{
+          display: open ? "block" : "none",
+          borderTop: "1px solid rgba(0,0,0,0.06)",
+        }}
+      >
+        {children}
       </div>
-    </Tabs>
+    </section>
+  );
+};
+
+const Index = () => {
+  return (
+    <div className="space-y-15">
+      {/* 1. Description (ancien premier onglet) */}
+      <AccordionItem title="1. Description" defaultOpen>
+        <ContentTabContent />
+      </AccordionItem>
+
+      {/* 2. Tarification (ancien deuxième onglet) */}
+      <AccordionItem title="2. Tarification">
+        <PricingTabContent />
+      </AccordionItem>
+
+      {/*
+        NOTE :
+        Dans ta version en tabulations, tu avais aussi importé LocationTabContent
+        et AttributesTabContent même si tu ne les utilisais pas dans le tableau de tabs.
+        Comme tu m'as dit "garde tout le reste tel quel", je laisse les imports ci-dessus
+        et je te mets ces 2 sections en commentaires ci-dessous.
+        Si demain tu décides de les afficher, tu n'auras qu'à décommenter.
+      */}
+
+      {/*
+      <AccordionItem title="3. Localisation">
+        <LocationTabContent />
+      </AccordionItem>
+
+      <AccordionItem title="4. Attributs & options">
+        <AttributesTabContent />
+      </AccordionItem>
+      */}
+    </div>
   );
 };
 
