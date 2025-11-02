@@ -3,15 +3,8 @@
 
 import React, { useState } from "react";
 import ContentTabContent from "./ContentTabContent";
-import LocationTabContent from "./LocationTabContent";
 import PricingTabContent from "./PricingTabContent";
-import AttributesTabContent from "./AttributesTabContent";
 
-/**
- * Accordéon repris du modèle utilisé dans :
- * // components/dashboardc/conciergerie-dashbord/add-hotel/components/index.js
- * (même structure, même classes, même logique d'ouverture/fermeture)
- */
 const AccordionItem = ({ title, defaultOpen = false, children }) => {
   const [open, setOpen] = useState(defaultOpen);
 
@@ -54,25 +47,6 @@ const Index = () => {
       <AccordionItem title="2. Tarification">
         <PricingTabContent />
       </AccordionItem>
-
-      {/*
-        NOTE :
-        Dans ta version en tabulations, tu avais aussi importé LocationTabContent
-        et AttributesTabContent même si tu ne les utilisais pas dans le tableau de tabs.
-        Comme tu m'as dit "garde tout le reste tel quel", je laisse les imports ci-dessus
-        et je te mets ces 2 sections en commentaires ci-dessous.
-        Si demain tu décides de les afficher, tu n'auras qu'à décommenter.
-      */}
-
-      {/*
-      <AccordionItem title="3. Localisation">
-        <LocationTabContent />
-      </AccordionItem>
-
-      <AccordionItem title="4. Attributs & options">
-        <AttributesTabContent />
-      </AccordionItem>
-      */}
     </div>
   );
 };
