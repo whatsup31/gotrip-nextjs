@@ -268,7 +268,7 @@ export default function AvailableServices({
 
                     <div className="mt-10">
                       <Link
-                        href={`/services/${svc.id}`}
+                        href={`/activity-single/${svc.id}`}
                         className="text-blue-1 underline"
                       >
                         Plus d’infos

@@ -1,89 +1,63 @@
+// components/activity-single/SlideGallery.jsx
 "use client";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-import { Gallery, Item } from "react-photoswipe-gallery";
+import { useMemo } from "react";
 
-const SlideGallery = () => {
-  const sliderImg = [
-    "/img/activities/10.png",
-    "/img/activities/11.png",
-    "/img/activities/12.png",
-    "/img/activities/13.png",
-    "/img/activities/11.png",
-  ];
+const SlideGallery = ({ images }) => {
+  // Normalisation des images venant de Supabase (jsonb)
+  const galleryImages = useMemo(() => {
+    if (!images) return [];
+
+    // Supabase renvoie normalement déjà un array JS,
+    // mais on gère aussi le cas string JSON.
+    let arr = images;
+
+    if (typeof images === "string") {
+      try {
+        arr = JSON.parse(images);
+      } catch {
+        arr = [];
+      }
+    }
+
+    if (Array.isArray(arr)) {
+      return arr
+        .map((item) =>
+          typeof item === "string"
+            ? item
+            : item?.src || item?.url || null
+        )
+        .filter(Boolean);
+    }
+
+    return [];
+  }, [images]);
+
+  const hasImages = galleryImages.length > 0;
+
+  // fallback si jamais aucun visuel n’est défini
+  const fallback = ["/img/placeholder/451x450.png"];
+
+  const toRender = hasImages ? galleryImages : fallback;
 
   return (
-    <>
-      <div className="relative">
-        <Swiper
-          loop={true}
-          spaceBetween={10}
-          modules={[Navigation]}
-          className="overflow-visible"
-          navigation={{
-            nextEl: ".js-activity-next-active",
-            prevEl: ".js-activity-prev-active",
-          }}
-          breakpoints={{
-            540: {
-              slidesPerView: 1,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 1,
-              spaceBetween: 22,
-            },
-            1024: {
-              slidesPerView: 2,
-            },
-            1200: {
-              slidesPerView: 2,
-            },
-          }}
+    <div className="row x-gap-10 y-gap-10">
+      {toRender.map((src, index) => (
+        <div
+          className="col-12 col-md-4 col-lg-3"
+          key={`${src}-${index}`}
         >
-          {sliderImg.map((img, i) => (
-            <SwiperSlide key={i}>
-              <div className="ratio ratio-64:45">
-                <img src={img} alt="image" className="rounded-4 img-ratio" />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-
-        <Gallery>
-          {sliderImg?.map((slide, i) => (
-            <div
-              className="absolute px-10 py-10 col-12  d-flex justify-end items-end z-2 bottom-0 end-0"
-              key={i}
-            >
-              <Item width={451} height={450} original={slide} thumbnail={slide}>
-                {({ ref, open }) => (
-                  <div
-                    className="button -blue-1 px-24 py-15 bg-white text-dark-1 js-gallery"
-                    ref={ref}
-                    onClick={open}
-                    role="button"
-                  >
-                    See All Photos
-                  </div>
-                )}
-              </Item>
-            </div>
-          ))}
-        </Gallery>
-
-        <button className="section-slider-nav -prev flex-center button -blue-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-activity-prev-active">
-          <i className="icon icon-chevron-left text-12" />
-        </button>
-        <button className="section-slider-nav -next flex-center button -blue-1 bg-white shadow-1 size-40 rounded-full sm:d-none js-activity-next-active">
-          <i className="icon icon-chevron-right text-12" />
-        </button>
-
-        {/* End prev nav button wrapper */}
-      </div>
-      {/* slider relative */}
-    </>
+          <div className="ratio ratio-3:2 rounded-4 overflow-hidden bg-light-2">
+            <img
+              src={src}
+              alt={`Service image ${index + 1}`}
+              className="img-ratio js-lazy"
+              style={{ objectFit: "cover", width: "100%", height: "100%" }}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
 

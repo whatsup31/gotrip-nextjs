@@ -1,5 +1,6 @@
-// app/(activity)/activity-single/[id]/page.jsx
+// app/(activity]/activity-single/[id]/page.jsx
 import "photoswipe/dist/photoswipe.css";
+import activityData from "@/data/activity";
 import Header11 from "@/components/header/header-11";
 import Overview from "@/components/activity-single/Overview";
 import TourSnapShot from "@/components/activity-single/TourSnapShot";
@@ -18,57 +19,35 @@ import ImportantInfo from "@/components/activity-single/ImportantInfo";
 import SlideGallery from "@/components/activity-single/SlideGallery";
 import MapPropertyFinder from "@/components/activity-single/MapPropertyFinder";
 
-import { cookies } from "next/headers";
-import { notFound } from "next/navigation";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-
 export const metadata = {
-  title: "Service | ômi",
+  title: "Activity Single | ômi",
   description: "ômi - votre voyage commence ici",
 };
 
-const ActivitySinglePage = async ({ params }) => {
-  const cookieStore = cookies();
-  const supabase = createServerComponentClient({ cookies: () => cookieStore });
-
-  const id = Number(params.id);
-  if (Number.isNaN(id)) {
-    notFound();
-  }
-
-  // Récupération du service depuis la table `services`
-  const { data: service, error } = await supabase
-    .from("services")
-    .select("*")
-    .eq("id", id)
-    .single();
-
-  if (error || !service) {
-    notFound();
-  }
-
-  // On adapte le modèle attendu par SidebarRight et le header
-  const activity = {
-    title: service.title,
-    price: service.price ?? 0,
-    ratings: service.rating_avg ?? 4.8,
-    numberOffReviews: service.review_count ?? 0,
-    location: service.area || "Zone desservie",
-  };
+const TourSingleV1Dynamic = ({ params }) => {
+  const id = params.id;
+  const activity =
+    activityData.find((item) => item.id == id) || activityData[0];
 
   return (
     <>
-      <div className="header-margin" />
+      {/* End Page Title */}
+
+      <div className="header-margin"></div>
+      {/* header top margin */}
 
       <Header11 />
+      {/* End Header 1 */}
 
-      <TopBreadCrumb service={service} />
+      <TopBreadCrumb />
+      {/* End top breadcrumb */}
 
       <section className="pt-40">
         <div className="container">
-          <SlideGallery images={service.images} />
+          <SlideGallery />
         </div>
       </section>
+      {/* End gallery grid wrapper */}
 
       <section className="pt-40 js-pin-container">
         <div className="container">
@@ -76,31 +55,29 @@ const ActivitySinglePage = async ({ params }) => {
             <div className="col-xl-8">
               <div className="row y-gap-20 justify-between items-end">
                 <div className="col-auto">
-                  <h1 className="text-26 fw-600">{service.title}</h1>
-
+                  <h1 className="text-26 fw-600">{activity?.title}</h1>
                   <div className="row x-gap-10 y-gap-20 items-center pt-10">
                     <div className="col-auto">
                       <div className="d-flex items-center">
-                        <i className="icon-star text-10 text-yellow-1" />
+                        <i className="icon-star text-10 text-yellow-1"></i>
 
                         <div className="text-14 text-light-1 ml-10">
                           <span className="text-15 fw-500 text-dark-1">
-                            {activity.ratings?.toFixed
-                              ? activity.ratings.toFixed(1)
-                              : activity.ratings}
-                          </span>{" "}
-                          {activity.numberOffReviews || 0} reviews
+                            {activity?.ratings}
+                          </span>
+                          {activity?.numberOffReviews} reviews
                         </div>
                       </div>
                     </div>
+                    {/* End .col */}
 
                     <div className="col-auto">
                       <div className="row x-gap-10 items-center">
                         <div className="col-auto">
                           <div className="d-flex x-gap-5 items-center">
-                            <i className="icon-location-2 text-16 text-light-1" />
+                            <i className="icon-location-2 text-16 text-light-1"></i>
                             <div className="text-15 text-light-1">
-                              {activity.location}
+                              {activity?.location}
                             </div>
                           </div>
                         </div>
@@ -112,42 +89,53 @@ const ActivitySinglePage = async ({ params }) => {
                         </div>
                       </div>
                     </div>
+                    {/* End .col */}
                   </div>
+                  {/* End .row */}
                 </div>
+                {/* End .col */}
 
                 <div className="col-auto">
                   <div className="row x-gap-10 y-gap-10">
                     <div className="col-auto">
                       <button className="button px-15 py-10 -blue-1">
-                        <i className="icon-share mr-10" />
+                        <i className="icon-share mr-10"></i>
                         Share
                       </button>
                     </div>
 
                     <div className="col-auto">
                       <button className="button px-15 py-10 -blue-1 bg-light-2">
-                        <i className="icon-heart mr-10" />
+                        <i className="icon-heart mr-10"></i>
                         Save
                       </button>
                     </div>
                   </div>
                 </div>
+                {/* End .col */}
               </div>
+              {/* End .row */}
 
-              <h3 className="text-22 fw-500 mt-40">Service snapshot</h3>
-              <TourSnapShot service={service} />
+              <h3 className="text-22 fw-500 mt-40">Tour snapshot</h3>
+              <TourSnapShot />
+              {/* End toursnapshot */}
+              <div className="border-top-light mt-40 mb-40"></div>
 
-              <div className="border-top-light mt-40 mb-40" />
-
-              <Overview service={service} />
+              <Overview />
+              {/* End  Overview */}
             </div>
+            {/* End .col-xl-8 */}
 
             <div className="col-xl-4">
               <SidebarRight activity={activity} />
             </div>
+            {/* End .col-xl-4 */}
           </div>
+          {/* End .row */}
         </div>
+        {/* End container */}
       </section>
+      {/* End single page content */}
 
       <section className="pt-40">
         <div className="container">
@@ -157,30 +145,36 @@ const ActivitySinglePage = async ({ params }) => {
                 <h3 className="text-22 fw-500">Important information</h3>
               </div>
             </div>
+            {/* End row */}
             <ImportantInfo />
           </div>
+          {/* End pt-40 */}
         </div>
+        {/* End .container */}
       </section>
+      {/* End important info */}
 
-      <section className="border-top-light mt-40 pt-40">
+      <section className="border-top-light  mt-40 pt-40">
         <div className="container">
-          <h3 className="text-22 fw-500 mb-20">Service location</h3>
-          <div className="rounded-4 overflow-hidden map-500">
+          <h3 className="text-22 fw-500 mb-20">Activity&apos;s Location</h3>
+          <div className=" rounded-4 overflow-hidden map-500">
             <MapPropertyFinder />
           </div>
         </div>
       </section>
+      {/* End Itinerary */}
 
       <section className="mt-40">
-        <div className="container">
+        <div className="container ">
           <div className="pt-40 border-top-light">
             <div className="row y-gap-20">
               <div className="col-lg-4">
                 <h2 className="text-22 fw-500">
                   FAQs about
-                  <br /> {service.title}
+                  <br /> The Crown Hotel
                 </h2>
               </div>
+              {/* End .row */}
 
               <div className="col-lg-8">
                 <div
@@ -190,10 +184,15 @@ const ActivitySinglePage = async ({ params }) => {
                   <Faq />
                 </div>
               </div>
+              {/* End .col */}
             </div>
+            {/* End .row */}
           </div>
+          {/* End .pt-40 */}
         </div>
+        {/* End .container */}
       </section>
+      {/* End Faq about sections */}
 
       <section className="mt-40 border-top-light pt-40">
         <div className="container">
@@ -201,14 +200,21 @@ const ActivitySinglePage = async ({ params }) => {
             <div className="col-xl-3">
               <h3 className="text-22 fw-500">Guest reviews</h3>
               <ReviewProgress2 />
+              {/* End review with progress */}
             </div>
+            {/* End col-xl-3 */}
 
             <div className="col-xl-8">
               <DetailsReview2 />
             </div>
+            {/* End col-xl-8 */}
           </div>
+          {/* End .row */}
         </div>
+        {/* End .container */}
+        {/* End container */}
       </section>
+      {/* End Review section */}
 
       <section className="mt-40 border-top-light pt-40">
         <div className="container">
@@ -222,16 +228,23 @@ const ActivitySinglePage = async ({ params }) => {
                   </p>
                 </div>
               </div>
+              {/* End .row */}
 
               <ReplyFormReview2 />
+              {/* End ReplyFormReview */}
             </div>
+            {/* End .col-xl-3 */}
 
             <div className="col-xl-8">
               <ReplyForm />
             </div>
+            {/* End .col-xl-8 */}
           </div>
+          {/* End .row */}
         </div>
+        {/* End .container */}
       </section>
+      {/* End Reply Comment box section */}
 
       <section className="layout-pt-lg layout-pb-lg mt-50 border-top-light">
         <div className="container">
@@ -239,11 +252,12 @@ const ActivitySinglePage = async ({ params }) => {
             <div className="col-auto">
               <div className="sectionTitle -md">
                 <h2 className="sectionTitle__title">Most Popular Tours</h2>
-                <p className="sectionTitle__text mt-5 sm:mt-0">
+                <p className=" sectionTitle__text mt-5 sm:mt-0">
                   Interdum et malesuada fames ac ante ipsum
                 </p>
               </div>
             </div>
+            {/* End .col */}
 
             <div className="col-auto">
               <Link
@@ -253,18 +267,25 @@ const ActivitySinglePage = async ({ params }) => {
                 More <div className="icon-arrow-top-right ml-15" />
               </Link>
             </div>
+            {/* End .col */}
           </div>
+          {/* End .row */}
 
           <div className="row y-gap-30 pt-40 sm:pt-20 item_gap-x30">
             <Tours />
           </div>
+          {/* End .row */}
         </div>
+        {/* End .container */}
       </section>
+      {/* End Tours Sections */}
 
       <CallToActions />
+      {/* End Call To Actions Section */}
+
       <DefaultFooter />
     </>
   );
 };
 
-export default ActivitySinglePage;
+export default TourSingleV1Dynamic;
